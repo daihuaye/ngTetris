@@ -25,15 +25,19 @@ function (
         return GameManager.getCurrentPiece();
     }
 
+    // if sequence is match, then highlight the DOM ele
     $scope.checkPattern = function checkPattern(piece) {
         var res = _.find(getPattern(), function (p) {
             return piece === p;
         });
         return _.isNumber(res);
     };
+
+    // pass function to the view in controller variable
     this.getLeft = function getLeft() {
         return getPiece().x * GameData.gameBoard.pieceWidthInPixel + GameData.gameBoard.borderWidth;
     };
+
     this.getTop = function getTop() {
         return getPiece().y * GameData.gameBoard.pieceWidthInPixel;
     };
