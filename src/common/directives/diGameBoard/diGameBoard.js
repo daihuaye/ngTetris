@@ -14,9 +14,13 @@ function (
     $scope,
     BoardGrid
 ){
-     $scope.getBoardGrid = function getBoardGrid() {
+    $scope.getBoardGrid = function getBoardGrid() {
         return BoardGrid.getBoardGrid();
-     };
+    };
+
+    $scope.getPieceModel = function getPieceModel() {
+        return [];
+    };
 }])
 .directive('diGameBoard', [
 function(
