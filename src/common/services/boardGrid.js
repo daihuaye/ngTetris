@@ -15,6 +15,8 @@ function (
     Piece
 ){
     var boardGrid = {};
+    boardGrid.pieces = [];
+    boardGrid.grid = [];
 
     function getBoardSize() {
         return GameData.gameBoard.boardSize;
@@ -23,13 +25,13 @@ function (
     boardGrid.buildEmptyGameBoard = function buildEmptyGameBoard() {
         var sizeOfBoard = GameData.gameBoard.boardWidth * GameData.gameBoard.boardHeight;
         for (var i = 0; i < sizeOfBoard; i++) {
-            GameData.gameBoard.grid[i] = null;
+            boardGrid.grid[i] = null;
         }
     };
 
     boardGrid.getBoardGrid = function getBoardGrid() {
-        return GameData.gameBoard.grid;
-    }; 
+        return boardGrid.grid;
+    };
 
     boardGrid._positionToCoordinates = function _positionToCoordinates(i) {
         var x = i % getBoardSize(),
