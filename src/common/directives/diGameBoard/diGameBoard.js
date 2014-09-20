@@ -4,18 +4,18 @@
 * Description
 */
 angular.module('direcitve.diGameBoard', [
-    'service.BoardGrid',
+    'service.GridService',
     'directive.diPiece'
 ])
 .controller('GameBoardCtrl', [
     '$scope',
-    'BoardGrid',
+    'GridService',
 function (
     $scope,
-    BoardGrid
+    GridService
 ){
-    $scope.getBoardGrid = function getBoardGrid() {
-        return BoardGrid.getBoardGrid();
+    $scope.getGridService = function getGridService() {
+        return GridService.getGridService();
     };
 
     $scope.getPieceModel = function getPieceModel() {

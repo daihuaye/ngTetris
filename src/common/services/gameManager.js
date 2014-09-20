@@ -5,16 +5,16 @@
 */
 angular.module('service.GameManager', [
     'resource.GameData',
-    'service.BoardGrid',
+    'service.GridService',
     'service.Piece'
 ])
 .factory('GameManager', [
     'GameData',
-    'BoardGrid',
+    'GridService',
     'Piece',
 function (
     GameData,
-    BoardGrid,
+    GridService,
     Piece
 ){
     var game = {
@@ -26,7 +26,7 @@ function (
             x: 4,
             y: 0
         });
-        BoardGrid.buildEmptyGameBoard();
+        GridService.buildEmptyGameBoard();
         game.update();
     };
 
