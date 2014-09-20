@@ -4,32 +4,38 @@
 * Description
 */
 angular.module('directive.diPiece', [
-    'service.Piece',
+    'service.GameManager',
     'resource.GameData'
 ])
 .controller('PieceCtrl', [
     '$scope',
-    'Piece',
+    'GameManager',
     'GameData',
 function (
     $scope,
-    Piece,
+    GameManager,
     GameData
 ){
-    var P = new Piece(),
-        patterns = P.getPattern();
     $scope.pieces = _.range(16);
+    
+    function getPattern() {
+        return GameManager.getCurrentPiece().getPattern();
+    }
+    function getPiece() {
+        return GameManager.getCurrentPiece();
+    }
+
     $scope.checkPattern = function checkPattern(piece) {
-        var res = _.find(patterns, function (p) {
+        var res = _.find(getPattern(), function (p) {
             return piece === p;
         });
         return _.isNumber(res);
     };
     this.getLeft = function getLeft() {
-        return P.x * GameData.gameBoard.pieceWidthInPixel + GameData.gameBoard.borderWidth;
+        return getPiece().x * GameData.gameBoard.pieceWidthInPixel + GameData.gameBoard.borderWidth;
     };
     this.getTop = function getTop() {
-        return P.y * GameData.gameBoard.pieceWidthInPixel;
+        return getPiece().y * GameData.gameBoard.pieceWidthInPixel;
     };
 }])
 .directive('diPiece', [

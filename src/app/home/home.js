@@ -1,7 +1,7 @@
 angular.module( 'ngBoilerplate.home', [
   'ui.router',
   'direcitve.diGameBoard',
-  'service.gameManager',
+  'service.GameManager',
   'service.animframePolyFill'
 ])
 .config(function config( $stateProvider ) {
