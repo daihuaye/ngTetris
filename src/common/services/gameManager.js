@@ -27,10 +27,18 @@ function (
             y: 0
         });
         BoardGrid.buildEmptyGameBoard();
+        game.update();
     };
 
     game.getCurrentPiece = function getCurrentPiece() {
         return game.currentPiece;
+    };
+
+    game.update = function update() {
+        var self = this;
+        window.requestAnimationFrame(function () {
+            self.update();
+        });
     };
     
     return game;
