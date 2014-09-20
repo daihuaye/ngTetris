@@ -20,4 +20,4 @@ open another tab of your terminal
 $ node server.js
 ```
 
-Finally, user `http://localhost:8080` in your browser.
+Finally, open the app with the url: `http://localhost:8080` in your browser
