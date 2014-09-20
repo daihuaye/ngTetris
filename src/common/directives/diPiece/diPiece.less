@@ -1,0 +1,20 @@
+.dy-piece {
+  position: absolute;
+  .transition(all, .3s, linear);
+  top: 0;
+  left: 10px;
+  .dy-piece-ul {
+    .size(4 * @game-cell-size); 
+  }
+  .dy-piece-li {
+    .size(@game-cell-size);
+    display: inline-block;
+    vertical-align: top;
+  }
+  .dy-pattern {
+    background-color: red;
+  }
+  &:hover {
+    top: @game-cell-size;
+  }
+}

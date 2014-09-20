@@ -1,0 +1,18 @@
+.dy-game-board {
+  position: relative;
+  background: #bbaaa0;
+  .size(@game-border-width, @game-border-height);
+  .dy-grid-container {
+    position: absolute;
+    z-index: 1;
+    margin: 0 auto;
+    padding-right: @game-side-border;
+    padding-left: @game-side-border;
+  }
+  .dy-grid-cell {
+    background: rgba(238,228,218,.35);
+    .border-radius(3px);
+    .size(@game-cell-size);
+    float: left;
+  }
+}
