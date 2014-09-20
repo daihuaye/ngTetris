@@ -10,7 +10,6 @@ angular.module('resource.GameData', [])
         level: 1,
         score: 0,
         gameBoard: {
-            grid: [],
             borderWidth: 10,
             boardWidthInPixel: 380,
             pieceWidthInPixel: 380 / 10,
