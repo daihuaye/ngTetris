@@ -41,6 +41,10 @@ function (
         this.canMove = null;
     };
 
+    Piece.prototype.getId = function getId() {
+        return this.id;
+    };
+
     Piece.prototype.reset = function reset() {
         this.canMove = null;
     };
