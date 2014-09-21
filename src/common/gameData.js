@@ -9,6 +9,8 @@ angular.module('resource.GameData', [])
         speed: 800,
         level: 1,
         score: 0,
+        rotationLimit: 4,
+        patternLimit: 7,
         gameBoard: {
             borderWidth: 10,
             boardWidthInPixel: 380,
