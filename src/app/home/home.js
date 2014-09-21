@@ -25,8 +25,21 @@ function HomeController(
     GameManager,
     animframePolyFill
 ){
+    $scope.gameOn = function gameOn() {
+        var self = this;
+        window.requestAnimationFrame(function () {
+            self.gameOn();
+        });
+        GameManager.moveCurrentPiece();
+        $scope.$broadcast('GameOn');
+    };
+
     $scope.newGame = function newGame() {
        GameManager.newGame();
+       $scope.gameOn();
+    };
+
+    $scope.startNewGame = function startNewGame() {
     };
 
     $scope.newGame();
