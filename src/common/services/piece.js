@@ -50,15 +50,16 @@ function (
     };
 
     Piece.prototype.updatePosition = function updatePosition(newPosition) {
-        this.x = newPosition.x;
-        this.y = newPosition.y;
+        this.x = newPosition.x || this.x;
+        this.y = newPosition.y || this.y;
     };
 
-    Piece.prototype.getPosition = function getPosition() {
-        return {
-            x: this.x,
-            y: this.y
-        };
+    Piece.prototype.getPositionX = function getPositionX() {
+        return this.x;
+    };
+
+    Piece.prototype.getPositionY = function getPositionY() {
+        return this.y;
     };
 
     Piece.prototype.getPattern = function getPattern() {
