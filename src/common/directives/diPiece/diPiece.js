@@ -16,14 +16,30 @@ function (
     GameManager,
     GameData
 ){
-    $scope.pieces = _.range(16);
-    
+    var getX = _.memoize(function(x) { 
+           return x * GameData.gameBoard.pieceWidthInPixel + GameData.gameBoard.borderWidth;
+        }),
+        getY = _.memoize(function (y) {
+            return y * GameData.gameBoard.pieceWidthInPixel;
+        });
+
     function getPattern() {
         return GameManager.getCurrentPiece().getPattern();
     }
+
     function getPiece() {
         return GameManager.getCurrentPiece();
     }
+
+    function getPositionX () {
+        return GameManager.getPositionX();
+    }
+
+    function getPositionY() {
+        return GameManager.getPositionY();
+    }
+
+    $scope.pieces = _.range(16);
 
     // if sequence is match, then highlight the DOM ele
     $scope.checkPattern = function checkPattern(piece) {
@@ -33,13 +49,12 @@ function (
         return _.isNumber(res);
     };
 
-    // pass function to the view in controller variable
     this.getLeft = function getLeft() {
-        return getPiece().x * GameData.gameBoard.pieceWidthInPixel + GameData.gameBoard.borderWidth;
+        return getX(getPositionX());
     };
 
     this.getTop = function getTop() {
-        return getPiece().y * GameData.gameBoard.pieceWidthInPixel;
+        return getY(getPositionY());
     };
 }])
 .directive('diPiece', [
@@ -59,6 +74,12 @@ function(
 
     Piece.link = function link(scope, element, attrs, controller) {
         element.css('left', controller.getLeft() + 'px');
+        scope.$on('GameOn', function () {
+            var top = controller.getTop(),
+                left = controller.getLeft();
+            element.css('left', left + 'px');
+            element.css('top', Math.round(top) + 'px');
+        });
     };
 
     return Piece;
