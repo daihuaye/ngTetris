@@ -34,10 +34,18 @@ function (
         return game.currentPiece;
     };
 
-    game.update = function update() {
-        var self = this;
-        window.requestAnimationFrame(function () {
-            self.update();
+    game.getPositionX = function getPositionX() {
+        return game.currentPiece.getPositionX();
+    };
+
+    game.getPositionY = function getPositionY() {
+        return game.currentPiece.getPositionY();
+    };
+
+    game.moveCurrentPiece = function moveCurrentPiece() {
+        var speedY = game.getPositionY() + 0.01;
+        game.currentPiece.updatePosition({
+            y: speedY
         });
     };
     
