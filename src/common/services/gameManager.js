@@ -33,6 +33,10 @@ function (
         return game.currentPiece;
     };
 
+    game.rotatePiece = function rotatePiece() {
+        return game.currentPiece.rotatePiece();
+    };
+
     game.getPositionX = function getPositionX() {
         return game.currentPiece.getPositionX();
     };
@@ -50,6 +54,12 @@ function (
 
     game.move = function move(key) {
         console.log(key);
+        switch(key) {
+            case 'up': game.rotatePiece();
+                break;
+            default:
+                break;
+        }
     };
     
     return game;
