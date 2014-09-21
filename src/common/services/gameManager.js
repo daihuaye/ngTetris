@@ -27,7 +27,6 @@ function (
             y: 0
         });
         GridService.buildEmptyGameBoard();
-        game.update();
     };
 
     game.getCurrentPiece = function getCurrentPiece() {
@@ -47,6 +46,10 @@ function (
         game.currentPiece.updatePosition({
             y: speedY
         });
+    };
+
+    game.move = function move(key) {
+        console.log(key);
     };
     
     return game;
