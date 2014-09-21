@@ -4,7 +4,8 @@
 * Description
 */
 angular.module('service.Piece', [
-    'service.PATTERNS'
+    'service.PATTERNS',
+    'resource.GameData'
 ])
 .factory('GenerateUniqueId', [function () {
     var generateUid = function() {
@@ -24,9 +25,11 @@ angular.module('service.Piece', [
 .factory('Piece', [
     'PATTERNS',
     'GenerateUniqueId',
+    'GameData',
 function (
     PATTERNS,
-    GenerateUniqueId
+    GenerateUniqueId,
+    GameData
 ){
     var Piece = function (pos) {
         var position = pos || {
@@ -35,8 +38,8 @@ function (
         };
         this.x = position.x;
         this.y = position.y;
-        this.rotaiton = Math.floor(Math.random() * 4);
-        this.patterns = Math.floor(Math.random() * 7);  
+        this.rotation = Math.floor(Math.random() * GameData.rotationLimit);
+        this.patterns = Math.floor(Math.random() * GameData.patternLimit);  
         this.id = GenerateUniqueId.next();
         this.canMove = null;
     };
@@ -63,7 +66,12 @@ function (
     };
 
     Piece.prototype.getPattern = function getPattern() {
-        return PATTERNS[this.patterns][this.rotaiton];
+        return PATTERNS[this.patterns][this.rotation];
+    };
+
+    Piece.prototype.rotatePiece = function rotatePiece() {
+        this.rotation = (this.rotation + 1) % GameData.rotationLimit;
+        return this;
     };
 
     return Piece;
