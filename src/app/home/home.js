@@ -2,7 +2,8 @@ angular.module( 'ngBoilerplate.home', [
   'ui.router',
   'direcitve.diGameBoard',
   'service.GameManager',
-  'service.animframePolyFill'
+  'service.animframePolyFill',
+  'service.Keyboard'
 ])
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'home', {
@@ -20,10 +21,12 @@ angular.module( 'ngBoilerplate.home', [
     '$scope',
     'GameManager',
     'animframePolyFill',
+    'KeyboardService',
 function HomeController(
     $scope,
     GameManager,
-    animframePolyFill
+    animframePolyFill,
+    KeyboardService
 ){
     $scope.gameOn = function gameOn() {
         var self = this;
@@ -35,11 +38,15 @@ function HomeController(
     };
 
     $scope.newGame = function newGame() {
-       GameManager.newGame();
-       $scope.gameOn();
+        KeyboardService.init();
+        GameManager.newGame();
+        $scope.gameOn();
     };
 
     $scope.startNewGame = function startNewGame() {
+        KeyboardService.on(function(key) {
+            GameManager.move(key);
+        });
     };
 
     $scope.newGame();
