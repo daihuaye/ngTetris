@@ -4,54 +4,52 @@
 * Description
 */
 angular.module('service.Keyboard', [])
-.service('KeyboardService', [
-    '$document',
+.factory('KeyboardService', [
 function (
-    $document
 ){
-    var UP = 'up',
+    var keyboard = {},
+        UP = 'up',
         RIGHT = 'right',
         DOWN = 'down',
-        LEFT = 'left';
+        LEFT = 'left',
+        keyboardMap = {
+            37: LEFT,
+            38: UP,
+            39: RIGHT,
+            40: DOWN
+        };
 
-    var keyboardMap = {
-        37: LEFT,
-        38: UP,
-        39: RIGHT,
-        40: DOWN
+    keyboard.init = function init() {
+        keyboard.keyEventHandlers = [];
     };
 
-    this.init = function init() {
-        var self = this;
-        this.keyEventHandlers = [];
-        $document.bind('keydown', function(evt) {
-            var key = keyboardMap[evt.which];
+    keyboard.keydownAction = function keydownAction(event) {
+        var key = keyboardMap[event.which];
 
-            if (key) {
-                evt.preventDefault();
-                self._handleKeyEvent(key, evt);
-            }
-        });
+        if (key) {
+            event.preventDefault();
+            keyboard._handleKeyEvent(key, event);
+        }
     };
 
-    this.on = function on(cb) {
-        this.keyEventHandlers.push(cb);
+    keyboard.on = function on(cb) {
+        keyboard.keyEventHandlers.push(cb);
     };
 
-    this._handleKeyEvent = function _handleKeyEvent(key, evt) {
-        var callbacks = this.keyEventHandlers;
+    keyboard._handleKeyEvent = function _handleKeyEvent(key, event) {
+        var callbacks = keyboard.keyEventHandlers;
         if (!callbacks) {
             return;
         }
 
-        evt.preventDefault();
+        event.preventDefault();
 
         if (callbacks) {
             for(var x = 0; x < callbacks.length; x++) {
                 var cb = callbacks[x];
-                cb(key, evt);
+                cb(key, event);
             }
         }
     };
-
+    return keyboard;
 }]);
