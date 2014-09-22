@@ -6,6 +6,7 @@
 angular.module('resource.GameData', [])
 .factory('GameData', [function () {
     var data = {
+        gameStart: false,
         speed: 800,
         level: 1,
         score: 0,
