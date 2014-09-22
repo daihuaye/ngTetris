@@ -24,7 +24,7 @@ function (
         });
 
     function getPattern() {
-        return GameManager.getCurrentPiece().getPattern();
+        return GameManager.getCurrentPattern();
     }
 
     function getPiece() {
