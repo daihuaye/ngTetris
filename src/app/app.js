@@ -2,6 +2,8 @@ angular.module( 'ngBoilerplate', [
   'templates-app',
   'templates-common',
   'ngBoilerplate.home',
+  'service.GameManager',
+  'service.Keyboard',
   'ui.router'
 ])
 
@@ -12,5 +14,18 @@ angular.module( 'ngBoilerplate', [
 .run( function run () {
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location ) {
-});
+.controller( 'AppCtrl', [
+    '$scope', 
+    'GameManager',
+    'KeyboardService',
+function(
+    $scope,
+    GameManager,
+    KeyboardService
+){
+    $scope.keydown = function keydown($event) {
+        if (GameManager.isGameStart()) {
+            KeyboardService.keydownAction($event);
+        }
+    };
+}]);
