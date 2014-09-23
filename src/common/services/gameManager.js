@@ -74,10 +74,23 @@ function (
         });
     };
 
+    game.movePieceInLevel = function movePieceInLevel(direction) {
+        var velocity = (direction === 'left') ? -1.5 : 1.5;
+            speedX = game.getPositionX() + velocity;
+
+        game.currentPiece.updatePosition({
+            x: speedX
+        });
+    };
+
     game.move = function move(key) {
         console.log(key);
         switch(key) {
             case 'up': game.rotatePiece();
+                break;
+            case 'left': game.movePieceInLevel('left');
+                break;
+            case 'right': game.movePieceInLevel('right');
                 break;
             default:
                 break;
