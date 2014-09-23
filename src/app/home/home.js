@@ -33,20 +33,39 @@ function HomeController(
         window.requestAnimationFrame(function () {
             self.gameOn();
         });
-        GameManager.moveCurrentPiece();
-        $scope.$broadcast('GameOn');
+        if(!GameManager.isPause() && GameManager.isGameStart()) {
+            GameManager.moveCurrentPiece();
+            $scope.$broadcast('GameOn');
+        }
     };
 
     $scope.newGame = function newGame() {
         KeyboardService.init();
         GameManager.newGame();
-        $scope.gameOn();
     };
 
     $scope.startNewGame = function startNewGame() {
+        GameManager.setGameStart();
         KeyboardService.on(function(key) {
             GameManager.move(key);
         });
+        $scope.gameOn();
+    };
+
+    $scope.isGameStart = function isGameStart() {
+        return GameManager.isGameStart();
+    };
+
+    $scope.pauseGame = function pauseGame() {
+        GameManager.setPause();
+    };
+
+    $scope.isPause = function isPause() {
+        return GameManager.isPause();
+    };
+
+    $scope.continueGame = function continueGame() {
+        GameManager.setPause();
     };
 
     $scope.newGame();
