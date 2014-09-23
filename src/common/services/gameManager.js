@@ -27,17 +27,20 @@ function (
             y: 0
         });
         GridService.buildEmptyGameBoard();
-        game.setGameStart();
     };
 
     game.setGameStart = function setGameStart() {
-        GameData.gameStart = true;
+        GameData.gameStart = !GameData.gameStart;
         return this;
     };
 
-    game.setGameEnd = function setGameEnd() {
-        GameData.gameStart = false;
+    game.setPause = function setPause() {
+        GameData.gamePause = !GameData.gamePause;
         return this;
+    };
+
+    game.isPause = function isPause() {
+        return GameData.gamePause;
     };
 
     game.isGameStart = function isGameStart() {
