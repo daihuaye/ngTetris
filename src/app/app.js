@@ -24,7 +24,13 @@ function(
     KeyboardService
 ){
     $scope.keydown = function keydown($event) {
-        if (GameManager.isGameStart()) {
+        if (GameManager.isGameStart() && !GameManager.isPause()) {
+            KeyboardService.keydownAction($event);
+        }
+    };
+
+    $scope.keypress = function keypress($event) {
+        if (GameManager.isGameStart && !GameManager.isPause()) {
             KeyboardService.keydownAction($event);
         }
     };
