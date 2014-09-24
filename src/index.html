@@ -32,8 +32,7 @@
       { "parsetags": "explicit" }
     </script>
   </head>
-  <body data-ng-keydown="keydown($event)"
-        data-ng-keypress="keypress($event)">
+  <body data-ng-keyup="keydown($event)">
     <div class="container" ui-view="main"></div>
   </body>
 </html>
