@@ -53,8 +53,8 @@ function (
     };
 
     Piece.prototype.updatePosition = function updatePosition(newPosition) {
-        this.x = newPosition.x || this.x;
-        this.y = newPosition.y || this.y;
+        this.x = isNaN(newPosition.x) ? this.x : newPosition.x;
+        this.y = isNaN(newPosition.y) ? this.y : newPosition.y;
     };
 
     Piece.prototype.getPositionX = function getPositionX() {

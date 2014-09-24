@@ -37,6 +37,10 @@ function (
 
     };
 
+    GridService.withinGrid = function withinGrid(cell) {
+        // return 
+    };
+
     GridService._positionToCoordinates = function _positionToCoordinates(i) {
         var x = i % getBoardSize(),
             y = (i - x) / getBoardSize();
