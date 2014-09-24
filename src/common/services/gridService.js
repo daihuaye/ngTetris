@@ -22,8 +22,16 @@ function (
         return GameData.gameBoard.boardSize;
     }
 
+    function getBoardWidth() {
+        return GameData.gameBoard.boardWidth;
+    }
+
+    function getBoardHeight() {
+        return GameData.gameBoard.boardHeight;
+    }
+
     GridService.buildEmptyGameBoard = function buildEmptyGameBoard() {
-        var sizeOfBoard = GameData.gameBoard.boardWidth * GameData.gameBoard.boardHeight;
+        var sizeOfBoard = getBoardWidth() * getBoardHeight();
         for (var i = 0; i < sizeOfBoard; i++) {
             GridService.grid[i] = null;
         }
@@ -35,10 +43,6 @@ function (
 
     GridService.insertPiece = function insertPiece(piece) {
 
-    };
-
-    GridService.withinGrid = function withinGrid(cell) {
-        // return 
     };
 
     GridService._positionToCoordinates = function _positionToCoordinates(i) {
