@@ -68,7 +68,6 @@ function (
     };
 
     game.moveCurrentPiece = function moveCurrentPiece() {
-        console.log('move currentPiece');
         var speedY = game.getPositionY() + 1;
         game.currentPiece.updatePosition({
             y: speedY
