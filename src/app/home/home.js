@@ -28,13 +28,21 @@ function HomeController(
     animframePolyFill,
     KeyboardService
 ){
+    function gameLoop() {
+        GameManager.moveCurrentPiece();
+    }
+
+    var loop = _.throttle(gameLoop, 2000, {
+            leading: false,
+            trailing: false
+        });
     $scope.gameOn = function gameOn() {
         var self = this;
         window.requestAnimationFrame(function () {
             self.gameOn();
         });
         if(!GameManager.isPause() && GameManager.isGameStart()) {
-            GameManager.moveCurrentPiece();
+            loop();
             $scope.$broadcast('GameOn');
         }
     };

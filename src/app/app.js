@@ -28,10 +28,4 @@ function(
             KeyboardService.keydownAction($event);
         }
     };
-
-    $scope.keypress = function keypress($event) {
-        if (GameManager.isGameStart && !GameManager.isPause()) {
-            KeyboardService.keydownAction($event);
-        }
-    };
 }]);
