@@ -13,6 +13,8 @@ angular.module('resource.GameData', [])
         score: 0,
         rotationLimit: 4,
         patternLimit: 7,
+        pieceSquareGrid: 4,
+        numCellInPiece: 4,
         gameBoard: {
             borderWidth: 10,
             boardWidthInPixel: 380,
