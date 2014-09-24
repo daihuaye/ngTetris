@@ -26,10 +26,12 @@ angular.module('service.Piece', [
     'PATTERNS',
     'GenerateUniqueId',
     'GameData',
+    'PATTERN_COOR',
 function (
     PATTERNS,
     GenerateUniqueId,
-    GameData
+    GameData,
+    PATTERN_COOR
 ){
     var Piece = function (pos) {
         var position = pos || {
@@ -44,17 +46,20 @@ function (
         this.canMove = null;
     };
 
+    function getBoardWidth() {
+        return GameData.gameBoard.boardWidth;
+    }
+
+    function getBoardHeight() {
+        return GameData.gameBoard.boardHeight;
+    }
+
     Piece.prototype.getId = function getId() {
         return this.id;
     };
 
     Piece.prototype.reset = function reset() {
         this.canMove = null;
-    };
-
-    Piece.prototype.updatePosition = function updatePosition(newPosition) {
-        this.x = isNaN(newPosition.x) ? this.x : newPosition.x;
-        this.y = isNaN(newPosition.y) ? this.y : newPosition.y;
     };
 
     Piece.prototype.getPositionX = function getPositionX() {
@@ -70,8 +75,49 @@ function (
     };
 
     Piece.prototype.rotatePiece = function rotatePiece() {
+        var oldRotation = this.rotation;
         this.rotation = (this.rotation + 1) % GameData.rotationLimit;
+        if(!this.verifyPiece()) {
+            this.rotation = oldRotation;
+        }
         return this;
+    };
+
+    Piece.prototype.updatePosition = function updatePosition(newPosition) {
+        var x = isNaN(newPosition.x) ? this.x : newPosition.x,
+            y = isNaN(newPosition.y) ? this.y : newPosition.y;
+
+        if(this.verifyPiece({x: x, y: y})) {
+            this.x = x;
+            this.y = y;    
+        }
+        return this;
+    };
+
+    Piece.prototype.verifyPiece = function verifyPiece(cell) {
+        var coord = this.convertPatternToCoordinates(cell),
+            isOk = true;
+        for(var i = 0, len = coord.length; i < len; i++) {
+            if(!this.withinGrid(coord[i])) {
+                isOk = false;
+            }
+        }
+        return isOk;
+    };
+
+    Piece.prototype.withinGrid = function withinGrid(cell) {
+        return cell.x >= 0 && cell.x < getBoardWidth() &&
+                cell.y >= 0 && cell.y < getBoardHeight();
+    };
+
+    Piece.prototype.convertPatternToCoordinates = function convertPatternToCoordinates(cell) {
+        var coord = angular.copy(PATTERN_COOR[this.patterns][this.rotation]),
+            location = cell || {x: this.x, y: this.y};
+        for(var i = 0; i < GameData.numCellInPiece; i++) {
+            coord[i].x += location.x;
+            coord[i].y += location.y;   
+        }
+        return coord;
     };
 
     return Piece;
