@@ -68,23 +68,22 @@ function (
     };
 
     game.moveCurrentPiece = function moveCurrentPiece() {
-        var speedY = game.getPositionY() + 0.01;
+        console.log('move currentPiece');
+        var speedY = game.getPositionY() + 1;
         game.currentPiece.updatePosition({
             y: speedY
         });
     };
 
     game.movePieceInLevel = function movePieceInLevel(direction) {
-        var velocity = (direction === 'left') ? -1.5 : 1.5;
+        var velocity = (direction === 'left') ? -1 : 1;
             speedX = game.getPositionX() + velocity;
-
         game.currentPiece.updatePosition({
             x: speedX
         });
     };
 
     game.move = function move(key) {
-        console.log(key);
         switch(key) {
             case 'up': game.rotatePiece();
                 break;
