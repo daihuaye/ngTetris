@@ -1,10 +1,8 @@
 <div class="dy-game-board">
     <div class="dy-grid-container">
         <div class="dy-grid-cell" 
-            data-ng-repeat="cell in getGridService() track by $index"></div>
+            data-ng-repeat="cell in getGridService() track by $index"
+            data-ng-class="{'dy-filled-piece': isPieceOnGird(cell)}"></div>
         <div di-piece></div>
-        <div data-ng-repeat="piece in getPieceModel() track by $id(piece.getId())">
-            
-        </div>
     </div>
 </div>
