@@ -71,6 +71,22 @@ function (
         var speedY = game.getPositionY() + 1;
         game.currentPiece.updatePosition({
             y: speedY
+        }, function(){
+            game.insertPiece();
+        });
+    };
+
+    game.insertPiece = function insertPiece() {
+        GridService.insertPiece(game.currentPiece);
+        game.currentPiece.destroy();
+        game.currentPiece = null;
+        game.createNewPiece();
+    };
+
+    game.createNewPiece = function createNewPiece() {
+        game.currentPiece = new Piece({
+            x: 4,
+            y: 0
         });
     };
 
