@@ -1,7 +1,7 @@
 .dy-game-board {
   position: relative;
   background: #bbaaa0;
-  .size(@game-border-width, @game-border-height);
+  .size(@game-board-width, @game-board-height);
   .dy-grid-container {
     position: absolute;
     z-index: 1;
@@ -14,5 +14,8 @@
     .border-radius(3px);
     .size(@game-cell-size);
     float: left;
+  }
+  .dy-filled-piece {
+    background: red;
   }
 }
