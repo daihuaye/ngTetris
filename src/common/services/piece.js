@@ -43,7 +43,6 @@ function (
         this.rotation = Math.floor(Math.random() * GameData.rotationLimit);
         this.patterns = Math.floor(Math.random() * GameData.patternLimit);  
         this.id = GenerateUniqueId.next();
-        this.canMove = null;
     };
 
     function getBoardWidth() {
@@ -58,8 +57,8 @@ function (
         return this.id;
     };
 
-    Piece.prototype.reset = function reset() {
-        this.canMove = null;
+    Piece.prototype.getPieceCoordArray = function getPieceCoordArray() {
+        return this.convertPatternToCoordinates();
     };
 
     Piece.prototype.getPositionX = function getPositionX() {
@@ -83,13 +82,19 @@ function (
         return this;
     };
 
-    Piece.prototype.updatePosition = function updatePosition(newPosition) {
-        var x = isNaN(newPosition.x) ? this.x : newPosition.x,
-            y = isNaN(newPosition.y) ? this.y : newPosition.y;
+    Piece.prototype.updatePosition = function updatePosition(newPosition, cb) {
+        var isMoveDown = isNaN(newPosition.y) ? false: newPosition.y > this.y;
+            x = isNaN(newPosition.x) ? this.x : newPosition.x,
+            y = isNaN(newPosition.y) ? this.y : newPosition.y,
+            isVarify = this.verifyPiece({x: x, y: y});
 
-        if(this.verifyPiece({x: x, y: y})) {
+        if(isVarify) {
             this.x = x;
-            this.y = y;    
+            this.y = y;
+        } else if(!isVarify && isMoveDown) {
+            if (cb) {
+                cb();
+            }
         }
         return this;
     };
@@ -118,6 +123,14 @@ function (
             coord[i].y += location.y;   
         }
         return coord;
+    };
+
+    Piece.prototype.destroy = function destroy() {
+        this.x = null;
+        this.y = null;
+        this.rotation = null;
+        this.patterns = null;
+        this.id = null;
     };
 
     return Piece;
