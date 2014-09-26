@@ -18,8 +18,8 @@ function (
         return GridService.getGridService();
     };
 
-    $scope.getPieceModel = function getPieceModel() {
-        return [];
+    $scope.isPieceOnGird = function isPieceOnGird(cell) {
+        return cell;
     };
 }])
 .directive('diGameBoard', [
