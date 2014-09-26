@@ -30,6 +30,9 @@ function HomeController(
 ){
     function gameLoop() {
         GameManager.moveCurrentPiece();
+        if(!$scope.$$phase) {
+            $scope.$apply();
+        }
     }
 
     var loop = _.throttle(gameLoop, 2000, {
