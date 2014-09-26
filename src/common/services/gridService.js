@@ -4,22 +4,19 @@
 * Description
 */
 angular.module('service.GridService', [
-    'resource.GameData',
-    'service.Piece'
+    'resource.GameData'
 ])
 .factory('GridService', [
     'GameData',
-    'Piece',
 function (
-    GameData,
-    Piece
+    GameData
 ){
     var GridService = {};
     GridService.pieces = [];
     GridService.grid = [];
 
     function getBoardSize() {
-        return GameData.gameBoard.boardSize;
+        return GameData.gameBoard.boardWidth;
     }
 
     function getBoardWidth() {
@@ -33,7 +30,7 @@ function (
     GridService.buildEmptyGameBoard = function buildEmptyGameBoard() {
         var sizeOfBoard = getBoardWidth() * getBoardHeight();
         for (var i = 0; i < sizeOfBoard; i++) {
-            GridService.grid[i] = null;
+            GridService.grid[i] = false;
         }
     };
 
@@ -42,7 +39,11 @@ function (
     };
 
     GridService.insertPiece = function insertPiece(piece) {
-
+        var coordArray = piece.getPieceCoordArray();
+        for (var i = 0; i < coordArray.length; i++) {
+            var pos = this._coordinatesToPosition(coordArray[i]);
+            GridService.grid[pos] = true;
+        }
     };
 
     GridService._positionToCoordinates = function _positionToCoordinates(i) {
