@@ -5,7 +5,8 @@
 */
 angular.module('service.Piece', [
     'service.PATTERNS',
-    'resource.GameData'
+    'resource.GameData',
+    'service.GridService'
 ])
 .factory('GenerateUniqueId', [function () {
     var generateUid = function() {
@@ -27,11 +28,13 @@ angular.module('service.Piece', [
     'GenerateUniqueId',
     'GameData',
     'PATTERN_COOR',
+    'GridService',
 function (
     PATTERNS,
     GenerateUniqueId,
     GameData,
-    PATTERN_COOR
+    PATTERN_COOR,
+    GridService
 ){
     var Piece = function (pos) {
         var position = pos || {
@@ -103,7 +106,7 @@ function (
         var coord = this.convertPatternToCoordinates(cell),
             isOk = true;
         for(var i = 0, len = coord.length; i < len; i++) {
-            if(!this.withinGrid(coord[i])) {
+            if(!this.withinGrid(coord[i]) || !GridService.isPieceVerify(coord[i])) {
                 isOk = false;
             }
         }
