@@ -12,7 +12,6 @@ function (
     GameData
 ){
     var GridService = {};
-    GridService.pieces = [];
     GridService.grid = [];
 
     function getBoardSize() {
@@ -44,6 +43,14 @@ function (
             var pos = this._coordinatesToPosition(coordArray[i]);
             GridService.grid[pos] = true;
         }
+    };
+
+    GridService.isPieceVerify = function isPieceVerify(coord) {
+        var pos = this._coordinatesToPosition(coord);
+        if(GridService.grid[pos]) {
+            return false;
+        }
+        return true;
     };
 
     GridService._positionToCoordinates = function _positionToCoordinates(i) {
