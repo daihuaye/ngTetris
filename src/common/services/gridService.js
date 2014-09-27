@@ -53,6 +53,35 @@ function (
         return true;
     };
 
+    GridService.checkAndClearFilledRow = function checkAndClearFilledRow() {
+        for(var i = 0; i < getBoardHeight(); i++) {
+            var j = 0;
+            for(; j < getBoardWidth(); j++) {
+                var pos = this._coordinatesToPosition({x: j, y: i});
+                if(!this.grid[pos]) {
+                    break;
+                }
+            }
+            if(j === getBoardWidth()) {
+                // clear the row
+                console.log("clear the row");
+                this.clearNthRow(i);
+            }
+        }
+    };
+
+    GridService.clearNthRow = function clearNthRow(row) {
+        for(var z = 0; z < getBoardWidth(); z++) {
+            var pos = this._coordinatesToPosition({x: z, y: row});
+            this.grid[pos] = false;
+        }
+        return this;
+    };
+
+    GridService.movePieceDownLevel = function movePieceDownLevel(row) {
+
+    };
+
     GridService._positionToCoordinates = function _positionToCoordinates(i) {
         var x = i % getBoardSize(),
             y = (i - x) / getBoardSize();
