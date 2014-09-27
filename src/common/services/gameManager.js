@@ -73,6 +73,7 @@ function (
             y: speedY
         }, function(){
             game.insertPiece();
+            GridService.checkAndClearFilledRow();
         });
     };
 
