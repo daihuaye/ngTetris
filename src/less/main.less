@@ -22,6 +22,23 @@
 
 @import 'variables.less';
 
+body {
+  background: #faf8ef;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  font-weight: regular;
+  font-size: 18px;
+}
+
+.container {
+  width: 500px;
+}
+
+@media screen and (max-width: 520px) {
+  .container {
+    width: 360px;
+    margin: 0 auto;
+  }
+}
 
 /**
  * Now that all app-wide styles have been applied, we can load the styles for
@@ -34,3 +51,5 @@
 
 @import '../common/directives/diGameBoard/diGameBoard.less';
 @import '../common/directives/diPiece/diPiece.less';
+
+@import '../app/home/home.mobile.less';
