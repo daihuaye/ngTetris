@@ -17,10 +17,10 @@ angular.module('resource.GameData', [])
         numCellInPiece: 4,
         gameBoard: {
             borderWidth: 10,
-            boardWidthInPixel: 380,
-            pieceWidthInPixel: 38,
+            boardWidthInPixel: 450,
+            pieceWidthInPixel: 45,
             boardWidth: 10,
-            boardHeight: 20,
+            boardHeight: 17,
             boardPosition: {
                 x: 0,
                 y: 0
