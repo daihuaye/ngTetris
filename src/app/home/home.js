@@ -53,6 +53,7 @@ function HomeController(
     $scope.newGame = function newGame() {
         KeyboardService.init();
         GameManager.newGame();
+        return this;
     };
 
     $scope.startNewGame = function startNewGame() {
@@ -61,6 +62,7 @@ function HomeController(
             GameManager.move(key);
         });
         $scope.gameOn();
+        return this;
     };
 
     $scope.isGameStart = function isGameStart() {
@@ -69,6 +71,7 @@ function HomeController(
 
     $scope.pauseGame = function pauseGame() {
         GameManager.setPause();
+        return this;
     };
 
     $scope.isPause = function isPause() {
@@ -77,6 +80,11 @@ function HomeController(
 
     $scope.continueGame = function continueGame() {
         GameManager.setPause();
+        return this;
+    };
+
+    $scope.getScore = function getScore() {
+        return GameManager.getScore();
     };
 
     $scope.newGame();
