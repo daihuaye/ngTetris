@@ -65,6 +65,7 @@ function (
             if(j === getBoardWidth()) {
                 // clear the row
                 this.clearNthRow(i);
+                this.movePieceDownLevel(i);
                 cb();
             }
         }
@@ -79,7 +80,16 @@ function (
     };
 
     GridService.movePieceDownLevel = function movePieceDownLevel(row) {
-
+        for(var i = row - 1; i > 0; i--) {
+            for(var j = 0; j < getBoardWidth(); j++) {
+                var curPos = this._coordinatesToPosition({x: j, y: i}),
+                    nextPos = this._coordinatesToPosition({x: j, y: i+1});
+                if (this.grid[curPos]) {
+                    this.grid[nextPos] = true;
+                }
+                this.grid[curPos] = false;
+            }
+        }
     };
 
     GridService._positionToCoordinates = function _positionToCoordinates(i) {
