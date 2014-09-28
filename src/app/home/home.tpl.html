@@ -1,29 +1,33 @@
 <div class="dy-home">
-    <div class="dy-title">
-        <span>ng-Tetris Game</span>
-        <div class="dy-score-container">
-            <div class="dy-score" data-ng-bind="getScore()">
-            </div
-            ><div class="dy-best-score">
+    <div class="row">
+        <div class="dy-game-title col-sm-7 col-xs-5">NgTetris</div>
+        <div class="col-sm-5 col-xs-7">
+            <div class="dy-best-score pull-right">
                 1000
+            </div>
+            <div class="dy-score pull-right" 
+                data-ng-bind="getScore()">
             </div>
         </div>
     </div
-    ><div class="dy-instructions">
-        <span>Let's play the game.</span
-        ><button data-ng-click="startNewGame()" 
-                data-ng-show="!isGameStart()">
-                New Game
-        </button
-        ><button data-ng-show="isGameStart() && !isPause()"
-                data-ng-click="pauseGame()">
-                Pause Game
-        </button
-        ><button data-ng-show="isGameStart() && isPause()"
-                data-ng-click="continueGame()">
-                Continue Game    
-        </button>
-
+    ><div class="row">
+        <div class="dy-instructions col-sm-5 col-xs-5">
+            Let's play the game.
+        </div
+        ><div class="col-sm-7 col-xs-7">
+            <button data-ng-click="startNewGame()" 
+                    data-ng-show="!isGameStart()">
+                    New Game
+            </button
+            ><button data-ng-show="isGameStart() && !isPause()"
+                    data-ng-click="pauseGame()">
+                    Pause Game
+            </button
+            ><button data-ng-show="isGameStart() && isPause()"
+                    data-ng-click="continueGame()">
+                    Continue Game    
+            </button>
+        </div>
     </div>
     
     <div class="dy-game-container">
