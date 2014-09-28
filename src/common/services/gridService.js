@@ -53,7 +53,7 @@ function (
         return true;
     };
 
-    GridService.checkAndClearFilledRow = function checkAndClearFilledRow() {
+    GridService.checkAndClearFilledRow = function checkAndClearFilledRow(cb) {
         for(var i = 0; i < getBoardHeight(); i++) {
             var j = 0;
             for(; j < getBoardWidth(); j++) {
@@ -64,8 +64,8 @@ function (
             }
             if(j === getBoardWidth()) {
                 // clear the row
-                console.log("clear the row");
                 this.clearNthRow(i);
+                cb();
             }
         }
     };
