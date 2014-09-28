@@ -18,7 +18,8 @@ function (
     Piece
 ){
     var game = {
-        currentPiece: null
+        currentPiece: null,
+        score: 0
     };
 
     game.newGame = function newGame() {
@@ -47,6 +48,10 @@ function (
         return GameData.gameStart;
     };
 
+    game.getScore = function getScore() {
+        return game.score;
+    };
+
     game.getCurrentPiece = function getCurrentPiece() {
         return game.currentPiece;
     };
@@ -73,7 +78,9 @@ function (
             y: speedY
         }, function(){
             game.insertPiece();
-            GridService.checkAndClearFilledRow();
+            GridService.checkAndClearFilledRow(function() {
+                game.score += 100;
+            });
         });
     };
 
