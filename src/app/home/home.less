@@ -1,5 +1,5 @@
 .dy-home {
-  padding-top: 10px;
+  padding-top: 20px;
   .dy-game-title {
     font-size: 60px;
     line-height: 65px;
@@ -20,8 +20,19 @@
   }
   .dy-score {
     .score-button-mixin(); 
+    &:after {
+      content: 'score';
+      .score-text-mixin();
+    }
   }
   .dy-best-score {
     .score-button-mixin();
+    &:after {
+      content: 'best';
+      .score-text-mixin();
+    }
+  }
+  .dy-instructions {
+    color: rgb(119, 110, 101);
   }
 }

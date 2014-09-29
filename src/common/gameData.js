@@ -19,6 +19,7 @@ angular.module('resource.GameData', [])
             borderWidth: 10,
             boardWidthInPixel: 300,
             pieceWidthInPixel: 30,
+            borderPaddingTop: 10,
             boardWidth: 10,
             boardHeight: 20,
             boardPosition: {

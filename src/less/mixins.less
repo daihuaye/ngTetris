@@ -1,13 +1,24 @@
 .score-button-mixin() {
+  position: relative;
   height: 55px;
   line-height: 55px;
-  padding: 0;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding: 10px 25px 0px 25px;
   display: inline-block;
   background: #bbada0;
   color: white;
   .border-radius(3px);
   font-size: 25px;
   font-weight: bold;
+}
+
+.score-text-mixin() {
+  position: absolute;
+  width: 100%;
+  top: 10px;
+  left: 0;
+  text-transform: uppercase;
+  font-size: 13px;
+  line-height: 13px;
+  text-align: center;
+  color: #eee4da;
 }
