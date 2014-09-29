@@ -1,5 +1,6 @@
 <div class="dy-piece">
-    <ul class="dy-piece-ul">
+    <ul class="dy-piece-ul"
+        data-ng-class="::getClassForShape()">
         <li data-ng-repeat="i in pieces"
             class="dy-piece-li"
             data-ng-class="{'dy-pattern': checkPattern(i)}"></li></ul>
