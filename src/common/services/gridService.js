@@ -29,7 +29,10 @@ function (
     GridService.buildEmptyGameBoard = function buildEmptyGameBoard() {
         var sizeOfBoard = getBoardWidth() * getBoardHeight();
         for (var i = 0; i < sizeOfBoard; i++) {
-            GridService.grid[i] = false;
+            GridService.grid[i] = {
+                filled: false,
+                shape: null
+            };
         }
     };
 
@@ -41,13 +44,14 @@ function (
         var coordArray = piece.getPieceCoordArray();
         for (var i = 0; i < coordArray.length; i++) {
             var pos = this._coordinatesToPosition(coordArray[i]);
-            GridService.grid[pos] = true;
+            GridService.grid[pos].filled = true;
+            GridService.grid[pos].shape = piece.getShape();
         }
     };
 
     GridService.isPieceVerify = function isPieceVerify(coord) {
         var pos = this._coordinatesToPosition(coord);
-        if(GridService.grid[pos]) {
+        if(GridService.grid[pos].filled) {
             return false;
         }
         return true;
@@ -58,7 +62,7 @@ function (
             var j = 0;
             for(; j < getBoardWidth(); j++) {
                 var pos = this._coordinatesToPosition({x: j, y: i});
-                if(!this.grid[pos]) {
+                if(!this.grid[pos].filled) {
                     break;
                 }
             }
@@ -74,7 +78,7 @@ function (
     GridService.clearNthRow = function clearNthRow(row) {
         for(var z = 0; z < getBoardWidth(); z++) {
             var pos = this._coordinatesToPosition({x: z, y: row});
-            this.grid[pos] = false;
+            this.grid[pos].filled = false;
         }
         return this;
     };
@@ -84,10 +88,10 @@ function (
             for(var j = 0; j < getBoardWidth(); j++) {
                 var curPos = this._coordinatesToPosition({x: j, y: i}),
                     nextPos = this._coordinatesToPosition({x: j, y: i+1});
-                if (this.grid[curPos]) {
-                    this.grid[nextPos] = true;
+                if (this.grid[curPos].filled) {
+                    this.grid[nextPos].filled = true;
                 }
-                this.grid[curPos] = false;
+                this.grid[curPos].filled = false;
             }
         }
     };
