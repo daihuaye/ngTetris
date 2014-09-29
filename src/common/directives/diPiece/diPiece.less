@@ -13,29 +13,34 @@
   }
   .dy-pattern {
     border: 1px solid #bbaaa0;
-    &:before {
-      content: '\f08a'
-    }
+    .cell-inner-shape-mixin();
   }
   .dy-L .dy-pattern {
     background-color: @L-color;
+    color: @L-inner-color;
   }
   .dy-O .dy-pattern {
     background-color: @O-color;
+    color: @O-inner-color;
   }
   .dy-I .dy-pattern {
-    background-color: @L-color;
+    background-color: @I-color;
+    color: @I-inner-color;
   }
   .dy-T .dy-pattern {
     background-color: @T-color;
+    color: @T-inner-color;
   }
   .dy-J .dy-pattern {
     background-color: @J-color;
+    color: @J-inner-color;
   }
   .dy-S .dy-pattern {
     background-color: @S-color;
+    color: @S-inner-color;
   }
   .dy-Z .dy-pattern {
     background-color: @Z-color;
+    color: @Z-inner-color;
   }
 }
