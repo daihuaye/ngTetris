@@ -18,8 +18,27 @@ function (
         return GridService.getGridService();
     };
 
-    $scope.isPieceOnGird = function isPieceOnGird(cell) {
-        return cell;
+    $scope.getFilledClass = function getFilledClass(cell) {
+        if (cell.filled) {
+            var pieceClass = '';
+            switch(cell.shape) {
+                case 0: pieceClass = 'dy-L-filled';
+                    break;
+                case 1: pieceClass = 'dy-O-filled';
+                    break;
+                case 2: pieceClass = 'dy-I-filled';
+                    break;
+                case 3: pieceClass = 'dy-T-filled';
+                    break;
+                case 4: pieceClass = 'dy-J-filled';
+                    break;
+                case 5: pieceClass = 'dy-S-filled';
+                    break;
+                case 6: pieceClass = 'dy-Z-filled';
+                    break;
+            }
+            return pieceClass;
+        }
     };
 }])
 .directive('diGameBoard', [
