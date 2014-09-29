@@ -2,7 +2,7 @@
     <div class="dy-grid-container">
         <div class="dy-grid-cell" 
             data-ng-repeat="cell in getGridService() track by $index"
-            data-ng-class="{'dy-filled-piece': isPieceOnGird(cell)}"></div>
+            data-ng-class="getFilledClass(cell)"></div>
         <div di-piece></div>
     </div>
 </div>
