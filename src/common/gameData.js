@@ -8,7 +8,7 @@ angular.module('resource.GameData', [])
     var data = {
         gameStart: false,
         gamePause: false,
-        speed: 800,
+        speed: 2000,
         level: 1,
         score: 0,
         rotationLimit: 4,
@@ -17,10 +17,10 @@ angular.module('resource.GameData', [])
         numCellInPiece: 4,
         gameBoard: {
             borderWidth: 10,
-            boardWidthInPixel: 450,
-            pieceWidthInPixel: 45,
+            boardWidthInPixel: 300,
+            pieceWidthInPixel: 30,
             boardWidth: 10,
-            boardHeight: 17,
+            boardHeight: 20,
             boardPosition: {
                 x: 0,
                 y: 0
