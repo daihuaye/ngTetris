@@ -76,6 +76,10 @@ function (
         return PATTERNS[this.patterns][this.rotation];
     };
 
+    Piece.prototype.getShape = function getShape() {
+        return this.patterns;
+    };
+
     Piece.prototype.rotatePiece = function rotatePiece() {
         var oldRotation = this.rotation;
         this.rotation = (this.rotation + 1) % GameData.rotationLimit;
