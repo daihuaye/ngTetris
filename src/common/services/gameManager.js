@@ -35,6 +35,10 @@ function (
         return this;
     };
 
+    game.getGameSpeed = function getGameSpeed() {
+        return GameData.speed;
+    };
+
     game.setPause = function setPause() {
         GameData.gamePause = !GameData.gamePause;
         return this;
