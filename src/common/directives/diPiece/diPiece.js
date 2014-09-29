@@ -49,6 +49,27 @@ function (
         return _.isNumber(res);
     };
 
+    $scope.getClassForShape = function getClassForShape() {
+        var pieceClass = '';
+        switch(GameManager.getCurrentShape()) {
+            case 0: pieceClass = 'dy-L';
+                break;
+            case 1: pieceClass = 'dy-O';
+                break;
+            case 2: pieceClass = 'dy-I';
+                break;
+            case 3: pieceClass = 'dy-T';
+                break;
+            case 4: pieceClass = 'dy-J';
+                break;
+            case 5: pieceClass = 'dy-S';
+                break;
+            case 6: pieceClass = 'dy-Z';
+                break;
+        }   
+        return pieceClass;
+    };
+
     this.getLeft = function getLeft() {
         return getX(getPositionX());
     };
