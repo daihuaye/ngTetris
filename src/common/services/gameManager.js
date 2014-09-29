@@ -64,6 +64,10 @@ function (
         return game.currentPiece.getPattern();
     };
 
+    game.getCurrentShape = function getCurrentShape() {
+        return game.currentPiece.getShape();
+    };
+
     game.rotatePiece = function rotatePiece() {
         return game.currentPiece.rotatePiece();
     };
