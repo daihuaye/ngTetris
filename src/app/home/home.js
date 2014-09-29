@@ -28,6 +28,11 @@ function HomeController(
     animframePolyFill,
     KeyboardService
 ){
+    var loop = _.throttle(gameLoop, GameManager.getGameSpeed(), {
+            leading: false,
+            trailing: false
+        });
+
     function gameLoop() {
         GameManager.moveCurrentPiece();
         if(!$scope.$$phase) {
@@ -35,10 +40,6 @@ function HomeController(
         }
     }
 
-    var loop = _.throttle(gameLoop, 2000, {
-            leading: false,
-            trailing: false
-        });
     $scope.gameOn = function gameOn() {
         var self = this;
         window.requestAnimationFrame(function () {
