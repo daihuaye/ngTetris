@@ -99,7 +99,7 @@ function (
             this.x = x;
             this.y = y;
         } else if(!isVarify && isMoveDown) {
-            if (cb) {
+            if (_.isFunction(cb)) {
                 cb();
             }
         }
@@ -112,6 +112,7 @@ function (
         for(var i = 0, len = coord.length; i < len; i++) {
             if(!this.withinGrid(coord[i]) || !GridService.isPieceVerify(coord[i])) {
                 isOk = false;
+                break;
             }
         }
         return isOk;
