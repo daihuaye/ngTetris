@@ -90,10 +90,9 @@ function (
             for(var j = 0; j < getBoardWidth(); j++) {
                 var curPos = GridService._coordinatesToPosition({x: j, y: i}),
                     nextPos = GridService._coordinatesToPosition({x: j, y: i + 1});
-                if (GridService.grid[curPos].filled) {
-                    GridService.grid[nextPos].filled = true;
-                }
+                GridService.grid[nextPos] = angular.copy(GridService.grid[curPos]);
                 GridService.grid[curPos].filled = false;
+                GridService.grid[curPos].shape = null;
             }
         }
         return GridService;
