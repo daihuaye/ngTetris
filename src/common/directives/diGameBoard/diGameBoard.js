@@ -54,6 +54,8 @@ function(
 
     GameBoard.scope = true;
 
+    GameBoard.replace = true;
+
     GameBoard.link = function link(scope, element, attrs) {};
 
     return GameBoard;
