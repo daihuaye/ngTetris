@@ -1,6 +1,7 @@
 angular.module( 'ngBoilerplate.home', [
   'ui.router',
-  'direcitve.diGameBoard',
+  'directive.diGameBoard',
+  'directive.diGameMenu',
   'service.GameManager',
   'service.animframePolyFill',
   'service.Keyboard'
@@ -57,36 +58,23 @@ function HomeController(
         return this;
     };
 
-    $scope.startNewGame = function startNewGame() {
+    $scope.getScore = function getScore() {
+        return GameManager.getScore();
+    };
+
+    function startNewGame() {
+        GameManager.createNewPiece();
         GameManager.setGameStart();
         KeyboardService.on(function(key) {
             GameManager.move(key);
         });
         $scope.gameOn();
         return this;
-    };
+    }
 
-    $scope.isGameStart = function isGameStart() {
-        return GameManager.isGameStart();
-    };
-
-    $scope.pauseGame = function pauseGame() {
-        GameManager.setPause();
-        return this;
-    };
-
-    $scope.isPause = function isPause() {
-        return GameManager.isPause();
-    };
-
-    $scope.continueGame = function continueGame() {
-        GameManager.setPause();
-        return this;
-    };
-
-    $scope.getScore = function getScore() {
-        return GameManager.getScore();
-    };
+    $scope.$on('menu.gameStart', function() {
+        startNewGame();
+    });
 
     $scope.newGame();
 }]);
