@@ -43,6 +43,9 @@ function (
 
     // if sequence is match, then highlight the DOM ele
     $scope.checkPattern = function checkPattern(piece) {
+        if (!GameManager.isGameStart()) {
+            return;
+        }
         var res = _.find(getPattern(), function (p) {
             return piece === p;
         });
@@ -50,6 +53,9 @@ function (
     };
 
     $scope.getClassForShape = function getClassForShape() {
+        if (!GameManager.isGameStart()) {
+            return;
+        }
         var pieceClass = '';
         switch(GameManager.getCurrentShape()) {
             case 0: pieceClass = 'dy-L';
@@ -94,7 +100,6 @@ function(
     Piece.scope = true;
 
     Piece.link = function link(scope, element, attrs, controller) {
-        element.css('left', controller.getLeft() + 'px');
         scope.$on('GameOn', function () {
             var top = controller.getTop(),
                 left = controller.getLeft();
