@@ -122,6 +122,13 @@ function (
                 break;
             case 'right': game.movePieceInLevel('right');
                 break;
+            case 'down': game.moveCurrentPiece();
+                break;
+            case 'space':
+                break;
+            case 'p':
+            case 'esc': game.setPause();
+                break;
             default:
                 break;
         }
