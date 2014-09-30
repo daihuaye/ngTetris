@@ -12,11 +12,17 @@ function (
         RIGHT = 'right',
         DOWN = 'down',
         LEFT = 'left',
+        SPACE = 'space',
+        ESC = 'esc',
+        P = 'p',
         keyboardMap = {
             37: LEFT,
             38: UP,
             39: RIGHT,
-            40: DOWN
+            40: DOWN,
+            32: SPACE,
+            27: ESC,
+            80: P
         };
 
     keyboard.init = function init() {
