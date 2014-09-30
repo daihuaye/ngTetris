@@ -43,14 +43,14 @@ function (
     GridService.insertPiece = function insertPiece(piece) {
         var coordArray = piece.getPieceCoordArray();
         for (var i = 0; i < coordArray.length; i++) {
-            var pos = this._coordinatesToPosition(coordArray[i]);
+            var pos = GridService._coordinatesToPosition(coordArray[i]);
             GridService.grid[pos].filled = true;
             GridService.grid[pos].shape = piece.getShape();
         }
     };
 
     GridService.isPieceVerify = function isPieceVerify(coord) {
-        var pos = this._coordinatesToPosition(coord);
+        var pos = GridService._coordinatesToPosition(coord);
         if(GridService.grid[pos].filled) {
             return false;
         }
@@ -61,15 +61,16 @@ function (
         for(var i = 0; i < getBoardHeight(); i++) {
             var j = 0;
             for(; j < getBoardWidth(); j++) {
-                var pos = this._coordinatesToPosition({x: j, y: i});
-                if(!this.grid[pos].filled) {
+                var pos = GridService._coordinatesToPosition({x: j, y: i});
+                if(!GridService.grid[pos].filled) {
                     break;
                 }
             }
             if(j === getBoardWidth()) {
                 // clear the row
-                this.clearNthRow(i);
-                this.movePieceDownLevel(i);
+                GridService
+                    .clearNthRow(i)
+                    .movePieceDownLevel(i);
                 cb();
             }
         }
@@ -77,23 +78,24 @@ function (
 
     GridService.clearNthRow = function clearNthRow(row) {
         for(var z = 0; z < getBoardWidth(); z++) {
-            var pos = this._coordinatesToPosition({x: z, y: row});
-            this.grid[pos].filled = false;
+            var pos = GridService._coordinatesToPosition({x: z, y: row});
+            GridService.grid[pos].filled = false;
         }
-        return this;
+        return GridService;
     };
 
     GridService.movePieceDownLevel = function movePieceDownLevel(row) {
-        for(var i = row - 1; i > 0; i--) {
+        for(var i = row - 1; i >= 0; i--) {
             for(var j = 0; j < getBoardWidth(); j++) {
-                var curPos = this._coordinatesToPosition({x: j, y: i}),
-                    nextPos = this._coordinatesToPosition({x: j, y: i+1});
-                if (this.grid[curPos].filled) {
-                    this.grid[nextPos].filled = true;
+                var curPos = GridService._coordinatesToPosition({x: j, y: i}),
+                    nextPos = GridService._coordinatesToPosition({x: j, y: i + 1});
+                if (GridService.grid[curPos].filled) {
+                    GridService.grid[nextPos].filled = true;
                 }
-                this.grid[curPos].filled = false;
+                GridService.grid[curPos].filled = false;
             }
         }
+        return GridService;
     };
 
     GridService._positionToCoordinates = function _positionToCoordinates(i) {
