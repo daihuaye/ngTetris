@@ -5,21 +5,6 @@
             Let's play the game.
         </div>
     </div>
-    <div class="sr-only">
-        <button data-ng-click="startNewGame()" 
-                data-ng-show="!isGameStart()">
-                New Game
-        </button
-        ><button data-ng-show="isGameStart() && !isPause()"
-                data-ng-click="pauseGame()">
-                Pause Game
-        </button
-        ><button data-ng-show="isGameStart() && isPause()"
-                data-ng-click="continueGame()">
-                Continue Game    
-        </button>
-    </div>
-    
     <div class="dy-game-container row">
         <div class="col-sm-4 dy-score-container">
             <div class="dy-best-score btn">
@@ -30,7 +15,12 @@
             </div>
         </div>
         <div class="col-sm-8">
-            <div di-game-board></div>
+            <div class="dy-game-control">
+                <!-- game board here -->
+                <div di-game-board></div>
+                <!-- add menu here -->
+                <div di-game-menu></div>
+            </div>
         </div>
     </div>
     <div class="dy-how-to-pause row">
