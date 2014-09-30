@@ -23,10 +23,6 @@ function (
     };
 
     game.newGame = function newGame() {
-        game.currentPiece = new Piece({
-            x: 4,
-            y: 0
-        });
         GridService.buildEmptyGameBoard();
     };
 
