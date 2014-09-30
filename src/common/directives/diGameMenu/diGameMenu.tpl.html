@@ -1,0 +1,14 @@
+<div class="dy-game-menu">
+    <button data-ng-click="startNewGame()" 
+            data-ng-show="!isGameStart()">
+            New Game
+    </button
+    ><button data-ng-show="isGameStart() && !isPause()"
+            data-ng-click="pauseGame()">
+            Pause Game
+    </button
+    ><button data-ng-show="isGameStart() && isPause()"
+            data-ng-click="continueGame()">
+            Continue Game    
+    </button>
+</div>
