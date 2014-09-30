@@ -80,6 +80,7 @@ function (
         for(var z = 0; z < getBoardWidth(); z++) {
             var pos = GridService._coordinatesToPosition({x: z, y: row});
             GridService.grid[pos].filled = false;
+            GridService.grid[pos].shape = null;
         }
         return GridService;
     };
