@@ -1,37 +1,39 @@
 <div class="dy-home">
     <div class="row">
-        <div class="dy-game-title col-sm-6 col-xs-5">NgTetris</div>
-        <div class="col-sm-6 col-xs-7">
-            <div class="dy-best-score pull-right btn">
+        <div class="dy-game-title col-sm-7 col-xs-6">NgTetris</div>
+        <div class="dy-instructions col-sm-5 col-xs-6">
+            Let's play the game.
+        </div>
+    </div>
+    <div class="sr-only">
+        <button data-ng-click="startNewGame()" 
+                data-ng-show="!isGameStart()">
+                New Game
+        </button
+        ><button data-ng-show="isGameStart() && !isPause()"
+                data-ng-click="pauseGame()">
+                Pause Game
+        </button
+        ><button data-ng-show="isGameStart() && isPause()"
+                data-ng-click="continueGame()">
+                Continue Game    
+        </button>
+    </div>
+    
+    <div class="dy-game-container row">
+        <div class="col-sm-4 dy-score-container">
+            <div class="dy-best-score btn">
                 1000
             </div>
-            <div class="dy-score pull-right btn" 
+            <div class="dy-score btn" 
                 data-ng-bind="getScore()">
             </div>
         </div>
-    </div
-    ><div class="row">
-        <div class="dy-instructions col-sm-5 col-xs-5">
-            Let's play the game.
-        </div
-        ><div class="col-sm-7 col-xs-7">
-            <button data-ng-click="startNewGame()" 
-                    data-ng-show="!isGameStart()">
-                    New Game
-            </button
-            ><button data-ng-show="isGameStart() && !isPause()"
-                    data-ng-click="pauseGame()">
-                    Pause Game
-            </button
-            ><button data-ng-show="isGameStart() && isPause()"
-                    data-ng-click="continueGame()">
-                    Continue Game    
-            </button>
+        <div class="col-sm-8">
+            <div di-game-board></div>
         </div>
     </div>
-    
-    <div class="dy-game-container">
-        <div di-game-board></div>
-    </div>    
-
+    <div class="dy-how-to-pause row">
+        PRESS ESC OR P TO PAUSE AND VIEW/EDIT CONTROLS
+    </div>
 </div>
