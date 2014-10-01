@@ -29,6 +29,10 @@ function (
         keyboard.keyEventHandlers = [];
     };
 
+    keyboard.getKey = function getKey(which) {
+        return keyboardMap[which];
+    };
+
     keyboard.keydownAction = function keydownAction(event) {
         var key = keyboardMap[event.which];
 
