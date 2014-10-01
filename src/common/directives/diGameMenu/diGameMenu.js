@@ -13,24 +13,17 @@ function (
     $scope,
     GameManager
 ){
-    $scope.startNewGame = function startNewGame() {
-        $scope.$emit('menu.gameStart');
-    };
-
-    $scope.pauseGame = function pauseGame() {
-        GameManager.setPause();
-    };
-
     $scope.continueGame = function continueGame() {
         GameManager.setPause();
+        $scope.closeModal();
         return this;
     };
 
-    $scope.isPause = function isPause() {
+    this.isPause = function isPause() {
         return GameManager.isPause();
     };
 
-    $scope.isGameStart = function isGameStart() {
+    this.isGameStart = function isGameStart() {
         return GameManager.isGameStart();
     };
 }])
@@ -45,9 +38,25 @@ function(
 
     GameMenu.restrict = 'A';
 
+    GameMenu.replace = true;
+
     GameMenu.scope = true;
 
-    GameMenu.link = function link(scope, element, attrs) {
+    GameMenu.link = function link(scope, element, attrs, controller) {
+        scope.$on('app.pause', function() {
+            if (!controller.isPause() && controller.isGameStart()) {
+                $(element).modal({
+                    backdrop: 'static'
+                });
+            } else {
+                scope.closeModal();                
+            }
+        });
+
+        scope.closeModal = function closeModal() {
+            $(element).modal('hide');
+        };
+
     };
 
     return GameMenu;
