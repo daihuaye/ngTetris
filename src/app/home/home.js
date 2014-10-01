@@ -62,7 +62,7 @@ function HomeController(
         return GameManager.getScore();
     };
 
-    function startNewGame() {
+    $scope.startNewGame = function startNewGame() {
         GameManager.createNewPiece();
         GameManager.setGameStart();
         KeyboardService.on(function(key) {
@@ -70,11 +70,11 @@ function HomeController(
         });
         $scope.gameOn();
         return this;
-    }
+    };
 
-    $scope.$on('menu.gameStart', function() {
-        startNewGame();
-    });
+    $scope.isGameStart = function isGameStart() {
+        return GameManager.isGameStart();
+    };
 
     $scope.newGame();
 }]);
