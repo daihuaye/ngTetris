@@ -1,4 +1,5 @@
 <div class="dy-home">
+    <div di-game-menu></div>
     <div class="row">
         <div class="dy-game-title col-sm-7 col-xs-6">NgTetris</div>
         <div class="dy-instructions col-sm-5 col-xs-6">
@@ -18,8 +19,14 @@
             <div class="dy-game-control">
                 <!-- game board here -->
                 <div di-game-board></div>
-                <!-- add menu here -->
-                <div di-game-menu></div>
+                <!-- start button here -->
+                <div class="dy-game-start-btn">
+                    <button class="dy-new-game-btn" 
+                        data-ng-click="startNewGame()"
+                        data-ng-show="!isGameStart()">
+                        New Game
+                    </button>
+                </div>
             </div>
         </div>
     </div>
