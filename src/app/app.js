@@ -23,8 +23,21 @@ function(
     GameManager,
     KeyboardService
 ){
+
+    function exceptConituneKey(event) {
+        switch(KeyboardService.getKey(event.which)) {
+            case 'esc':
+            case 'p':
+                $scope.$broadcast('app.pause');
+                return true;
+            default:
+                return false;
+        }
+    }
+
     $scope.keydown = function keydown($event) {
-        if (GameManager.isGameStart() && !GameManager.isPause()) {
+        if (exceptConituneKey($event) ||
+            (GameManager.isGameStart() && !GameManager.isPause())) {
             KeyboardService.keydownAction($event);
         }
     };
