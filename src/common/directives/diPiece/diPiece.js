@@ -53,7 +53,8 @@ function (
     };
 
     $scope.getClassForShape = function getClassForShape() {
-        if (!GameManager.isGameStart()) {
+        if (!GameManager.isGameStart() ||
+            _.isNull(GameManager.getCurrentPiece())) {
             return;
         }
         var pieceClass = '';
@@ -85,7 +86,11 @@ function (
     };
 }])
 .directive('diPiece', [
+    'GameManager',
+    'GameData',
 function(
+    GameManager,
+    GameData
 ){
     var Piece = {};
 
@@ -103,9 +108,27 @@ function(
         scope.$on('GameOn', function () {
             var top = controller.getTop(),
                 left = controller.getLeft();
-            element.css('left', left + 'px');
-            element.css('top', Math.round(top) + 'px');
+            element.css({
+                'left': left + 'px',
+                'top': Math.round(top) + 'px'
+            });
         });
+
+        scope.isPieceReady = function isPieceReady() {
+            var isReady = !_.isNull(GameManager.getCurrentPiece());
+            if (!isReady) {
+                element.removeClass('dy-piece-ready');
+                scope.$emit('diPiece.createNewPiece');
+            } else {
+                if (!element.hasClass('dy-piece-ready')) {
+                    // wait for the animation complete in 0.3 seconds
+                    window.setTimeout(function() {
+                        element.addClass('dy-piece-ready');
+                    }, GameData.cssAnimateTimeout);
+                }
+            }
+            return isReady;
+        };
     };
 
     return Piece;
