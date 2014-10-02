@@ -1,8 +1,11 @@
-.dy-piece {
-  position: absolute;
-  .transition(all, .3s, linear);
+.dy-piece-ready {
+  .transition(all, @cssAnimateTimeout, linear);
   top: 0;
   left: 10px;
+}
+
+.dy-piece {
+  position: absolute;
   .dy-piece-ul {
     .size(4 * @game-cell-size); 
   }
