@@ -122,6 +122,8 @@ function(
             } else {
                 if (!element.hasClass('dy-piece-ready')) {
                     // wait for the animation complete in 0.3 seconds
+                    // if modify the timeout time, it need to update 
+                    // the variables in the variables.less
                     window.setTimeout(function() {
                         element.addClass('dy-piece-ready');
                     }, GameData.cssAnimateTimeout);
