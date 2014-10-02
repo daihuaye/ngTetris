@@ -133,7 +133,7 @@ function (
         return coord;
     };
 
-    Piece.prototype.calculateCollionPoint = function calculateCollionPoint() {
+    Piece.prototype.calculateCollisionPoint = function calculateCollisionPoint() {
         var cell = {
             x: this.x,
             y: this.y
