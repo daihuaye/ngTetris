@@ -114,6 +114,8 @@ function(
             });
         });
 
+        // can't separate the digest loop with class update and
+        // create a new piece, so manually update the dy-piece-ready class
         scope.isPieceReady = function isPieceReady() {
             var isReady = !_.isNull(GameManager.getCurrentPiece());
             if (!isReady) {
