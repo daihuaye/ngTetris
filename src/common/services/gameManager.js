@@ -76,23 +76,24 @@ function (
         return game.currentPiece.getPositionY();
     };
 
+    function insertAndClearRow() {
+        game.insertPiece();
+        GridService.checkAndClearFilledRow(function() {
+            game.score += 100;
+        });
+    }
+
     game.moveCurrentPiece = function moveCurrentPiece() {
         var speedY = game.getPositionY() + 1;
         game.currentPiece.updatePosition({
             y: speedY
-        }, function(){
-            game.insertPiece();
-            GridService.checkAndClearFilledRow(function() {
-                game.score += 100;
-            });
-        });
+        }, insertAndClearRow);
     };
 
     game.insertPiece = function insertPiece() {
         GridService.insertPiece(game.currentPiece);
         game.currentPiece.destroy();
         game.currentPiece = null;
-        game.createNewPiece();
     };
 
     game.createNewPiece = function createNewPiece() {
@@ -110,6 +111,11 @@ function (
         });
     };
 
+    game.hardDrop = function hardDrop() {
+        var cell = game.currentPiece.calculateCollionPoint();
+        game.currentPiece.updatePosition(cell, insertAndClearRow);
+    };
+
     game.move = function move(key) {
         switch(key) {
             case 'up': game.rotatePiece();
@@ -120,7 +126,7 @@ function (
                 break;
             case 'down': game.moveCurrentPiece();
                 break;
-            case 'space':
+            case 'space': game.hardDrop();
                 break;
             case 'p':
             case 'esc': game.setPause();
