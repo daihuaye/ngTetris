@@ -90,7 +90,7 @@ function (
     };
 
     Piece.prototype.updatePosition = function updatePosition(newPosition, cb) {
-        var isMoveDown = isNaN(newPosition.y) ? false: newPosition.y > this.y;
+        var isMoveDown = isNaN(newPosition.y) ? false : newPosition.y > this.y;
             x = isNaN(newPosition.x) ? this.x : newPosition.x,
             y = isNaN(newPosition.y) ? this.y : newPosition.y,
             isVarify = this.verifyPiece({x: x, y: y});
@@ -144,7 +144,6 @@ function (
                 break;
             }
         }
-        cell.y--;
         return cell;
     };
 

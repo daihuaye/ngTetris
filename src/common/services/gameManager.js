@@ -113,23 +113,30 @@ function (
 
     game.hardDrop = function hardDrop() {
         var cell = game.currentPiece.calculateCollisionPoint();
+        cell.y--;
         game.currentPiece.updatePosition(cell, insertAndClearRow);
     };
 
     game.move = function move(key) {
-        switch(key) {
-            case 'up': game.rotatePiece();
+        switch (key) {
+            case 'up':
+                game.rotatePiece();
                 break;
-            case 'left': game.movePieceInLevel('left');
+            case 'left':
+                game.movePieceInLevel('left');
                 break;
-            case 'right': game.movePieceInLevel('right');
+            case 'right':
+                game.movePieceInLevel('right');
                 break;
-            case 'down': game.moveCurrentPiece();
+            case 'down':
+                game.moveCurrentPiece();
                 break;
-            case 'space': game.hardDrop();
+            case 'space':
+                game.hardDrop();
                 break;
             case 'p':
-            case 'esc': game.setPause();
+            case 'esc':
+                game.setPause();
                 break;
             default:
                 break;
