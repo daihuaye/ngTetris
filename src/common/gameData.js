@@ -15,6 +15,7 @@ angular.module('resource.GameData', [])
         patternLimit: 7,
         pieceSquareGrid: 4,
         numCellInPiece: 4,
+        cssAnimateTimeout: 300, // milliseconds
         gameBoard: {
             borderWidth: 10,
             boardWidthInPixel: 300,
