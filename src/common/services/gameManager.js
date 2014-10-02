@@ -112,7 +112,7 @@ function (
     };
 
     game.hardDrop = function hardDrop() {
-        var cell = game.currentPiece.calculateCollionPoint();
+        var cell = game.currentPiece.calculateCollisionPoint();
         game.currentPiece.updatePosition(cell, insertAndClearRow);
     };
 

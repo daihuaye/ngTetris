@@ -133,6 +133,21 @@ function (
         return coord;
     };
 
+    Piece.prototype.calculateCollionPoint = function calculateCollionPoint() {
+        var cell = {
+            x: this.x,
+            y: this.y
+        };
+        for(var i = cell.y; i < getBoardHeight(); i++) {
+            cell.y = i;
+            if(!this.verifyPiece(cell)) {
+                break;
+            }
+        }
+        cell.y--;
+        return cell;
+    };
+
     Piece.prototype.destroy = function destroy() {
         this.x = null;
         this.y = null;
