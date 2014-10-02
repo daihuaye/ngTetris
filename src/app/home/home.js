@@ -76,5 +76,9 @@ function HomeController(
         return GameManager.isGameStart();
     };
 
+    $scope.$on('diPiece.createNewPiece', function() {
+        GameManager.createNewPiece();
+    });
+
     $scope.newGame();
 }]);
