@@ -19,6 +19,10 @@ function (
         return this;
     };
 
+    $scope.restartGame = function restartGame() {
+        return this;
+    };
+
     this.isPause = function isPause() {
         return GameManager.isPause();
     };

@@ -5,9 +5,37 @@
                 <span>Pause</span>
             </div>
             <div class="modal-body">
-                <button data-ng-click="continueGame()">
-                        Continue Game
-                </button>
+                <div class="row ">
+                    <div class="col-sm-4 col-xs-6">
+                        <span>Key:</span> &uparrow; <span>Rotate Right</span>
+                    </div>
+                    <div class="col-sm-4 col-xs-6">
+                        <span>Key:</span> &rightarrow; <span>Move Right</span>
+                    </div>
+                    <div class="col-sm-4 col-xs-6">
+                        <span>Key:</span> &downarrow; <span>Soft Drop</span>
+                    </div>
+                    <div class="col-sm-4 col-xs-6">
+                        <span>Key:</span> &leftarrow; <span>Move Left</span>
+                    </div>
+                    <div class="col-sm-8">
+                        <span>Space key:</span> <span>Hard Drop</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-offset-4 col-sm-4 col-xs-6">
+                        <button data-ng-click="restartGame()">
+                            <span class="hidden-xs">Restart Game</span>
+                            <span class="visible-xs">Restart</span>
+                        </button>
+                    </div>
+                    <div class="col-sm-4 col-xs-6">
+                        <button data-ng-click="continueGame()">
+                            <span class="hidden-xs">Continue Game</span>
+                            <span class="visible-xs">Continue</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
