@@ -22,7 +22,16 @@ function (
         score: 0
     };
 
+    game.resetGame = function resetGame() {
+        game.currentPiece = null;
+        game.score = 0;
+        GameData.gameStart = false;
+        GameData.gamePause = false;
+        GameData.score = 0;
+    };
+
     game.newGame = function newGame() {
+        game.resetGame();
         GridService.buildEmptyGameBoard();
     };
 
