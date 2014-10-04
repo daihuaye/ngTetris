@@ -53,7 +53,6 @@ function HomeController(
     };
 
     $scope.newGame = function newGame() {
-        KeyboardService.init();
         GameManager.newGame();
         return this;
     };
@@ -80,5 +79,6 @@ function HomeController(
         GameManager.createNewPiece();
     });
 
+    KeyboardService.init();
     $scope.newGame();
 }]);
