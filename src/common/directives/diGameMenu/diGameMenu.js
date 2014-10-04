@@ -20,6 +20,9 @@ function (
     };
 
     $scope.restartGame = function restartGame() {
+        GameManager.newGame();
+        $scope.closeModal();
+        GameManager.setGameStart();
         return this;
     };
 
