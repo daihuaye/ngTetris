@@ -40,12 +40,16 @@ function (
         return GridService.grid;
     };
 
-    GridService.insertPiece = function insertPiece(piece) {
+    GridService.insertPiece = function insertPiece(piece, gameOver) {
         var coordArray = piece.getPieceCoordArray();
         for (var i = 0; i < coordArray.length; i++) {
             var pos = GridService._coordinatesToPosition(coordArray[i]);
-            GridService.grid[pos].filled = true;
-            GridService.grid[pos].shape = piece.getShape();
+            if (GridService.grid[pos].filled) {
+                gameOver();
+            } else {
+                GridService.grid[pos].filled = true;
+                GridService.grid[pos].shape = piece.getShape();
+            }
         }
     };
 
