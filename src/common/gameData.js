@@ -3,14 +3,26 @@
 *
 * Description
 */
-angular.module('resource.GameData', [])
-.factory('GameData', [function () {
+angular.module('resource.GameData', [
+    'service.localStoragePolyfill'
+])
+.factory('GameData', [
+    'localStoragePolyfill',
+function (
+    localStoragePolyfill
+){
+    function getBestScore() {
+        return localStoragePolyfill.getItem('game.bestScore') || 0;
+    }
+
     var data = {
         gameStart: false,
+        gameEnd: false,
         gamePause: false,
         speed: 2000,
         level: 1,
         score: 0,
+        getBestScore: getBestScore,
         rotationLimit: 4,
         patternLimit: 7,
         pieceSquareGrid: 4,
