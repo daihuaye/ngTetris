@@ -67,6 +67,15 @@ function HomeController(
         return GameManager.getScore();
     };
 
+    $scope.getBestScore = function getBestScore() {
+        var score = parseInt(GameManager.getBestScore(), 10);
+        if (score === 0) {
+            return '--';
+        } else {
+            return score;
+        }
+    };
+
     $scope.startNewGame = function startNewGame() {
         GameManager.createNewPiece();
         GameManager.setGameStart();
@@ -79,6 +88,10 @@ function HomeController(
 
     $scope.isGameStart = function isGameStart() {
         return GameManager.isGameStart();
+    };
+
+    $scope.isGameEnd = function isGameEnd() {
+        return GameManager.isGameEnd();
     };
 
     $scope.$on('diPiece.createNewPiece', function() {
