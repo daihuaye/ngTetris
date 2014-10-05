@@ -8,9 +8,8 @@
     </div>
     <div class="dy-game-container row">
         <div class="col-sm-4 dy-score-container">
-            <div class="dy-best-score btn">
-                1000
-            </div>
+            <div class="dy-best-score btn"
+                data-ng-bind="getBestScore()"></div>
             <div class="dy-score btn" 
                 data-ng-bind="getScore()">
             </div>
@@ -23,9 +22,19 @@
                 <div class="dy-game-start-btn">
                     <button class="dy-new-game-btn" 
                         data-ng-click="startNewGame()"
-                        data-ng-show="!isGameStart()">
+                        data-ng-show="!isGameStart() && !isGameEnd()">
                         New Game
                     </button>
+                    <div class="dy-game-over"
+                        data-ng-show="!isGameStart() && isGameEnd()">
+                        <p>Game Over</p>
+                        <div class="dy-game-restart">
+                            <button class="dy-new-game-btn" 
+                                data-ng-click="restartNewGame()">
+                                Try again
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
