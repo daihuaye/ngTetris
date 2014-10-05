@@ -20,11 +20,13 @@
                 <div di-game-board></div>
                 <!-- start button here -->
                 <div class="dy-game-start-btn">
-                    <button class="dy-new-game-btn" 
-                        data-ng-click="startNewGame()"
+                    <div class="dy-game-start"
                         data-ng-show="!isGameStart() && !isGameEnd()">
-                        New Game
-                    </button>
+                        <button class="dy-new-game-btn" 
+                            data-ng-click="startNewGame()">
+                            New Game
+                        </button>
+                    </div>
                     <div class="dy-game-over"
                         data-ng-show="!isGameStart() && isGameEnd()">
                         <p>Game Over</p>
