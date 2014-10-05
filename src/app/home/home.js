@@ -57,6 +57,12 @@ function HomeController(
         return this;
     };
 
+    $scope.restartNewGame = function restartNewGame() {
+        GameManager.newGame();
+        GameManager.setGameStart();
+        return this;
+    };
+
     $scope.getScore = function getScore() {
         return GameManager.getScore();
     };
