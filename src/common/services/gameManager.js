@@ -6,16 +6,19 @@
 angular.module('service.GameManager', [
     'resource.GameData',
     'service.GridService',
-    'service.Piece'
+    'service.Piece',
+    'service.localStoragePolyfill'
 ])
 .factory('GameManager', [
     'GameData',
     'GridService',
     'Piece',
+    'localStoragePolyfill',
 function (
     GameData,
     GridService,
-    Piece
+    Piece,
+    localStoragePolyfill
 ){
     var game = {
         currentPiece: null,
@@ -27,6 +30,7 @@ function (
         game.score = 0;
         GameData.gameStart = false;
         GameData.gamePause = false;
+        GameData.gameEnd = false;
         GameData.score = 0;
     };
 
@@ -57,8 +61,32 @@ function (
         return GameData.gameStart;
     };
 
+    game.gameOver = function gameOver() {
+        game.saveBestScore();
+        game.setGameStart();
+        GameData.gameStart = false;
+        GameData.gameEnd = true;
+    };
+
+    game.isGameEnd = function isGameEnd() {
+        return GameData.gameEnd;
+    };
+
+    game.saveBestScore = function saveBestScore() {
+        var score  = parseInt(GameData.getBestScore(), 10),
+            preScore = parseInt(game.getScore(), 10);
+        if (preScore > score) {
+            localStoragePolyfill.setItem('game.bestScore', preScore);
+        }
+        return game;
+    };
+
     game.getScore = function getScore() {
         return game.score;
+    };
+
+    game.getBestScore = function getBestScore() {
+        return GameData.getBestScore();
     };
 
     game.getCurrentPiece = function getCurrentPiece() {
@@ -100,7 +128,7 @@ function (
     };
 
     game.insertPiece = function insertPiece() {
-        GridService.insertPiece(game.currentPiece);
+        GridService.insertPiece(game.currentPiece, game.gameOver);
         game.currentPiece.destroy();
         game.currentPiece = null;
     };
