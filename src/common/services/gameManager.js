@@ -155,8 +155,13 @@ function (
 
     game.hardDrop = function hardDrop() {
         var cell = game.currentPiece.calculateCollisionPoint();
-        cell.y--;
         game.currentPiece.updatePosition(cell, insertAndClearRow);
+    };
+
+    game.updateGhostPiece = function updateGhostPiece() {
+        if (game.currentPiece) {
+            game.currentPiece.updateGhostPiece();
+        }
     };
 
     game.move = function move(key) {
