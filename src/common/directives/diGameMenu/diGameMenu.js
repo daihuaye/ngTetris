@@ -16,14 +16,17 @@ function (
     $scope.continueGame = function continueGame() {
         GameManager.setPause();
         $scope.closeModal();
-        return this;
     };
 
     $scope.restartGame = function restartGame() {
         GameManager.newGame();
         $scope.closeModal();
         GameManager.setGameStart();
-        return this;
+    };
+
+    $scope.endGame = function endGame() {
+        GameManager.gameOver();
+        $scope.closeModal();
     };
 
     this.isPause = function isPause() {
