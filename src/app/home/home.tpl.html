@@ -29,6 +29,11 @@
                     </div>
                     <div class="dy-game-over"
                         data-ng-show="!isGameStart() && isGameEnd()">
+                        <div data-ng-show="isNewRecord()"
+                            class="dy-new-record pulse">
+                            New Record:<br>
+                            <span data-ng-bind="getBestScore()"></span>
+                        </div>
                         <p>Game Over</p>
                         <div class="dy-game-restart">
                             <button class="dy-new-game-btn" 
