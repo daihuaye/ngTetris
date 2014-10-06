@@ -188,6 +188,7 @@ function (
             default:
                 break;
         }
+        game.updateGhostPiece();
     };
     
     return game;
