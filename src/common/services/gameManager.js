@@ -22,12 +22,12 @@ function (
 ){
     var game = {
         currentPiece: null,
-        score: 0
+        isNewRecord: false
     };
 
     game.resetGame = function resetGame() {
         game.currentPiece = null;
-        game.score = 0;
+        game.isNewRecord = false;
         GameData.gameStart = false;
         GameData.gamePause = false;
         GameData.gameEnd = false;
@@ -76,13 +76,14 @@ function (
         var score  = parseInt(GameData.getBestScore(), 10),
             preScore = parseInt(game.getScore(), 10);
         if (preScore > score) {
+            game.isNewRecord = true;
             localStoragePolyfill.setItem('game.bestScore', preScore);
         }
         return game;
     };
 
     game.getScore = function getScore() {
-        return game.score;
+        return GameData.score;
     };
 
     game.getBestScore = function getBestScore() {
@@ -116,7 +117,7 @@ function (
     function insertAndClearRow() {
         game.insertPiece();
         GridService.checkAndClearFilledRow(function() {
-            game.score += 100;
+            GameData.score += 100;
         });
     }
 
@@ -138,6 +139,10 @@ function (
             x: 4,
             y: 0
         });
+    };
+
+    game.getIsNewRecord = function getIsNewRecord() {
+        return game.isNewRecord;
     };
 
     game.movePieceInLevel = function movePieceInLevel(direction) {
