@@ -19,8 +19,8 @@ function (
     };
 
     $scope.getFilledClass = function getFilledClass(cell) {
+        var pieceClass = '';
         if (cell.filled) {
-            var pieceClass = '';
             switch(cell.shape) {
                 case 0: pieceClass = 'dy-L-filled';
                     break;
@@ -37,8 +37,11 @@ function (
                 case 6: pieceClass = 'dy-Z-filled';
                     break;
             }
-            return pieceClass;
         }
+        if (cell.ghost) {
+            pieceClass += (pieceClass.length > 0) ? ' dy-ghost-piece' : 'dy-ghost-piece';
+        }
+        return pieceClass;
     };
 }])
 .directive('diGameBoard', [
