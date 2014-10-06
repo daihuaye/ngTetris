@@ -94,6 +94,10 @@ function HomeController(
         return GameManager.isGameEnd();
     };
 
+    $scope.isNewRecord = function isNewRecord() {
+        return GameManager.getIsNewRecord(); 
+    };
+
     $scope.$on('diPiece.createNewPiece', function() {
         GameManager.createNewPiece();
     });
