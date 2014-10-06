@@ -46,7 +46,8 @@ function (
         for (var i = 0; i < sizeOfBoard; i++) {
             GridService.grid[i] = {
                 filled: false,
-                shape: null
+                shape: null,
+                ghost: false
             };
         }
     };
@@ -123,6 +124,17 @@ function (
 
     GridService._coordinatesToPosition = function _coordinatesToPosition(pos) {
         return coordToPosMem(pos);
+    };
+
+    GridService.resetGhostPiece = function resetGhostPiece() {
+        for(var i = 0, len = GridService.grid.length; i < len; i++) {
+            GridService.grid[i].ghost = false;
+        }
+    };
+
+    GridService.updateGhostPiece = function updateGhostPiece(cell) {
+        var pos = GridService._coordinatesToPosition(cell);
+        GridService.grid[pos].ghost = true;
     };
 
     return GridService;
