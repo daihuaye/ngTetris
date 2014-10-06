@@ -19,7 +19,7 @@ function (
         gameStart: false,
         gameEnd: false,
         gamePause: false,
-        speed: 2000,
+        speed: 800,
         level: 1,
         score: 0,
         getBestScore: getBestScore,
