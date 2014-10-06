@@ -11,7 +11,22 @@ angular.module('service.GridService', [
 function (
     GameData
 ){
-    var GridService = {};
+    var GridService = {},
+        coordToPosMem = _.memoize(function (pos) {
+            return (pos.y * getBoardSize()) + pos.x;
+        }, function (pos) {
+            return '' + pos.x + pos.y;
+        }),
+        posToCoord = _.memoize(function (i) {
+            var x = i % getBoardSize(),
+                y = (i - x) / getBoardSize();
+
+            return {
+                x: x,
+                y: y
+            };
+        });
+
     GridService.grid = [];
 
     function getBoardSize() {
@@ -103,17 +118,11 @@ function (
     };
 
     GridService._positionToCoordinates = function _positionToCoordinates(i) {
-        var x = i % getBoardSize(),
-            y = (i - x) / getBoardSize();
-
-        return {
-            x: x,
-            y: y
-        };
+        return posToCoord(i);  
     };
 
     GridService._coordinatesToPosition = function _coordinatesToPosition(pos) {
-        return (pos.y * getBoardSize()) + pos.x;
+        return coordToPosMem(pos);
     };
 
     return GridService;
