@@ -36,6 +36,7 @@ function HomeController(
 
     function gameLoop() {
         GameManager.moveCurrentPiece();
+        GameManager.updateGhostPiece();    
         if(!$scope.$$phase) {
             $scope.$apply();
         }
