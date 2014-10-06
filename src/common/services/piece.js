@@ -37,16 +37,22 @@ function (
     GridService
 ){
     var Piece = function (pos) {
-        var position = pos || {
-            x: 4,
-            y: 0
-        };
-        this.x = position.x;
-        this.y = position.y;
-        this.rotation = Math.floor(Math.random() * GameData.rotationLimit);
-        this.patterns = Math.floor(Math.random() * GameData.patternLimit);  
-        this.id = GenerateUniqueId.next();
-    };
+            var position = pos || {
+                x: 4,
+                y: 0
+            };
+            this.x = position.x;
+            this.y = position.y;
+            this.rotation = Math.floor(Math.random() * GameData.rotationLimit);
+            this.patterns = Math.floor(Math.random() * GameData.patternLimit);  
+            this.id = GenerateUniqueId.next();
+        },
+        withinGridMem = _.memoize(function (cell) {
+            return cell.x >= 0 && cell.x < getBoardWidth() &&
+                cell.y >= 0 && cell.y < getBoardHeight();
+        }, function (cell) {
+            return '' + cell.x + cell.y;
+        });
 
     function getBoardWidth() {
         return GameData.gameBoard.boardWidth;
@@ -119,8 +125,7 @@ function (
     };
 
     Piece.prototype.withinGrid = function withinGrid(cell) {
-        return cell.x >= 0 && cell.x < getBoardWidth() &&
-                cell.y >= 0 && cell.y < getBoardHeight();
+        return withinGridMem(cell);
     };
 
     Piece.prototype.convertPatternToCoordinates = function convertPatternToCoordinates(cell) {
