@@ -46,6 +46,7 @@ function (
             this.rotation = Math.floor(Math.random() * GameData.rotationLimit);
             this.patterns = Math.floor(Math.random() * GameData.patternLimit);  
             this.id = GenerateUniqueId.next();
+            GridService.resetGhostPiece();
         },
         withinGridMem = _.memoize(function (cell) {
             return cell.x >= 0 && cell.x < getBoardWidth() &&
@@ -149,7 +150,17 @@ function (
                 break;
             }
         }
+        cell.y--;
         return cell;
+    };
+
+    Piece.prototype.updateGhostPiece = function updateGhostPiece() {
+        var point = this.calculateCollisionPoint(),
+            coord = this.convertPatternToCoordinates(point);
+        GridService.resetGhostPiece();
+        for(var i = 0, len = coord.length; i < len; i++) {
+            GridService.updateGhostPiece(coord[i]);
+        }
     };
 
     Piece.prototype.destroy = function destroy() {
@@ -158,6 +169,7 @@ function (
         this.rotation = null;
         this.patterns = null;
         this.id = null;
+        GridService.resetGhostPiece();
     };
 
     return Piece;
