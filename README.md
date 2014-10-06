@@ -13,9 +13,6 @@ $ cd ngTetris
 $ sudo npm -g install grunt-cli karma bower
 $ npm install
 $ bower install
-```
-open another tab of your terminal
-```sh
 $ node server.js
 ```
 
