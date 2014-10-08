@@ -12,16 +12,25 @@ function (
     localStoragePolyfill
 ){
     function getBestScore() {
-        return localStoragePolyfill.getItem('game.bestScore') || 0;
+        return parseInt(localStoragePolyfill.getItem('game.bestScore'), 10) || 0;
+    }
+
+    function getGameSpeed() {
+        return parseInt(localStoragePolyfill.getItem('game.speed'), 10) || 800;   
+    }
+
+    function setGameSpeed(speed) {
+        localStoragePolyfill.setItem('game.speed', speed);
     }
 
     var data = {
         gameStart: false,
         gameEnd: false,
         gamePause: false,
-        speed: 800,
         level: 1,
         score: 0,
+        getGameSpeed: getGameSpeed,
+        setGameSpeed: setGameSpeed,
         getBestScore: getBestScore,
         rotationLimit: 4,
         patternLimit: 7,
