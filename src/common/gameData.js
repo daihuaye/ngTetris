@@ -4,19 +4,22 @@
 * Description
 */
 angular.module('resource.GameData', [
-    'service.localStoragePolyfill'
+    'service.localStoragePolyfill',
+    'service.GAMESPEED'
 ])
 .factory('GameData', [
     'localStoragePolyfill',
+    'GAMESPEED',
 function (
-    localStoragePolyfill
+    localStoragePolyfill,
+    GAMESPEED
 ){
     function getBestScore() {
         return parseInt(localStoragePolyfill.getItem('game.bestScore'), 10) || 0;
     }
 
     function getGameSpeed() {
-        return parseInt(localStoragePolyfill.getItem('game.speed'), 10) || 800;   
+        return parseInt(localStoragePolyfill.getItem('game.speed'), 10) || GAMESPEED['BEGINNER'];   
     }
 
     function setGameSpeed(speed) {
