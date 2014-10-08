@@ -4,7 +4,8 @@ angular.module( 'ngBoilerplate.home', [
   'directive.diGameMenu',
   'service.GameManager',
   'service.animframePolyFill',
-  'service.Keyboard'
+  'service.Keyboard',
+  'service.GAMESPEED'
 ])
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'home', {
@@ -23,11 +24,13 @@ angular.module( 'ngBoilerplate.home', [
     'GameManager',
     'animframePolyFill',
     'KeyboardService',
+    'GAMESPEED',
 function HomeController(
     $scope,
     GameManager,
     animframePolyFill,
-    KeyboardService
+    KeyboardService,
+    GAMESPEED
 ){
     var loop;
 
@@ -48,21 +51,20 @@ function HomeController(
         }
     }
 
-    $scope.gameOn = function gameOn() {
-        var self = this;
+    function gameOn() {
         window.requestAnimationFrame(function () {
-            self.gameOn();
+            gameOn();
         });
         if(!GameManager.isPause() && GameManager.isGameStart()) {
             loop();
             $scope.$broadcast('home.GameOn');
         }
-    };
+    }
 
-    $scope.newGame = function newGame() {
+    function newGame() {
         GameManager.newGame();
         return this;
-    };
+    }
 
     $scope.restartNewGame = function restartNewGame() {
         GameManager.newGame();
@@ -89,7 +91,7 @@ function HomeController(
         KeyboardService.on(function(key) {
             GameManager.move(key);
         });
-        $scope.gameOn();
+        gameOn();
         return this;
     };
 
@@ -105,6 +107,23 @@ function HomeController(
         return GameManager.getIsNewRecord(); 
     };
 
+    $scope.getGameSpeed = function getGameSpeed() {
+        var curSpeed = GameManager.getGameSpeed(),
+            speedKey = '';
+        for(var key in GAMESPEED) {
+            if (GAMESPEED[key] === curSpeed) {
+                speedKey = key;
+                break;
+            }
+        }
+        return speedKey;
+    };
+
+    $scope.setGameSpeed = function setGameSpeed() {
+        $scope.$broadcast('app.pause');
+        GameManager.setPause();
+    };
+
     $scope.$on('Piece.createNewPiece', function() {
         GameManager.createNewPiece();
     });
@@ -114,5 +133,5 @@ function HomeController(
     });
 
     KeyboardService.init();
-    $scope.newGame();
+    newGame();
 }]);
