@@ -105,7 +105,7 @@ function(
     Piece.scope = true;
 
     Piece.link = function link(scope, element, attrs, controller) {
-        scope.$on('GameOn', function () {
+        scope.$on('home.GameOn', function () {
             var top = controller.getTop(),
                 left = controller.getLeft();
             element.css({
@@ -120,7 +120,7 @@ function(
             var isReady = !_.isNull(GameManager.getCurrentPiece());
             if (!isReady) {
                 element.removeClass('dy-piece-ready');
-                scope.$emit('diPiece.createNewPiece');
+                scope.$emit('Piece.createNewPiece');
             } else {
                 if (!element.hasClass('dy-piece-ready')) {
                     // wait for the animation complete in 0.3 seconds
