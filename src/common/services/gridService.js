@@ -134,7 +134,9 @@ function (
 
     GridService.updateGhostPiece = function updateGhostPiece(cell) {
         var pos = GridService._coordinatesToPosition(cell);
-        GridService.grid[pos].ghost = true;
+        if (pos > 0) {
+            GridService.grid[pos].ghost = true;
+        }
     };
 
     return GridService;
