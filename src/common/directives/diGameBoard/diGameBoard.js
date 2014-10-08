@@ -3,7 +3,8 @@
 *
 * Description
 */
-angular.module('direcitve.diGameBoard', [
+angular.module('directive.diGameBoard', [
+    'ngAnimate',
     'service.GridService',
     'directive.diPiece'
 ])

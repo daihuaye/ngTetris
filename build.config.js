@@ -67,7 +67,8 @@ module.exports = {
       'vendor/bootstrap/dist/js/bootstrap.min.js',
       'vendor/angular-ui-router/release/angular-ui-router.js',
       'vendor/angular-ui-utils/modules/route/route.js',
-      'vendor/underscore/underscore-min.js'
+      'vendor/underscore/underscore-min.js',
+      'vendor/angular-animate/angular-animate.min.js'
     ],
     css: [
     ],
