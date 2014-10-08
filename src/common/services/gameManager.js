@@ -190,6 +190,10 @@ function (
         }
         game.updateGhostPiece();
     };
+
+    game.updateGameSpeed = function updateGameSpeed(speed) {
+        GameData.speed = speed;
+    };
     
     return game;
 }]);
