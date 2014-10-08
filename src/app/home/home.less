@@ -20,6 +20,7 @@
   }
   .dy-score {
     .score-button-mixin(); 
+    margin-bottom: 5px;
     &:after {
       content: 'score';
       .score-text-mixin();
@@ -27,8 +28,19 @@
   }
   .dy-best-score {
     .score-button-mixin();
+    margin-bottom: 5px;
     &:after {
       content: 'best';
+      .score-text-mixin();
+    }
+  }
+  .dy-speed-role {
+    .score-button-mixin();
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 17px;
+    &:after {
+      content: 'level';
       .score-text-mixin();
     }
   }
