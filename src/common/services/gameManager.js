@@ -45,7 +45,7 @@ function (
     };
 
     game.getGameSpeed = function getGameSpeed() {
-        return GameData.speed;
+        return GameData.getGameSpeed();
     };
 
     game.setPause = function setPause() {
@@ -192,7 +192,7 @@ function (
     };
 
     game.updateGameSpeed = function updateGameSpeed(speed) {
-        GameData.speed = speed;
+        GameData.setGameSpeed(speed);
     };
     
     return game;
