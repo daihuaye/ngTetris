@@ -4,7 +4,8 @@
 * Description
 */
 angular.module('directive.diGameMenu', [
-    'service.GameManager'
+    'service.GameManager',
+    'directive.diBootstrapSlider'
 ])
 .controller('GameMenuCtrl', [
     '$scope',
