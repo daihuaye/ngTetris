@@ -29,10 +29,16 @@ function HomeController(
     animframePolyFill,
     KeyboardService
 ){
-    var loop = _.throttle(gameLoop, GameManager.getGameSpeed(), {
+    var loop;
+
+    function setUpGameLoop() {
+        return _.throttle(gameLoop, GameManager.getGameSpeed(), {
             leading: false,
             trailing: false
         });
+    }
+
+    loop = setUpGameLoop();
 
     function gameLoop() {
         GameManager.moveCurrentPiece();
@@ -49,7 +55,7 @@ function HomeController(
         });
         if(!GameManager.isPause() && GameManager.isGameStart()) {
             loop();
-            $scope.$broadcast('GameOn');
+            $scope.$broadcast('home.GameOn');
         }
     };
 
@@ -99,8 +105,12 @@ function HomeController(
         return GameManager.getIsNewRecord(); 
     };
 
-    $scope.$on('diPiece.createNewPiece', function() {
+    $scope.$on('Piece.createNewPiece', function() {
         GameManager.createNewPiece();
+    });
+
+    $scope.$on('BootstrapSlider.Speed', function() {
+        loop = setUpGameLoop();
     });
 
     KeyboardService.init();
