@@ -16,6 +16,11 @@ function (
     GameManager,
     GAMESPEED
 ){
+    $scope.whichRole = function whichRole(role) {
+        var speed = GameManager.getGameSpeed();
+        return GAMESPEED[role] === speed;
+    };
+
     this.updateGameSpeed = function updateGameSpeed(option) {
         var speed = GAMESPEED[option];
         GameManager.updateGameSpeed(speed);
