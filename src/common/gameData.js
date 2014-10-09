@@ -30,7 +30,6 @@ function (
         gameStart: false,
         gameEnd: false,
         gamePause: false,
-        level: 1,
         score: 0,
         getGameSpeed: getGameSpeed,
         setGameSpeed: setGameSpeed,
