@@ -1,17 +1,32 @@
 <div class="btn-group dy-bootstrap-slider" data-toggle="buttons">
-  <label class="btn btn-primary active">
-    <input type="radio" name="options" data-role="BEGINNER" checked> Beginner
+  <label class="btn btn-primary"
+        data-ng-class="{'active': whichRole('BEGINNER')}">
+    <input type="radio" 
+            name="options" 
+            data-role="BEGINNER"> Beginner
   </label>
-  <label class="btn btn-primary">
-    <input type="radio" name="options" data-role="INTERMEDIATE"> Intermediate
+  <label class="btn btn-primary"
+        data-ng-class="{'active': whichRole('INTERMEDIATE')}">
+    <input type="radio" 
+            name="options" 
+            data-role="INTERMEDIATE"> Intermediate
   </label>
-  <label class="btn btn-primary">
-    <input type="radio" name="options" data-role="ADVANCED"> Advanced
+  <label class="btn btn-primary"
+        data-ng-class="{'active': whichRole('ADVANCED')}">
+    <input type="radio" 
+            name="options" 
+            data-role="ADVANCED"> Advanced
   </label>
-  <label class="btn btn-primary">
-    <input type="radio" name="options" data-role="EXPERT"> Expert
+  <label class="btn btn-primary"
+        data-ng-class="{'active': whichRole('EXPERT')}">
+    <input type="radio" 
+            name="options" 
+            data-role="EXPERT"> Expert
   </label>
-  <label class="btn btn-primary">
-    <input type="radio" name="options" data-role="SUPER"> Super
+  <label class="btn btn-primary"
+        data-ng-class="{'active': whichRole('SUPER')}">
+    <input type="radio" 
+            name="options" 
+            data-role="SUPER"> Super
   </label>
 </div>
