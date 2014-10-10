@@ -40,7 +40,7 @@ function (
         gameBoard: {
             borderWidth: 10,
             pieceWidthInPixel: 30, // match the pixel of piece in grid
-            Ï: 10,
+            boardWidth: 10,
             boardHeight: 20
         }
     };
