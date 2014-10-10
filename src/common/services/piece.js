@@ -132,10 +132,10 @@ function (
     Piece.prototype.convertPatternToCoordinates = function convertPatternToCoordinates(cell) {
         var coord = angular.copy(PATTERN_COOR[this.patterns][this.rotation]),
             location = cell || {x: this.x, y: this.y};
-        for(var cell in coord) {
-            cell.x += location.x;
-            cell.y += location.y;
-        }
+        _.each(coord, function (ele, index) {
+            coord[index].x += location.x;
+            coord[index].y += location.y;
+        });
         return coord;
     };
 
