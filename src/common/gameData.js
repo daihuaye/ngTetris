@@ -36,21 +36,12 @@ function (
         getBestScore: getBestScore,
         rotationLimit: 4,
         patternLimit: 7,
-        pieceSquareGrid: 4,
-        numCellInPiece: 4,
         cssAnimateTimeout: 300, // milliseconds
         gameBoard: {
             borderWidth: 10,
-            boardWidthInPixel: 300,
-            pieceWidthInPixel: 30,
-            borderPaddingTop: 10,
-            boardWidth: 10,
-            boardHeight: 20,
-            boardPosition: {
-                x: 0,
-                y: 0
-            },
-            coordinatePosition: 0
+            pieceWidthInPixel: 30, // match the pixel of piece in grid
+            Ï: 10,
+            boardHeight: 20
         }
     };
 
