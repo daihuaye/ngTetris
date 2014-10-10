@@ -13,13 +13,13 @@ function (
 ){
     var GridService = {},
         coordToPosMem = _.memoize(function (pos) {
-            return (pos.y * getBoardSize()) + pos.x;
+            return (pos.y * getBoardWidth()) + pos.x;
         }, function (pos) {
             return '' + pos.x + pos.y;
         }),
         posToCoord = _.memoize(function (i) {
-            var x = i % getBoardSize(),
-                y = (i - x) / getBoardSize();
+            var x = i % getBoardWidth(),
+                y = (i - x) / getBoardWidth();
 
             return {
                 x: x,
@@ -28,10 +28,6 @@ function (
         });
 
     GridService.grid = [];
-
-    function getBoardSize() {
-        return GameData.gameBoard.boardWidth;
-    }
 
     function getBoardWidth() {
         return GameData.gameBoard.boardWidth;
