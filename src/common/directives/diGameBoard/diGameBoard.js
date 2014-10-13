@@ -37,6 +37,8 @@ function (
                     break;
                 case 6: pieceClass = 'dy-Z-filled';
                     break;
+                default: pieceClass = 'dy-L-filled';
+                    break;
             }
         }
         if (cell.ghost) {

@@ -73,6 +73,8 @@ function (
                 break;
             case 6: pieceClass = 'dy-Z';
                 break;
+            default: pieceClass = 'dy-L';
+                break;
         }   
         return pieceClass;
     };
