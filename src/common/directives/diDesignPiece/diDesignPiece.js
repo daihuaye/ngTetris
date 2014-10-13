@@ -104,9 +104,10 @@ function (
     }
 
     function isOk() {
+        // check any fields except saved field 
         return _.chain($scope.errorCode)
                 .find(function (value, key) {
-                    return key === 'saved' ? value : false;
+                    return key === 'saved' ? false : value;
                 })
                 .isUndefined()
                 .value();
