@@ -32,5 +32,5 @@ angular.module('service.animframePolyFill', [])
         };
     }
 
-    return;
+    return {};
 }]);
