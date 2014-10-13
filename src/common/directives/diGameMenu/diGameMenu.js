@@ -5,7 +5,8 @@
 */
 angular.module('directive.diGameMenu', [
     'service.GameManager',
-    'directive.diBootstrapSlider'
+    'directive.diBootstrapSlider',
+    'directive.diDesignPiece'
 ])
 .controller('GameMenuCtrl', [
     '$scope',
@@ -14,6 +15,7 @@ function (
     $scope,
     GameManager
 ){
+    var isDesgin = false;
     $scope.continueGame = function continueGame() {
         GameManager.setPause();
         $scope.closeModal();
@@ -28,6 +30,19 @@ function (
     $scope.endGame = function endGame() {
         GameManager.gameOver();
         $scope.closeModal();
+    };
+
+    $scope.getCurrentView = function getCurrentView() {
+        var key = isDesgin ?  'design' : 'instructions';
+        return key;
+    };
+
+    $scope.goBack = function goBack() {
+        isDesgin = false;
+    };
+
+    $scope.designNewPiece = function designNewPiece() {
+        isDesgin = true;
     };
 
     this.isPause = function isPause() {
