@@ -34,6 +34,7 @@
     "karma-coffee-preprocessor": "^0.2.1",
     "karma": "^0.12.9",
     "express": "^4.9.0",
-    "karma-phantomjs-launcher": "^0.1.4"
+    "karma-phantomjs-launcher": "^0.1.4",
+    "grunt-express": "^1.4.1"
   }
 }
