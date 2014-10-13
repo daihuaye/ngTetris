@@ -18,6 +18,7 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ngmin');
   grunt.loadNpmTasks('grunt-html2js');
+  grunt.loadNpmTasks('grunt-express');
 
   /**
    * Load in our build configuration file.
@@ -528,6 +529,16 @@ module.exports = function ( grunt ) {
           livereload: false
         }
       }
+    },
+    express: {
+        all: {
+            options: {
+                port: 9000,
+                hostname: 'localhost',
+                bases: ['build'],
+                livereload: true
+            }
+        }
     }
   };
 
@@ -541,7 +552,7 @@ module.exports = function ( grunt ) {
    * before watching for changes.
    */
   grunt.renameTask( 'watch', 'delta' );
-  grunt.registerTask( 'watch', [ 'build', 'karma:unit', 'delta' ] );
+  grunt.registerTask( 'watch', [ 'build', 'karma:unit', 'express', 'delta' ] );
 
   /**
    * The default task is to build and compile.
