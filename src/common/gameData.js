@@ -37,6 +37,8 @@ function (
         rotationLimit: 4,
         patternLimit: 7,
         cssAnimateTimeout: 300, // milliseconds
+        maxCustomPiece: 5,
+        customPieceWidth: 4,
         gameBoard: {
             borderWidth: 10,
             pieceWidthInPixel: 30, // match the pixel of piece in grid
