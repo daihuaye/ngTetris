@@ -6,7 +6,8 @@
 angular.module('service.Piece', [
     'service.PATTERNS',
     'resource.GameData',
-    'service.GridService'
+    'service.GridService',
+    'directive.diDesignPiece'
 ])
 .factory('GenerateUniqueId', [function () {
     var generateUid = function() {
@@ -29,22 +30,26 @@ angular.module('service.Piece', [
     'GameData',
     'PATTERN_COOR',
     'GridService',
+    'CustomPiece',
 function (
     PATTERNS,
     GenerateUniqueId,
     GameData,
     PATTERN_COOR,
-    GridService
+    GridService,
+    CustomPiece
 ){
     var Piece = function (pos) {
             var position = pos || {
-                x: 4,
-                y: 0
-            };
+                    x: 4,
+                    y: 0
+                },
+                patternLimit = CustomPiece.hasCustomPiece() ? GameData.patternLimit + 1 : 
+                                                                GameData.patternLimit;
             this.x = position.x;
             this.y = position.y;
             this.rotation = Math.floor(Math.random() * GameData.rotationLimit);
-            this.patterns = Math.floor(Math.random() * GameData.patternLimit);  
+            this.patterns = Math.floor(Math.random() * patternLimit); 
             this.id = GenerateUniqueId.next();
             GridService.resetGhostPiece();
         },
@@ -61,6 +66,14 @@ function (
 
     function getBoardHeight() {
         return GameData.gameBoard.boardHeight;
+    }
+
+    function getPatternCoord() {
+        if (_.isUndefined(PATTERN_COOR[this.patterns])) {
+            return CustomPiece.getPatternCoord();
+        } else {
+            return PATTERN_COOR[this.patterns][this.rotation];
+        }
     }
 
     Piece.prototype.getId = function getId() {
@@ -80,7 +93,11 @@ function (
     };
 
     Piece.prototype.getPattern = function getPattern() {
-        return PATTERNS[this.patterns][this.rotation];
+        if (_.isUndefined(PATTERNS[this.patterns])) {
+            return CustomPiece.getPattern();
+        } else {
+            return PATTERNS[this.patterns][this.rotation];
+        }
     };
 
     Piece.prototype.getShape = function getShape() {
@@ -130,7 +147,7 @@ function (
     };
 
     Piece.prototype.convertPatternToCoordinates = function convertPatternToCoordinates(cell) {
-        var coord = angular.copy(PATTERN_COOR[this.patterns][this.rotation]),
+        var coord = angular.copy(getPatternCoord.apply(this)),
             location = cell || {x: this.x, y: this.y};
         _.each(coord, function (ele, index) {
             coord[index].x += location.x;
