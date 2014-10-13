@@ -1,0 +1,36 @@
+.dy-design-piece {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  .dy-design-container {
+    padding: 5px;
+    display: inline-block;
+    background-color: #bbaaa0;
+  }
+  .dy-piece-ul {
+    .size(4 * @game-cell-size);
+    margin-bottom: 0px;
+  }
+  .dy-piece-li {
+    .size(@game-cell-size);
+    display: inline-block;
+    vertical-align: top;
+    background-color: rgba(238, 228, 218, 0.35);
+    border: 1px solid #bbaaa0;
+    cursor: pointer;
+  }
+  .dy-checked {
+    background-color: lightblue;
+  }
+  .dy-alert {
+    position: absolute;
+    right: 0;
+    top: -125px;
+    div {
+      height: 56px;
+    }
+  }
+  .dy-save-btn {
+    margin-top: 15px;
+  }
+}

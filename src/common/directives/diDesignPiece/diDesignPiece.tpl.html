@@ -1,0 +1,43 @@
+<div class="dy-design-piece">
+    <div class="row">
+        <div class="col-sm-12">
+            <div data-ng-messages="errorCode"
+                class="dy-alert"
+                data-ng-if="interacted()">
+                <div data-ng-message="maxlength"
+                    class="alert alert-danger"
+                    role="alert">
+                    You selected over {{::getMaxPiece()}} cells.
+                </div>
+                <div data-ng-message="minlength"
+                    class="alert alert-danger"
+                    role="alert">
+                    Please select at least one cell.
+                </div>
+                <div data-ng-message="saved"
+                    class="alert alert-success"
+                    role="alert">
+                    You piece is saved and ready to use.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="dy-design-container">
+                <ul class="dy-piece-ul">
+                   <li data-ng-repeat="i in pieces track by $index"
+                        class="dy-piece-li"
+                        data-ng-class="{'dy-checked': isSelected($index)}"
+                        data-ng-click="onClick($index)"></li> 
+                </ul>
+            </div>  
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <button class="btn btn-primary dy-save-btn"
+                data-ng-click="savePiece()">Save</button>  
+        </div>
+    </div>
+</div>
