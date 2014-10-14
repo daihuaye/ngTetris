@@ -70,7 +70,7 @@ function (
 
     function getPatternCoord() {
         if (_.isUndefined(PATTERN_COOR[this.patterns])) {
-            return CustomPiece.getPatternCoord();
+            return CustomPiece.getPatternCoord(this.rotation);
         } else {
             return PATTERN_COOR[this.patterns][this.rotation];
         }
@@ -94,7 +94,7 @@ function (
 
     Piece.prototype.getPattern = function getPattern() {
         if (_.isUndefined(PATTERNS[this.patterns])) {
-            return CustomPiece.getPattern();
+            return CustomPiece.getPattern(this.rotation);
         } else {
             return PATTERNS[this.patterns][this.rotation];
         }
