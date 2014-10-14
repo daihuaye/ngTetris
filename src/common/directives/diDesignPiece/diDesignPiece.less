@@ -6,6 +6,8 @@
     padding: 5px;
     display: inline-block;
     background-color: #bbaaa0;
+    margin-right: 10px;
+    margin-top: 10px;
   }
   .dy-piece-ul {
     .size(4 * @game-cell-size);
@@ -32,5 +34,47 @@
   }
   .dy-save-btn {
     margin-top: 15px;
+  }
+  .dy-color {
+    margin-top: 15px;
+  }
+  .dy-0 {
+    .rotate(0);
+  }
+  .dy-90 {
+    .rotate(90);
+    pointer-events: none;
+  }
+  .dy-180{
+    .rotate(180);
+    pointer-events: none;
+  }
+  .dy-270 {
+    .rotate(270);
+    pointer-events: none;
+  }
+  .dy-preview-90 {
+    position: absolute;
+    .rotate(-90deg);
+    top: 9px;
+    left: -4px;
+    font-size: 33px;
+    color: rgba(0, 0, 0, 0.3);
+  }
+  .dy-preview-180 {
+    position: absolute;
+    .rotate(-180deg);
+    top: 20px;
+    padding-left: 7px;
+    font-size: 33px;
+    color: rgba(0, 0, 0, 0.3);
+  }
+  .dy-preview-270 {
+    position: absolute;
+    .rotate(-270deg);
+    top: 23px;
+    left: 4px;
+    font-size: 33px;
+    color: rgba(0, 0, 0, 0.3);
   }
 }
