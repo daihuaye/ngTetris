@@ -5,12 +5,15 @@
 */
 angular.module('directive.diDesignPiece', [
     'ngMessages',
-    'resource.GameData'
+    'resource.GameData',
+    'service.ROTATION_MATRIX'
 ])
 .factory('CustomPiece', [
     'GameData',
+    'ROTATION_MATRIX',
     function (
-    GameData
+    GameData,
+    ROTATION_MATRIX
 ){
     var custom = {},
         posToCoord = _.memoize(function (i) {
@@ -22,40 +25,84 @@ angular.module('directive.diDesignPiece', [
                 y: y
             };
         }),
-        pattern = [],
-        patternCoord = [];
+        patternCoord2d = [],
+        pattern2d = [];
 
     function getCustomPieceWidth() {
         return GameData.customPieceWidth;
     }
 
+    function getRotatePattern(matrix, deg) {
+        var pattern = [],
+            rotationArray = ROTATION_MATRIX[deg];
+        // [y, x], index 0 is y, 1 is x
+        _.each(rotationArray, function (elem, index) {
+            var pos = !_.chain(matrix)
+                    .find(function (obj, key) {
+                        return elem[1] === obj.x &&
+                                elem[0] === obj.y;
+                    })
+                    .isUndefined()
+                    .value();
+            if (pos) {
+                pattern.push(index);
+            }
+        });
+        pattern2d.push(pattern);
+    }
+
+    function setPatternCoord2d() {
+        patternCoord2d = [];
+        _.each(pattern2d, function (pattern) {
+            setPatternToCoord(pattern);
+        });
+    }
+
+    function setPatternToCoord(pattern) {
+        var patternCoord = [];
+        _.each(pattern, function (i) {
+            patternCoord.push(posToCoord(i));
+        });
+        patternCoord2d.push(patternCoord);
+    }
+
     custom.generatePatterns = function generatePatterns(pieces) {
-        pattern = [];
-        patternCoord = [];
+        var pattern = [];
+        pattern2d = [];
+        patternCoord2d = [];
         _.each(pieces, function (piece, index) {
             if (piece.isSelected) {
                 pattern.push(index);
             }
         });
+        pattern2d.push(pattern);
         custom.generatePatternCoord();
     };
 
     custom.generatePatternCoord = function generatePatternCoord() {
-        _.each(pattern, function (i) {
-            patternCoord.push(posToCoord(i));
-        });
+        // set up the first patter coord
+        setPatternToCoord(pattern2d[0]);
+
+        for(var deg in [90, 180, 270]) {
+            // deg is index [0, 1, 2]
+            // patternCoor2d has init with orgin coord
+            // so index + 1 to move to next rotation
+            getRotatePattern(patternCoord2d[0], parseInt(deg, 10) + 1);
+        }
+
+        setPatternCoord2d();
     };
 
-    custom.getPattern = function getPattern() {
-        return pattern;
+    custom.getPattern = function getPattern(rotation) {
+        return pattern2d[rotation];
     };
 
-    custom.getPatternCoord = function getPatternCoord() {
-        return patternCoord;
+    custom.getPatternCoord = function getPatternCoord(rotation) {
+        return patternCoord2d[rotation];
     };
 
     custom.hasCustomPiece = function hasCustomPiece() {
-        return pattern.length > 0;
+        return pattern2d.length > 0;
     };
 
     return custom;
