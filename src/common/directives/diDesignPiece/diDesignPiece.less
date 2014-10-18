@@ -1,6 +1,5 @@
 .dy-design-piece {
   padding-top: 20px;
-  padding-bottom: 20px;
   position: relative;
   .dy-design-container {
     padding: 5px;
@@ -21,9 +20,6 @@
     border: 1px solid #bbaaa0;
     cursor: pointer;
   }
-  .dy-checked {
-    background-color: lightblue;
-  }
   .dy-alert {
     position: absolute;
     right: 0;
@@ -35,11 +31,18 @@
   .dy-save-btn {
     margin-top: 15px;
   }
+  .alert-warning {
+    vertical-align: bottom;
+    line-height: 34px;
+    padding: 5px;
+  }
   .dy-color {
     margin-top: 15px;
   }
   .dy-0 {
     .rotate(0);
+    border: 5px solid #5cb85c;
+    padding: 0;
   }
   .dy-90 {
     .rotate(90);
@@ -76,5 +79,16 @@
     left: 4px;
     font-size: 33px;
     color: rgba(0, 0, 0, 0.3);
+  }
+  .dy-color {
+    .size(2em);
+    border-radius: 50%;
+    display: block;
+    float: left;
+    margin: 0 1em 0 0;
+    cursor: pointer;
+  }
+  .dy-color-section {
+    padding-top: 20px;
   }
 }
