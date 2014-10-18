@@ -2,7 +2,8 @@
     <div class="dy-grid-container">
         <div class="dy-grid-cell" 
             data-ng-repeat="cell in getGridService() track by $index"
-            data-ng-class="getFilledClass(cell)"></div>
+            data-ng-class="getFilledClass(cell)"
+            data-ng-style="getFilledCustomColor(cell)"></div>
         <div di-piece></div>
     </div>
 </div>
