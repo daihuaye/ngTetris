@@ -1,7 +1,7 @@
 ngTetris
 ========
 
-Use AngularJS to build a simple Tetris game .
+Use AngularJS to build a simple Tetris game . [Demo link](http://ngtetris.com)
 
 ![alt text](https://lh5.googleusercontent.com/V1t1Wy2TgPr-ohFCOxMJt0oWaRI8nJdeA-CJQ_oKABu8ZVgkWG-fzpdud1V1s-qDyvJaieE3rw=w1892-h866 "Game Play")
 
