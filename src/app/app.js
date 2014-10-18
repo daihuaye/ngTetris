@@ -41,4 +41,12 @@ function(
             KeyboardService.keydownAction($event);
         }
     };
+
+    $scope.importTrackingScript = function importTrackingScript() {
+        if (window.location.origin.indexOf('localhost') !== -1) {
+            return false;
+        } else {
+            return true;
+        }
+    };
 }]);
