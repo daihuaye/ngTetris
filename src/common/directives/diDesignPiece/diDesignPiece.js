@@ -116,22 +116,29 @@ function (
     GameData,
     CustomPiece
 ){
-    var isSumbit = false;
+    var isSumbit = false,
+        currentColor = '';
     
     $scope.pieces = [];
-    $scope.errorCode = {
-        maxlength: false,
-        minlength: true,
-        saved: false
-    };
+    $scope.colors = randomColor({count: GameData.availableColors});
+    if (GameData.getColor() === '') {
+        GameData.setColor(randomColor());
+    }
+    currentColor = GameData.getColor();
+
     _.each(_.range(16), function (value) {
         $scope.pieces[value] = {
             isSelected: false
         };
     });
-    _.each(CustomPiece.getPattern(), function (index) {
+    _.each(CustomPiece.getPattern(0), function (index) {
         $scope.pieces[index].isSelected = true;
     });
+    $scope.errorCode = {
+        maxlength: false,
+        minlength: ($scope.pieces.length === 0),
+        saved: false
+    };
 
     function checkSelectedField() {
         var res = _.countBy($scope.pieces, function (piece) {
@@ -164,6 +171,7 @@ function (
         var isChecked = $scope.pieces[index].isSelected;
         $scope.pieces[index].isSelected = !isChecked;
         checkSelectedField();
+        isSumbit = true;
     };
 
     $scope.isSelected = function isSelected(index) {
@@ -175,7 +183,12 @@ function (
         if (isOk()) {
             $scope.errorCode.saved = true;
             CustomPiece.generatePatterns($scope.pieces);
+            GameData.setColor(currentColor);
         }
+    };
+
+    $scope.isSaved = function isSaved() {
+        return isSumbit && !$scope.errorCode.saved;
     };
 
     $scope.getMaxPiece = function getMaxPiece() {
@@ -185,6 +198,26 @@ function (
     $scope.interacted = function interacted() {
         return isSumbit;
     };
+
+    $scope.pickColor = function pickColor(color) {
+        $scope.errorCode.saved = false;
+        if ($scope.pieces.length > 0) {
+            isSumbit = true;
+        }
+        currentColor = color;
+    };
+
+    $scope.getColor = function getColor() {
+        return { background: currentColor };
+    };
+
+    $scope.getColorByIndex = function getColorByIndex(index) {
+        if ($scope.pieces[index].isSelected) {
+            return currentColor;
+        }
+        return;
+    };
+
 }])
 .directive('diDesignPiece', [
 function(
