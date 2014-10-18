@@ -3,7 +3,7 @@ ngTetris
 
 Use AngularJS to build a simple Tetris game .
 
-![alt text](https://drive.google.com/file/d/0B976CjDKjqUfSHNZdW5rNkZXQlU/view?usp=sharing "Game Play")
+![alt text](https://lh5.googleusercontent.com/V1t1Wy2TgPr-ohFCOxMJt0oWaRI8nJdeA-CJQ_oKABu8ZVgkWG-fzpdud1V1s-qDyvJaieE3rw=w1892-h866 "Game Play")
 
 Quick Start
 ===========
