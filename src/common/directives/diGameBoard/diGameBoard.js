@@ -6,14 +6,17 @@
 angular.module('directive.diGameBoard', [
     'ngAnimate',
     'service.GridService',
-    'directive.diPiece'
+    'directive.diPiece',
+    'resource.GameData'
 ])
 .controller('GameBoardCtrl', [
     '$scope',
     'GridService',
+    'GameData',
 function (
     $scope,
-    GridService
+    GridService,
+    GameData
 ){
     $scope.getGridService = function getGridService() {
         return GridService.getGridService();
@@ -37,7 +40,7 @@ function (
                     break;
                 case 6: pieceClass = 'dy-Z-filled';
                     break;
-                default: pieceClass = 'dy-L-filled';
+                default: pieceClass = 'dy-X-filled';
                     break;
             }
         }
@@ -45,6 +48,14 @@ function (
             pieceClass += (pieceClass.length > 0) ? ' dy-ghost-piece' : 'dy-ghost-piece';
         }
         return pieceClass;
+    };
+
+    $scope.getFilledCustomColor = function getFilledCustomColor(cell) {
+        if (cell.filled && cell.shape === 7) {
+            return {
+                'background-color': GameData.getColor()
+            };
+        }
     };
 }])
 .directive('diGameBoard', [
