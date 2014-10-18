@@ -21,6 +21,14 @@ function (
         }),
         getY = _.memoize(function (y) {
             return y * GameData.gameBoard.pieceWidthInPixel;
+        }),
+        memCheckPattern = _.memoize(function (pattern, piece) {
+            var res = _.find(getPattern(), function (p) {
+                return piece === p;
+            });
+            return _.isNumber(res);
+        }, function (pattern, piece) {
+            return pattern.toString() + ',' + piece;
         });
 
     function getPattern() {
@@ -46,10 +54,7 @@ function (
         if (!GameManager.isGameStart()) {
             return;
         }
-        var res = _.find(getPattern(), function (p) {
-            return piece === p;
-        });
-        return _.isNumber(res);
+        return memCheckPattern(getPattern(), piece);
     };
 
     $scope.getClassForShape = function getClassForShape() {
@@ -73,7 +78,7 @@ function (
                 break;
             case 6: pieceClass = 'dy-Z';
                 break;
-            default: pieceClass = 'dy-L';
+            default: pieceClass = 'dy-X';
                 break;
         }   
         return pieceClass;
@@ -115,6 +120,18 @@ function(
                 'top': Math.round(top) + 'px'
             });
         });
+
+        scope.getColor = function getColor() {
+            var ul = element.children(),
+                li = ul.children();
+            if (ul.hasClass('dy-X')) {
+                if (this.checkPattern(this.i)) {
+                    return {
+                        'background-color': GameData.getColor()
+                    };
+                }
+            }
+        };
 
         // can't separate the digest loop with class update and
         // create a new piece, so manually update the dy-piece-ready class
