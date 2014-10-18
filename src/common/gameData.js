@@ -26,6 +26,14 @@ function (
         localStoragePolyfill.setItem('game.speed', speed);
     }
 
+    function setColor(color) {
+        data.customColorChosen = color;
+    }
+
+    function getColor() {
+        return data.customColorChosen;
+    }
+
     var data = {
         gameStart: false,
         gameEnd: false,
@@ -39,6 +47,10 @@ function (
         cssAnimateTimeout: 300, // milliseconds
         maxCustomPiece: 5,
         customPieceWidth: 4,
+        availableColors: 5,
+        customColorChosen: '',
+        setColor: setColor,
+        getColor: getColor,
         gameBoard: {
             borderWidth: 10,
             pieceWidthInPixel: 30, // match the pixel of piece in grid
