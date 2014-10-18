@@ -32,6 +32,7 @@
                    <li data-ng-repeat="i in pieces track by $index"
                         class="dy-piece-li"
                         data-ng-class="{'dy-checked': isSelected($index)}"
+                        data-ng-style="{'background-color': getColorByIndex($index)}"
                         data-ng-click="onClick($index)"></li> 
                 </ul>
                 <div data-ng-class="'dy-preview-' + i"
@@ -39,10 +40,30 @@
             </div>
         </div>
     </div>
+    <div class="row dy-color-section">
+        <div class="col-sm-3">
+            <span>Your color:</span>
+            <ul>
+                <li class="dy-color dy-your-color"
+                    data-ng-style="getColor()"></li>
+            </ul>
+        </div> 
+        <div class="col-sm-9">
+            <span>Pick a color:</span>
+            <ul>
+                <li data-ng-repeat="color in colors"
+                    data-ng-style="{background: color}"
+                    data-ng-click="pickColor(color)"
+                    class="dy-color"></li>
+            </ul>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-12">
             <button class="btn btn-primary dy-save-btn"
-                data-ng-click="savePiece()">Save</button>  
+                data-ng-click="savePiece()">Save your tetris</button> 
+            <span class="alert alert-warning"
+                data-ng-show="isSaved()">No saved yet!</span>
         </div>
     </div>
 </div>
