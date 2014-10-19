@@ -53,7 +53,7 @@ function (
         getColor: getColor,
         gameBoard: {
             borderWidth: 10,
-            pieceWidthInPixel: 30, // match the pixel of piece in grid
+            pieceWidthInPixel: 25, // match the pixel of piece in grid
             boardWidth: 10,
             boardHeight: 20
         }
