@@ -5,23 +5,16 @@
 */
 angular.module('service.localStoragePolyfill', [])
 .factory('localStoragePolyfill', [function () {
-    if (!('localStorage' in window)) {
-        window.localStorage = {
-            _data: {},
-            setItem: function(id, val) {
-                return this._data[id] = String(val);
-            },
-            getItem: function(id) {
-                return this._data.hasOwnProperty(id) ? this._data[id] : undefined;
-            },
-            removeItem: function(id) {
-                return delete this._data[id];
-            },
-            clear: function() {
-                return this._data = {};
-            }
-        };
-    }
-
-    return window.localStorage;
+    var basilStorage = new window.Basil({
+        namespace: 'ngtetris'
+    });
+    
+    return {
+        setItem: function setItem(name, value) {
+            basilStorage.set(name, value);
+        },
+        getItem: function getItem(name) {
+            return basilStorage.get(name);
+        }
+    };
 }]);

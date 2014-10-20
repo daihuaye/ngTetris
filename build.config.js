@@ -70,7 +70,8 @@ module.exports = {
       'vendor/underscore/underscore-min.js',
       'vendor/angular-animate/angular-animate.min.js',
       'vendor/angular-messages/angular-messages.min.js',
-      'vendor/randomColor/randomColor.js'
+      'vendor/randomColor/randomColor.js',
+      'vendor/basil.js/build/basil.min.js'
     ],
     css: [
     ],
