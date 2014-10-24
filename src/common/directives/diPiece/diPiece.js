@@ -114,10 +114,13 @@ function(
     Piece.link = function link(scope, element, attrs, controller) {
         scope.$on('home.GameOn', function () {
             var top = controller.getTop(),
-                left = controller.getLeft();
+                left = controller.getLeft(),
+                translatePos = 'translate(' + left + 'px,' + Math.round(top) + 'px)';
             element.css({
-                'left': left + 'px',
-                'top': Math.round(top) + 'px'
+                'transform': translatePos,
+                '-webkit-transform': translatePos,
+                '-ms-transform': translatePos,
+                '-moz-transform': translatePos
             });
         });
 
