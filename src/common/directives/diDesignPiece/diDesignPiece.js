@@ -101,6 +101,13 @@ angular.module('directive.diDesignPiece', [
         return patternCoord2d[rotation];
     };
 
+    custom.getCustomPiece = function getCustomPiece() {
+        return {
+            pattern2d: pattern2d,
+            patternCoord2d: patternCoord2d
+        };
+    };
+
     custom.hasCustomPiece = function hasCustomPiece() {
         return pattern2d.length > 0;
     };
