@@ -124,6 +124,10 @@ function HomeController(
         GameManager.setPause();
     };
 
+    $scope.saveGame = function saveGame() {
+        GameManager.saveGame();
+    };
+
     $scope.$on('Piece.createNewPiece', function() {
         GameManager.createNewPiece();
     });
