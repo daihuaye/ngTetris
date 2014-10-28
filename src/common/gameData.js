@@ -39,6 +39,7 @@ function (
         gameEnd: false,
         gamePause: false,
         score: 0,
+        savedGameTime: null,
         getGameSpeed: getGameSpeed,
         setGameSpeed: setGameSpeed,
         getBestScore: getBestScore,
