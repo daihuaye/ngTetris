@@ -22,7 +22,8 @@ function (
 ){
     var game = {
         currentPiece: null,
-        isNewRecord: false
+        isNewRecord: false,
+        data: {}
     };
 
     game.resetGame = function resetGame() {
@@ -37,6 +38,62 @@ function (
     game.newGame = function newGame() {
         game.resetGame();
         GridService.buildEmptyGameBoard();
+    };
+
+    game.saveGame = function saveGame() {
+        // piece
+        game.data.piece = {
+            rotation: game.currentPiece.getRotation(),
+            patterns: game.currentPiece.getPatternNumber()
+        };
+
+        // grid
+        game.data.grid = GridService.getGridService();
+
+        // scroe
+        game.data.score = GameData.score;
+
+        // custom piece
+        game.data.custom = game.currentPiece.getCustomPiece();
+        game.data.custom.color = GameData.getColor();
+
+        GameData.savedGameTime = new Date();
+        game.data.date = GameData.savedGameTime.toJSON();
+
+        localStoragePolyfill.setItem('game.history', game.data);
+        localStoragePolyfill.setItem('game.history.date', game.data.date);
+        return;
+    };
+
+    game.restoreGame = function restoreGame() {
+        var data = localStoragePolyfill.getItem('game.history');
+        if (!_.isNull(data)) {
+            game.data = data;
+            game.currentPiece.setRotation(game.data.piece.rotation);
+            game.currentPiece.setPatternNumber(game.data.piece.patterns);
+            GridService.setGridService(game.data.grid);
+            GameData.score = game.data.score;
+            GameData.setColor(game.data.custom.color);
+            game.currentPiece.setCustomPiece(game.data.custom);
+            game.currentPiece.setPositionY(0);
+            game.currentPiece.setPositionX(4);
+            GameData.saveGameTime = new Date(game.data.date);
+        }
+    };
+
+    game.hasGameHistory = function hasGameHistory() {
+        var data = localStoragePolyfill.getItem('game.history');
+        return !_.isNull(data);
+    };
+
+    game.getGameSavedTime = function getGameSavedTime() {
+        var date = localStoragePolyfill.getItem('game.history.date');
+        if (!_.isNull(date)) {
+            var time = new Date(date);
+            return time.toLocaleString();
+        } else {
+            return null;
+        }
     };
 
     game.setGameStart = function setGameStart() {
