@@ -34,7 +34,17 @@
                             <div class="col-sm-12">
                                 <button class="pull-left btn btn-success tada"
                                     data-ng-click="designNewPiece()">
-                                    <span>You can design your own Tetris</span>
+                                    You can design your own Tetris
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row dy-game-load-game" 
+                            data-ng-show="hasGameHistory()">
+                            <div class="col-sm-12">
+                                <div>Your last saved time: <span data-ng-bind="getSavedTime()"></span></div>
+                                <button class="pull-left btn btn-info"
+                                        data-ng-click="restoreGame()">
+                                    Restore Game
                                 </button>
                             </div>
                         </div>
@@ -68,14 +78,14 @@
                     </div>
                     <div class="col-sm-3 col-xs-3">
                         <button class="btn btn-success"
-                            data-ng-click="continueGame()">
-                            Continue Game
+                            data-ng-click="saveGame()">
+                            Save Game
                         </button>
                     </div>
                     <div class="col-sm-3 col-xs-3">
-                        <button class="btn btn-success"
-                            data-ng-click="saveGame()">
-                            Save Game
+                        <button class="btn btn-info"
+                            data-ng-click="continueGame()">
+                            Continue Game
                         </button>
                     </div>
                 </div>
