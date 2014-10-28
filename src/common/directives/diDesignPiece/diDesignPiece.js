@@ -108,6 +108,11 @@ angular.module('directive.diDesignPiece', [
         };
     };
 
+    custom.setCustomPiece = function setCustomPiece(customPiece) {
+        pattern2d = customPiece.pattern2d;
+        patternCoord2d = customPiece.patternCoord2d;
+    };
+
     custom.hasCustomPiece = function hasCustomPiece() {
         return pattern2d.length > 0;
     };
