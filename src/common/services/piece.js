@@ -76,8 +76,37 @@ function (
         }
     }
 
+    Piece.prototype.getRotation = function() {
+        return this.rotation;
+    };
+
+    Piece.prototype.setRotation = function(rotation) {
+        this.rotation = rotation;
+    };
+
+    Piece.prototype.getPatternNumber = function() {
+        return this.patterns;
+    };
+
+    Piece.prototype.setPatternNumber = function(patternNum) {
+        this.patterns = patternNum;
+    };
+
+    Piece.prototype.getCustomPiece = function getCustomPiece() {
+        return CustomPiece.getCustomPiece();
+    };
+
+    Piece.prototype.setCustomPiece = function setCustomPiece(custom) {
+        CustomPiece.setCustomPiece(custom);
+    };
+
     Piece.prototype.getId = function getId() {
         return this.id;
+    };
+
+    Piece.prototype.restorePiece = function(rotation, patterns) {
+        this.rotation = rotation;
+        this.patterns = patterns;
     };
 
     Piece.prototype.getPieceCoordArray = function getPieceCoordArray() {
@@ -88,8 +117,16 @@ function (
         return this.x;
     };
 
+    Piece.prototype.setPositionX = function setPositionX(x) {
+        this.x = x;
+    };
+
     Piece.prototype.getPositionY = function getPositionY() {
         return this.y;
+    };
+
+    Piece.prototype.setPositionY = function getPositionY(y) {
+        this.y = y;
     };
 
     Piece.prototype.getPattern = function getPattern() {
