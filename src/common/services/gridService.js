@@ -52,6 +52,10 @@ function (
         return GridService.grid;
     };
 
+    GridService.setGridService = function setGridService(grid) {
+        GridService.grid = grid;
+    };
+
     GridService.insertPiece = function insertPiece(piece, gameOver) {
         var coordArray = piece.getPieceCoordArray();
         for (var i = 0; i < coordArray.length; i++) {
