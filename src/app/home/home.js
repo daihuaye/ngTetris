@@ -120,8 +120,10 @@ function HomeController(
     };
 
     $scope.setGameSpeed = function setGameSpeed() {
-        $scope.$broadcast('app.pause');
-        GameManager.setPause();
+        if ($scope.isGameStart()) {
+            $scope.$broadcast('app.pause');
+            GameManager.setPause();
+        }
     };
 
     $scope.saveGame = function saveGame() {
