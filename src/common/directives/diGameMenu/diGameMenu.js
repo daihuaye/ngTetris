@@ -32,6 +32,16 @@ function (
         $scope.closeModal();
     };
 
+    $scope.restoreGame = function restoreGame() {
+        GameManager.restoreGame();
+        GameManager.setPause();
+        $scope.closeModal();
+    };
+
+    $scope.hasGameHistory = function hasGameHistory() {
+        return GameManager.hasGameHistory();
+    };
+
     $scope.getCurrentView = function getCurrentView() {
         var key = isDesgin ?  'design' : 'instructions';
         return key;
@@ -43,6 +53,10 @@ function (
 
     $scope.designNewPiece = function designNewPiece() {
         isDesgin = true;
+    };
+
+    $scope.getSavedTime = function getSavedTime() {
+        return GameManager.getGameSavedTime();
     };
 
     this.isPause = function isPause() {
