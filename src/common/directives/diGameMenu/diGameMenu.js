@@ -59,6 +59,10 @@ function (
         return GameManager.getGameSavedTime();
     };
 
+    $scope.isShowSaveGameBtn = function isShowSaveGameBtn() {
+        return !isDesgin;
+    };
+
     this.isPause = function isPause() {
         return GameManager.isPause();
     };
