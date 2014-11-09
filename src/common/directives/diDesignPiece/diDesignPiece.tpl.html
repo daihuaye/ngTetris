@@ -1,7 +1,11 @@
 <div class="dy-design-piece">
     <div class="row">
         <div class="col-sm-12">
-            <span>Edit here: &downarrow;</span>
+            <ul>
+                <li>Instruction:</li>
+                <li>1. Click on 4 by 4 sqare grid (green border one)</li> 
+                <li>2. Click save button.</li>
+            </ul>
             <div data-ng-messages="errorCode"
                 class="dy-alert"
                 data-ng-if="interacted()">
@@ -58,9 +62,9 @@
             </ul>
         </div>
     </div>
-    <div class="row">
+    <div class="row dy-save-btn">
         <div class="col-sm-12">
-            <button class="btn btn-primary dy-save-btn"
+            <button class="btn btn-primary"
                 data-ng-click="savePiece()">Save your tetris</button> 
             <span class="alert alert-warning"
                 data-ng-show="isSaved()">No saved yet!</span>
