@@ -6,7 +6,8 @@
 angular.module('directive.diDesignPiece', [
     'ngMessages',
     'resource.GameData',
-    'service.ROTATION_MATRIX'
+    'service.ROTATION_MATRIX',
+    'service.GameManager'
 ])
 .factory('CustomPiece', [
     'GameData',
@@ -123,10 +124,12 @@ angular.module('directive.diDesignPiece', [
     '$scope',
     'GameData',
     'CustomPiece',
+    'GameManager',
 function (
     $scope,
     GameData,
-    CustomPiece
+    CustomPiece,
+    GameManager
 ){
     var isSumbit = false,
         currentColor = '';
@@ -228,6 +231,11 @@ function (
             return currentColor;
         }
         return;
+    };
+
+    $scope.getTop = function() {
+        var customTop = GameManager.getOpenDesignBeforeStart() ? { top: '-76px' } : {};
+        return customTop;
     };
 
 }])
