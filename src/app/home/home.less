@@ -40,9 +40,17 @@
     .score-button-mixin();
     padding-right: 10px;
     padding-left: 10px;
+    margin-bottom: 5px;
     font-size: 17px;
     &:after {
       content: 'level';
+      .score-text-mixin();
+    }
+  }
+  .dy-design-new-tetris {
+    .score-button-mixin();
+    &:after {
+      content: 'Design';
       .score-text-mixin();
     }
   }
