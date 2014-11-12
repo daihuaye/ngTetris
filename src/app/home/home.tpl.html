@@ -10,13 +10,18 @@
         <div class="col-sm-4 dy-score-container">
             <div class="dy-best-score btn"
                 data-ng-bind="getBestScore()"></div>
+            <div class="btn dy-speed-role"
+                data-ng-click="setGameSpeed()"
+                data-ng-bind="getGameSpeed()">
+            </div>
             <div class="dy-score btn" 
                 data-ng-bind="getScore()"
                 ng-show="getScore() > 0 || isGameStart()">
             </div>
-            <div class="btn dy-speed-role"
-                data-ng-click="setGameSpeed()"
-                data-ng-bind="getGameSpeed()">
+            <div class="btn dy-design-new-tetris"
+                data-ng-click="openDesignMenu()"
+                data-ng-show="!isGameStart()">
+                <i class="fa fa-puzzle-piece"></i>
             </div>
         </div>
         <div class="col-sm-8">
