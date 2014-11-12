@@ -1,7 +1,7 @@
-angular.module( 'ngBoilerplate', [
+angular.module( 'ngTetris', [
   'templates-app',
   'templates-common',
-  'ngBoilerplate.home',
+  'ngTetris.home',
   'service.GameManager',
   'service.Keyboard',
   'ui.router'
