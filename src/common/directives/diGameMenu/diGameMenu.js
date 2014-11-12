@@ -15,9 +15,12 @@ function (
     $scope,
     GameManager
 ){
-    var isDesgin = false;
     $scope.continueGame = function continueGame() {
-        GameManager.setPause();
+        if (GameManager.getOpenDesignBeforeStart()) {
+            GameManager.setOpenDesignBeforeStart(false);
+        } else {
+            GameManager.setPause();
+        }
         $scope.closeModal();
     };
 
@@ -43,16 +46,19 @@ function (
     };
 
     $scope.getCurrentView = function getCurrentView() {
-        var key = isDesgin ?  'design' : 'instructions';
+        var key = (GameManager.getIsOpenGameDesign() ||
+                    GameManager.getOpenDesignBeforeStart()) ?  'design' : 'instructions';
         return key;
     };
 
     $scope.goBack = function goBack() {
-        isDesgin = false;
+        var notDesignPage = false;
+        GameManager.setIsOpenGameDesign(notDesignPage);
     };
 
     $scope.designNewPiece = function designNewPiece() {
-        isDesgin = true;
+        var designPage = true;
+        GameManager.setIsOpenGameDesign(designPage);
     };
 
     $scope.getSavedTime = function getSavedTime() {
@@ -60,7 +66,11 @@ function (
     };
 
     $scope.isShowSaveGameBtn = function isShowSaveGameBtn() {
-        return !isDesgin;
+        return !GameManager.getIsOpenGameDesign();
+    };
+
+    $scope.isShowBackBtn = function isShowBackBtn() {
+        return !GameManager.getOpenDesignBeforeStart();
     };
 
     this.isPause = function isPause() {
@@ -72,7 +82,9 @@ function (
     };
 }])
 .directive('diGameMenu', [
+    'GameManager',
 function(
+    GameManager
 ){
     var GameMenu = {};
 
@@ -88,7 +100,8 @@ function(
 
     GameMenu.link = function link(scope, element, attrs, controller) {
         scope.$on('app.pause', function() {
-            if (!controller.isPause() && controller.isGameStart()) {
+            if ((!controller.isPause() && controller.isGameStart()) ||
+                GameManager.getOpenDesignBeforeStart()) {
                 $(element).modal({
                     backdrop: 'static'
                 });
