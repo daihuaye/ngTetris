@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div data-ng-switch-when="design">
-                        <div class="row">
+                        <div class="row" data-ng-show="isShowBackBtn()">
                             <div class="col-sm-12">
                                 <button class="btn pull-left btn-default dy-back-btn"
                                     data-ng-click="goBack()">&lt;Back to instruction</button>
@@ -67,20 +67,23 @@
                 <div class="row dy-game-buttons well">
                     <div class="col-sm-3 col-xs-3">
                         <button class="btn btn-danger"
-                            data-ng-click="endGame()">
+                            data-ng-click="endGame()"
+                            data-ng-show="isShowBackBtn()">
                             End Game
                         </button>
                     </div>
                     <div class="col-sm-3 col-xs-3">
                         <button class="btn btn-warning"
-                            data-ng-click="restartGame()">
+                            data-ng-click="restartGame()"
+                            data-ng-show="isShowBackBtn()">
                             Restart Game
                         </button>
                     </div>
                     <div class="col-sm-3 col-xs-3" 
                         data-ng-show="isShowSaveGameBtn()">
                         <button class="btn btn-success"
-                            data-ng-click="saveGame()">
+                            data-ng-click="saveGame()"
+                            data-ng-show="isShowBackBtn()">
                             Save Game
                         </button>
                     </div>
