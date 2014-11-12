@@ -1,4 +1,4 @@
-angular.module( 'ngBoilerplate.home', [
+angular.module( 'ngTetris.home', [
   'ui.router',
   'directive.diGameBoard',
   'directive.diGameMenu',
@@ -124,6 +124,11 @@ function HomeController(
             $scope.$broadcast('app.pause');
             GameManager.setPause();
         }
+    };
+
+    $scope.openDesignMenu = function openDesignMenu() {
+        GameManager.setOpenDesignBeforeStart(true);
+        $scope.$broadcast('app.pause');
     };
 
     $scope.saveGame = function saveGame() {
