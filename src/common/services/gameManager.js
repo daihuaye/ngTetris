@@ -23,6 +23,8 @@ function (
     var game = {
         currentPiece: null,
         isNewRecord: false,
+        isOpenGameDesign: false,
+        openDesignBeforeStart: false,
         data: {}
     };
 
@@ -127,6 +129,22 @@ function (
 
     game.isGameEnd = function isGameEnd() {
         return GameData.gameEnd;
+    };
+
+    game.getIsOpenGameDesign = function getIsOpenGameDesign() {
+        return game.isOpenGameDesign;
+    };
+
+    game.setIsOpenGameDesign = function setIsOpenGameDesign(isOpen) {
+        game.isOpenGameDesign = isOpen;
+    };
+
+    game.getOpenDesignBeforeStart = function getOpenDesignBeforeStart() {
+        return game.openDesignBeforeStart;
+    };
+
+    game.setOpenDesignBeforeStart = function setOpenDesignBeforeStart(isOpen) {
+        game.openDesignBeforeStart = isOpen;
     };
 
     game.saveBestScore = function saveBestScore() {
