@@ -11,7 +11,8 @@
     "lesshat": "~3.0.2",
     "underscore": "~1.7.0",
     "randomColor": "~0.1.1",
-    "basil.js": "~0.3.4"
+    "basil.js": "~0.3.4",
+    "angular-touch": "~1.3.2"
   },
   "dependencies": {}
 }
