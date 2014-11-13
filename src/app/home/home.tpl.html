@@ -1,13 +1,16 @@
-<div class="dy-home">
+<div class="dy-home"
+    data-ng-class="{'dy-top-0': isMobilePlay()}">
     <div di-game-menu></div>
     <div class="row">
         <div class="dy-game-title col-sm-7 col-xs-6">NgTetris</div>
         <div class="dy-instructions col-sm-5 col-xs-6">
-            Let's play the game.
+            Let's play tetris.
         </div>
     </div>
-    <div class="dy-game-container row">
-        <div class="col-sm-4 dy-score-container">
+    <div class="dy-game-container row"
+        data-ng-class="{'dy-top-0': isMobilePlay()}">
+        <div class="col-sm-4 dy-score-container"
+            data-ng-hide="isMobilePlay()">
             <div class="dy-best-score btn"
                 data-ng-bind="getBestScore()"></div>
             <div class="btn dy-speed-role"
@@ -25,6 +28,14 @@
             </div>
         </div>
         <div class="col-sm-8">
+            <span class="dy-mobile-score"
+                data-ng-bind="getScore()"
+                data-ng-hide="!isMobilePlay()">
+            </span>
+            <span class="dy-mobile-speed"
+                data-ng-bind="getGameSpeed()"
+                data-ng-hide="!isMobilePlay()">
+            </span>
             <div class="dy-game-control">
                 <!-- game board here -->
                 <div di-game-board></div>
@@ -61,11 +72,16 @@
             </div>
         </div>
     </div>
-    <div class="dy-how-to-pause row">
-        PRESS ESC OR P TO PAUSE AND VIEW/EDIT CONTROLS
+    <div class="row"
+        data-ng-if="shouldShowMobileControll()">
+        <div di-mobile-controller></div>
+    </div>
+    <div class="dy-how-to-pause row"
+        data-ng-hide="isMobilePlay()">
+        PRESS <span class="key light">ESC</span> OR <span class="key light">P</span> TO PAUSE AND VIEW/EDIT CONTROLS
     </div>
     <hr>
-    <p>
+    <p data-ng-hide="isMobilePlay()">
         Created by <a href="https://github.com/davishacker" target="_blank">Daihua Ye</a>. This is the completed redesign version of my previous <a href="http://tetrisgame.heroku.com/" target="_blank">Tetris game</a>. This version is built on top of <a href="https://angularjs.org/" target="_blank">AngularJS</a>. And the idea for ngTetris is inspired by <a href="http://ng2048.github.io/" target="_blank">ng-2048</a>.
     </p>
 </div>
