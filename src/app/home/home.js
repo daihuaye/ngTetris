@@ -1,7 +1,9 @@
 angular.module( 'ngTetris.home', [
   'ui.router',
+  'ngTouch',
   'directive.diGameBoard',
   'directive.diGameMenu',
+  'directive.diMobileController',
   'service.GameManager',
   'service.animframePolyFill',
   'service.Keyboard',
@@ -25,12 +27,14 @@ angular.module( 'ngTetris.home', [
     'animframePolyFill',
     'KeyboardService',
     'GAMESPEED',
+    'Device',
 function HomeController(
     $scope,
     GameManager,
     animframePolyFill,
     KeyboardService,
-    GAMESPEED
+    GAMESPEED,
+    Device
 ){
     var loop;
 
@@ -69,6 +73,7 @@ function HomeController(
     $scope.restartNewGame = function restartNewGame() {
         GameManager.newGame();
         GameManager.setGameStart();
+        window.scrollTo(0, 0);
         return this;
     };
 
@@ -135,12 +140,24 @@ function HomeController(
         GameManager.saveGame();
     };
 
+    $scope.shouldShowMobileControll = function shouldShowMobileControll() {
+        return Device.device;
+    };
+
+    $scope.isMobilePlay = function isMobilePlay() {
+        return Device.device && GameManager.isGameStart();
+    };
+
     $scope.$on('Piece.createNewPiece', function() {
         GameManager.createNewPiece();
     });
 
     $scope.$on('BootstrapSlider.Speed', function() {
         loop = setUpGameLoop();
+    });
+
+    $scope.$on('mobile.pause', function() {
+        $scope.$broadcast('app.pause');
     });
 
     KeyboardService.init();
