@@ -23,6 +23,7 @@
 @import 'variables.less';
 @import 'mixins.less';
 @import 'animations.less';
+@import 'keys.less';
 
 body {
   background: #faf8ef;
@@ -33,6 +34,11 @@ body {
 
 .container {
   width: @max-width;
+}
+
+.dy-top-0 {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
 }
 
 @media screen and (max-width: @max-width) {
@@ -56,8 +62,11 @@ body {
 @import '../common/directives/diGameMenu/diGameMenu.less';
 @import '../common/directives/diBootstrapSlider/diBootstrapSlider.less';
 @import '../common/directives/diDesignPiece/diDesignPiece.less';
+@import '../common/directives/diMobileController/diMobileController.less';
 
 @import '../app/home/home.mobile.less';
 @import '../common/directives/diGameMenu/diGameMenu.mobile.less';
 @import '../common/directives/diBootstrapSlider/diBootstrapSlider.mobile.less';
 @import '../common/directives/diDesignPiece/diDesignPiece.mobile.less';
+
+
