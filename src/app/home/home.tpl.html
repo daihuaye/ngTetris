@@ -1,7 +1,7 @@
 <div class="dy-home"
     data-ng-class="{'dy-top-0': isMobilePlay()}">
     <div di-game-menu></div>
-    <div class="row">
+    <div class="row" data-ng-hide="isMobilePlay()">
         <div class="dy-game-title col-sm-7 col-xs-6">NgTetris</div>
         <div class="dy-instructions col-sm-5 col-xs-6">
             Let's play tetris.
