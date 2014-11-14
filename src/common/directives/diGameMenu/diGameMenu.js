@@ -11,9 +11,11 @@ angular.module('directive.diGameMenu', [
 .controller('GameMenuCtrl', [
     '$scope',
     'GameManager',
+    'Device',
 function (
     $scope,
-    GameManager
+    GameManager,
+    Device
 ){
     $scope.continueGame = function continueGame() {
         if (GameManager.getOpenDesignBeforeStart()) {
@@ -71,6 +73,10 @@ function (
 
     $scope.isShowBackBtn = function isShowBackBtn() {
         return !GameManager.getOpenDesignBeforeStart();
+    };
+
+    $scope.isMobileDevice = function() {
+        return Device.device;
     };
 
     this.isPause = function isPause() {
