@@ -186,7 +186,7 @@ function (
     };
 
     game.rotatePiece = function rotatePiece() {
-        return game.currentPiece.rotatePiece();
+        rotatePieceCheck();
     };
 
     game.getPositionX = function getPositionX() {
@@ -277,6 +277,47 @@ function (
     game.updateGameSpeed = function updateGameSpeed(speed) {
         GameData.setGameSpeed(speed);
     };
+
+    function getBoardWidth() {
+        return GameData.gameBoard.boardWidth;
+    }
+
+    function moveCustomInLevel(velocity) {
+        var speedX = game.getPositionX() + velocity;
+        game.currentPiece.updatePosition({
+            x: speedX
+        });  
+    }
+
+    function rotatePieceCheck() {
+        var oldRotation = game.currentPiece.getRotation();
+        game.currentPiece.setRotation((oldRotation + 1) % GameData.rotationLimit);
+
+        var coord = game.currentPiece.convertPatternToCoordinates();
+        for(var i = 0, len = coord.length; i < len; i++) {
+            if (!game.currentPiece.withinGrid(coord[i])) {
+                if (coord[i].x < 0) {
+                    game.movePieceInLevel('right');
+                    break;
+                }
+                if (coord[i].x >= getBoardWidth() ) {
+                    game.movePieceInLevel('left');
+                    if (game.currentPiece.getPatternNumber() === 2) {
+                        if (coord[i+1] && coord[i+1].x >= getBoardWidth()) {
+                            moveCustomInLevel(-2);
+                        }
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+                if(!game.currentPiece.verifyPiece()) {
+                    game.currentPiece.setRotation(oldRotation);
+                    break;
+                }
+            }
+        }
+    }
     
     return game;
 }]);
