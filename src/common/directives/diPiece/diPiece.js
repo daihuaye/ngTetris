@@ -126,7 +126,7 @@ function(
 
         scope.getColor = function getColor() {
             var ul = element.children(),
-                li = ul.children();
+                li = ul ? ul.children() : undefined;
             if (ul.hasClass('dy-X')) {
                 if (this.checkPattern(this.i)) {
                     return {
