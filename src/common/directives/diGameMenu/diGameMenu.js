@@ -17,94 +17,130 @@ function (
     GameManager,
     Device
 ){
-    $scope.continueGame = function continueGame() {
+    var vm = this,
+    options = {
+        // Game Cycle
+        continueGame: continueGame,
+        restartGame: restartGame,
+        restoreGame: restoreGame,
+        endGame: endGame,
+        isPause: isPause,
+        isGameStart: isGameStart,
+        saveGame: saveGame,
+
+        // Game History
+        hasGameHistory: hasGameHistory,
+
+        // Current View & Save Time
+        getCurrentView: getCurrentView,
+        getSavedTime: getSavedTime,
+        goBack: goBack,
+
+        // Design New Piece
+        designNewPiece: designNewPiece,
+
+        // Condition
+        isShowSaveGameBtn: isShowSaveGameBtn,
+        isShowBackBtn: isShowBackBtn,
+        isMobileDevice: isMobileDevice
+    };
+
+    angular.extend(vm, options);
+
+    //////////////
+
+    function continueGame() {
         if (GameManager.getOpenDesignBeforeStart()) {
             GameManager.setOpenDesignBeforeStart(false);
         } else {
             GameManager.setPause();
         }
         $scope.closeModal();
-    };
+    }
 
-    $scope.restartGame = function restartGame() {
+    function restartGame() {
         GameManager.newGame();
         $scope.closeModal();
         GameManager.setGameStart();
-    };
+    }
 
-    $scope.endGame = function endGame() {
+    function endGame() {
         GameManager.gameOver();
         $scope.closeModal();
-    };
+    }
 
-    $scope.restoreGame = function restoreGame() {
+    function restoreGame() {
         GameManager.restoreGame();
         GameManager.setPause();
         $scope.closeModal();
-    };
+    }
 
-    $scope.hasGameHistory = function hasGameHistory() {
+    function hasGameHistory() {
         return GameManager.hasGameHistory();
-    };
+    }
 
-    $scope.getCurrentView = function getCurrentView() {
+    function getCurrentView() {
         var key = (GameManager.getIsOpenGameDesign() ||
                     GameManager.getOpenDesignBeforeStart()) ?  'design' : 'instructions';
         return key;
-    };
+    }
 
-    $scope.goBack = function goBack() {
+    function goBack() {
         var notDesignPage = false;
         GameManager.setIsOpenGameDesign(notDesignPage);
-    };
+    }
 
-    $scope.designNewPiece = function designNewPiece() {
+    function designNewPiece() {
         var designPage = true;
         GameManager.setIsOpenGameDesign(designPage);
-    };
+    }
 
-    $scope.getSavedTime = function getSavedTime() {
+    function getSavedTime() {
         return GameManager.getGameSavedTime();
-    };
+    }
 
-    $scope.isShowSaveGameBtn = function isShowSaveGameBtn() {
+    function isShowSaveGameBtn() {
         return !GameManager.getIsOpenGameDesign();
-    };
+    }
 
-    $scope.isShowBackBtn = function isShowBackBtn() {
+    function isShowBackBtn() {
         return !GameManager.getOpenDesignBeforeStart();
-    };
+    }
 
-    $scope.isMobileDevice = function() {
+    function isMobileDevice() {
         return Device.device;
-    };
+    }
 
-    this.isPause = function isPause() {
+    function isPause() {
         return GameManager.isPause();
-    };
+    }
 
-    this.isGameStart = function isGameStart() {
+    function isGameStart() {
         return GameManager.isGameStart();
-    };
+    }
+
+    function saveGame() {
+        GameManager.saveGame();
+    }
 }])
 .directive('diGameMenu', [
     'GameManager',
 function(
     GameManager
 ){
-    var GameMenu = {};
+    var GameMenu = {
+        controller: 'GameMenuCtrl',
+        controllerAs: 'vm',
+        templateUrl: 'directives/diGameMenu/diGameMenu.tpl.html',
+        restrict: 'A',
+        replace: true,
+        scope: true,
+        link: link
+    };
 
-    GameMenu.controller = 'GameMenuCtrl';
-    
-    GameMenu.templateUrl = 'directives/diGameMenu/diGameMenu.tpl.html';
+    return GameMenu;
 
-    GameMenu.restrict = 'A';
-
-    GameMenu.replace = true;
-
-    GameMenu.scope = true;
-
-    GameMenu.link = function link(scope, element, attrs, controller) {
+    function link(scope, element, attrs, controller) {
         scope.$on('app.pause', function() {
             if ((!controller.isPause() && controller.isGameStart()) ||
                 GameManager.getOpenDesignBeforeStart()) {
@@ -120,7 +156,5 @@ function(
             $(element).modal('hide');
         };
 
-    };
-
-    return GameMenu;
+    }
 }]);

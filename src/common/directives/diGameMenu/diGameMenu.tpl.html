@@ -5,10 +5,10 @@
                 <span>Pause</span>
             </div>
             <div class="modal-body">
-                <div data-ng-switch on="getCurrentView()">
+                <div data-ng-switch on="vm.getCurrentView()">
                     <div data-ng-switch-when="instructions">
                         <div class="row dy-game-guide" 
-                            data-ng-hide="isMobileDevice()">
+                            data-ng-hide="vm.isMobileDevice()">
                             <div class="col-sm-4 col-xs-6">
                                 <span>Key:</span> &uparrow; <span>Rotate Right</span>
                             </div>
@@ -35,27 +35,27 @@
                             <div class="col-sm-12">
                                 <div>You can design your own Tetris:</div>
                                 <button class="pull-left btn btn-success tada"
-                                    data-ng-click="designNewPiece()">
+                                    data-ng-click="vm.designNewPiece()">
                                     Make your own Tetris
                                 </button>
                             </div>
                         </div>
                         <div class="row dy-game-load-game" 
-                            data-ng-show="hasGameHistory()">
+                            data-ng-show="vm.hasGameHistory()">
                             <div class="col-sm-12">
-                                <div>Your last saved time: <span data-ng-bind="getSavedTime()"></span></div>
+                                <div>Your last saved time: <span data-ng-bind="vm.getSavedTime()"></span></div>
                                 <button class="pull-left btn btn-info"
-                                        data-ng-click="restoreGame()">
+                                        data-ng-click="vm.restoreGame()">
                                     Restore Game
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div data-ng-switch-when="design">
-                        <div class="row" data-ng-show="isShowBackBtn()">
+                        <div class="row" data-ng-show="vm.isShowBackBtn()">
                             <div class="col-sm-12">
                                 <button class="btn pull-left btn-default dy-back-btn"
-                                    data-ng-click="goBack()">&lt;Back to instruction</button>
+                                    data-ng-click="vm.goBack()">&lt;Back to instruction</button>
                             </div>
                         </div>
                         <div class="row">
@@ -68,29 +68,29 @@
                 <div class="row dy-game-buttons well">
                     <div class="col-sm-3 col-xs-3">
                         <button class="btn btn-danger"
-                            data-ng-click="endGame()"
-                            data-ng-show="isShowBackBtn()">
+                            data-ng-click="vm.endGame()"
+                            data-ng-show="vm.isShowBackBtn()">
                             End Game
                         </button>
                     </div>
                     <div class="col-sm-3 col-xs-3">
                         <button class="btn btn-warning"
-                            data-ng-click="restartGame()"
-                            data-ng-show="isShowBackBtn()">
+                            data-ng-click="vm.restartGame()"
+                            data-ng-show="vm.isShowBackBtn()">
                             Restart Game
                         </button>
                     </div>
                     <div class="col-sm-3 col-xs-3" 
-                        data-ng-show="isShowSaveGameBtn()">
+                        data-ng-show="vm.isShowSaveGameBtn()">
                         <button class="btn btn-success"
-                            data-ng-click="saveGame()"
-                            data-ng-show="isShowBackBtn()">
+                            data-ng-click="vm.saveGame()"
+                            data-ng-show="vm.isShowBackBtn()">
                             Save Game
                         </button>
                     </div>
                     <div class="col-sm-3 col-xs-3">
                         <button class="btn btn-info"
-                            data-ng-click="continueGame()">
+                            data-ng-click="vm.continueGame()">
                             Continue Game
                         </button>
                     </div>
