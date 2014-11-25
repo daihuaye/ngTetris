@@ -14,26 +14,6 @@ function (
     localStoragePolyfill,
     GAMESPEED
 ){
-    function getBestScore() {
-        return parseInt(localStoragePolyfill.getItem('game.bestScore'), 10) || 0;
-    }
-
-    function getGameSpeed() {
-        return parseInt(localStoragePolyfill.getItem('game.speed'), 10) || GAMESPEED['BEGINNER'];   
-    }
-
-    function setGameSpeed(speed) {
-        localStoragePolyfill.setItem('game.speed', speed);
-    }
-
-    function setColor(color) {
-        data.customColorChosen = color;
-    }
-
-    function getColor() {
-        return data.customColorChosen;
-    }
-
     var data = {
         gameStart: false,
         gameEnd: false,
@@ -61,4 +41,24 @@ function (
     };
 
     return data;
+
+    function getBestScore() {
+        return parseInt(localStoragePolyfill.getItem('game.bestScore'), 10) || 0;
+    }
+
+    function getGameSpeed() {
+        return parseInt(localStoragePolyfill.getItem('game.speed'), 10) || GAMESPEED['BEGINNER'];   
+    }
+
+    function setGameSpeed(speed) {
+        localStoragePolyfill.setItem('game.speed', speed);
+    }
+
+    function setColor(color) {
+        data.customColorChosen = color;
+    }
+
+    function getColor() {
+        return data.customColorChosen;
+    }
 }]);
