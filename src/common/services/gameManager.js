@@ -29,28 +29,78 @@ function (
     localStoragePolyfill
 ){
     var game = {
+        // Game Variables
         currentPiece: null,
         isNewRecord: false,
         isOpenGameDesign: false,
         openDesignBeforeStart: false,
-        data: {}
+        data: {},
+
+        // Game Cycle
+        newGame: newGame,
+        resetGame: resetGame,
+        saveGame: saveGame,
+        setPause: setPause,
+        restoreGame: restoreGame,
+        isGameEnd: isGameEnd,
+        isPause: isPause,
+        isGameStart: isGameStart,
+        setGameStart: setGameStart,
+        gameOver: gameOver,
+        
+        // Design New Game Functions
+        getIsOpenGameDesign: getIsOpenGameDesign,
+        setIsOpenGameDesign: setIsOpenGameDesign,
+        getOpenDesignBeforeStart: getOpenDesignBeforeStart,
+        setOpenDesignBeforeStart: setOpenDesignBeforeStart,
+
+        // Game Properties
+        hasGameHistory: hasGameHistory,
+        getGameSavedTime: getGameSavedTime,
+
+        // Score
+        saveBestScore: saveBestScore,
+        getScore: getScore,
+        getBestScore: getBestScore,
+        getIsNewRecord: getIsNewRecord,
+
+        // Piece Properties
+        createNewPiece: createNewPiece,
+        getCurrentPiece: getCurrentPiece,
+        moveCurrentPiece: moveCurrentPiece,
+        insertPiece: insertPiece,
+        getCurrentPattern: getCurrentPattern,
+        getCurrentShape: getCurrentShape,
+        getPositionX: getPositionX,
+        getPositionY: getPositionY,
+
+        // Piece Movement
+        rotatePiece: rotatePiece,
+        movePieceInLevel: movePieceInLevel,
+        updateGhostPiece: updateGhostPiece,
+        hardDrop: hardDrop,
+        move: move,
+        getGameSpeed: getGameSpeed,
+        updateGameSpeed: updateGameSpeed
     };
 
-    game.resetGame = function resetGame() {
+    return game;
+
+    function resetGame() {
         game.currentPiece = null;
         game.isNewRecord = false;
         GameData.gameStart = false;
         GameData.gamePause = false;
         GameData.gameEnd = false;
         GameData.score = 0;
-    };
+    }
 
-    game.newGame = function newGame() {
+    function newGame() {
         game.resetGame();
         GridService.buildEmptyGameBoard();
-    };
+    }
 
-    game.saveGame = function saveGame() {
+    function saveGame() {
         // piece
         game.data.piece = {
             rotation: game.currentPiece.getRotation(),
@@ -73,9 +123,9 @@ function (
         localStoragePolyfill.setItem('game.history', game.data);
         localStoragePolyfill.setItem('game.history.date', game.data.date);
         return;
-    };
+    }
 
-    game.restoreGame = function restoreGame() {
+    function restoreGame() {
         var data = localStoragePolyfill.getItem('game.history');
         if (!_.isNull(data)) {
             game.data = data;
@@ -89,14 +139,14 @@ function (
             game.currentPiece.setPositionX(4);
             GameData.saveGameTime = new Date(game.data.date);
         }
-    };
+    }
 
-    game.hasGameHistory = function hasGameHistory() {
+    function hasGameHistory() {
         var data = localStoragePolyfill.getItem('game.history');
         return !_.isNull(data);
-    };
+    }
 
-    game.getGameSavedTime = function getGameSavedTime() {
+    function getGameSavedTime() {
         var date = localStoragePolyfill.getItem('game.history.date');
         if (!_.isNull(date)) {
             var time = new Date(date);
@@ -104,58 +154,58 @@ function (
         } else {
             return null;
         }
-    };
+    }
 
-    game.setGameStart = function setGameStart() {
+    function setGameStart() {
         GameData.gameStart = !GameData.gameStart;
         return this;
-    };
+    }
 
-    game.getGameSpeed = function getGameSpeed() {
+    function getGameSpeed() {
         return GameData.getGameSpeed();
-    };
+    }
 
-    game.setPause = function setPause() {
+    function setPause() {
         GameData.gamePause = !GameData.gamePause;
         return this;
-    };
+    }
 
-    game.isPause = function isPause() {
+    function isPause() {
         return GameData.gamePause;
-    };
+    }
 
-    game.isGameStart = function isGameStart() {
+    function isGameStart() {
         return GameData.gameStart;
-    };
+    }
 
-    game.gameOver = function gameOver() {
+    function gameOver() {
         game.saveBestScore();
         game.setGameStart();
         GameData.gameStart = false;
         GameData.gameEnd = true;
-    };
+    }
 
-    game.isGameEnd = function isGameEnd() {
+    function isGameEnd() {
         return GameData.gameEnd;
-    };
+    }
 
-    game.getIsOpenGameDesign = function getIsOpenGameDesign() {
+    function getIsOpenGameDesign() {
         return game.isOpenGameDesign;
-    };
+    }
 
-    game.setIsOpenGameDesign = function setIsOpenGameDesign(isOpen) {
+    function setIsOpenGameDesign(isOpen) {
         game.isOpenGameDesign = isOpen;
-    };
+    }
 
-    game.getOpenDesignBeforeStart = function getOpenDesignBeforeStart() {
+    function getOpenDesignBeforeStart() {
         return game.openDesignBeforeStart;
-    };
+    }
 
-    game.setOpenDesignBeforeStart = function setOpenDesignBeforeStart(isOpen) {
+    function setOpenDesignBeforeStart(isOpen) {
         game.openDesignBeforeStart = isOpen;
-    };
+    }
 
-    game.saveBestScore = function saveBestScore() {
+    function saveBestScore() {
         var score  = parseInt(GameData.getBestScore(), 10),
             preScore = parseInt(game.getScore(), 10);
         if (preScore > score) {
@@ -163,91 +213,84 @@ function (
             localStoragePolyfill.setItem('game.bestScore', preScore);
         }
         return game;
-    };
-
-    game.getScore = function getScore() {
-        return GameData.score;
-    };
-
-    game.getBestScore = function getBestScore() {
-        return GameData.getBestScore();
-    };
-
-    game.getCurrentPiece = function getCurrentPiece() {
-        return game.currentPiece;
-    };
-
-    game.getCurrentPattern = function getCurrentPattern() {
-        return game.currentPiece.getPattern();
-    };
-
-    game.getCurrentShape = function getCurrentShape() {
-        return game.currentPiece.getShape();
-    };
-
-    game.rotatePiece = function rotatePiece() {
-        rotatePieceCheck();
-    };
-
-    game.getPositionX = function getPositionX() {
-        return game.currentPiece.getPositionX();
-    };
-
-    game.getPositionY = function getPositionY() {
-        return game.currentPiece.getPositionY();
-    };
-
-    function insertAndClearRow() {
-        game.insertPiece();
-        GridService.checkAndClearFilledRow(function() {
-            GameData.score += 100;
-        });
     }
 
-    game.moveCurrentPiece = function moveCurrentPiece() {
+    function getScore() {
+        return GameData.score;
+    }
+
+    function getBestScore() {
+        return GameData.getBestScore();
+    }
+
+    function getCurrentPiece() {
+        return game.currentPiece;
+    }
+
+    function getCurrentPattern() {
+        return game.currentPiece.getPattern();
+    }
+
+    function getCurrentShape() {
+        return game.currentPiece.getShape();
+    }
+
+    function rotatePiece() {
+        rotatePieceCheck();
+    }
+
+    function getPositionX() {
+        return game.currentPiece.getPositionX();
+    }
+
+    function getPositionY() {
+        return game.currentPiece.getPositionY();
+    }
+
+    function moveCurrentPiece() {
         var speedY = game.getPositionY() + 1;
         game.currentPiece.updatePosition({
             y: speedY
         }, insertAndClearRow);
-    };
+    }
 
-    game.insertPiece = function insertPiece() {
+    function insertPiece() {
         GridService.insertPiece(game.currentPiece, game.gameOver);
         game.currentPiece.destroy();
         game.currentPiece = null;
-    };
+    }
 
-    game.createNewPiece = function createNewPiece() {
+    function createNewPiece() {
         game.currentPiece = new Piece({
             x: 4,
             y: 0
         });
-    };
+    }
 
-    game.getIsNewRecord = function getIsNewRecord() {
+    function getIsNewRecord() {
         return game.isNewRecord;
-    };
+    }
 
-    game.movePieceInLevel = function movePieceInLevel(direction) {
+    function movePieceInLevel(direction) {
         var velocity = (direction === 'left') ? -1 : 1;
             speedX = game.getPositionX() + velocity;
         game.currentPiece.updatePosition({
             x: speedX
         });
-    };
+    }
 
-    game.hardDrop = function hardDrop() {
+    function hardDrop() {
         var cell = game.currentPiece.calculateCollisionPoint();
         game.currentPiece.updatePosition(cell, insertAndClearRow);
-    };
+    }
 
-    game.updateGhostPiece = function updateGhostPiece() {
+    function updateGhostPiece() {
         if (game.currentPiece) {
             game.currentPiece.updateGhostPiece();
         }
-    };
+    }
 
-    game.move = function move(key) {
+    function move(key) {
         switch (key) {
             case 'up':
                 game.rotatePiece();
@@ -272,16 +315,26 @@ function (
                 break;
         }
         game.updateGhostPiece();
-    };
+    }
 
-    game.updateGameSpeed = function updateGameSpeed(speed) {
+    function updateGameSpeed(speed) {
         GameData.setGameSpeed(speed);
-    };
+    }
 
+    // private method
+    function insertAndClearRow() {
+        game.insertPiece();
+        GridService.checkAndClearFilledRow(function() {
+            GameData.score += 100;
+        });
+    }
+
+    // private method
     function getBoardWidth() {
         return GameData.gameBoard.boardWidth;
     }
 
+    // private method
     function moveCustomInLevel(velocity) {
         var speedX = game.getPositionX() + velocity;
         game.currentPiece.updatePosition({
@@ -289,6 +342,7 @@ function (
         });  
     }
 
+    // private method
     function rotatePieceCheck() {
         var oldRotation = game.currentPiece.getRotation();
         game.currentPiece.setRotation((oldRotation + 1) % GameData.rotationLimit);
