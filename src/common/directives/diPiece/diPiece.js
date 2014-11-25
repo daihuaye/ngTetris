@@ -29,7 +29,19 @@ function (
             return _.isNumber(res);
         }, function (pattern, piece) {
             return pattern.toString() + ',' + piece;
-        });
+        }),
+        options = {
+            pieces: _.range(16),
+            checkPattern: checkPattern,
+            getClassForShape: getClassForShape,
+            getLeft: getLeft,
+            getTop: getTop
+        },
+        vm = this;
+
+    angular.extend(vm, options);
+
+    //////////////////
 
     function getPattern() {
         return GameManager.getCurrentPattern();
@@ -47,17 +59,16 @@ function (
         return GameManager.getPositionY();
     }
 
-    $scope.pieces = _.range(16);
 
     // if sequence is match, then highlight the DOM ele
-    $scope.checkPattern = function checkPattern(piece) {
+    function checkPattern(piece) {
         if (!GameManager.isGameStart()) {
             return;
         }
         return memCheckPattern(getPattern(), piece);
-    };
+    }
 
-    $scope.getClassForShape = function getClassForShape() {
+    function getClassForShape() {
         if (!GameManager.isGameStart() ||
             _.isNull(GameManager.getCurrentPiece())) {
             return;
@@ -82,15 +93,15 @@ function (
                 break;
         }   
         return pieceClass;
-    };
+    }
 
-    this.getLeft = function getLeft() {
+    function getLeft() {
         return getX(getPositionX());
-    };
+    }
 
-    this.getTop = function getTop() {
+    function getTop() {
         return getY(getPositionY());
-    };
+    }
 }])
 .directive('diPiece', [
     'GameManager',
@@ -99,19 +110,19 @@ function(
     GameManager,
     GameData
 ){
-    var Piece = {};
+    var Piece = {
+        controller: 'PieceCtrl',
+        controllerAs: 'vm',
+        templateUrl: 'directives/diPiece/diPiece.tpl.html',
+        restrict: 'A',
+        replace: true,
+        scope: true,
+        link: link
+    };
 
-    Piece.controller = 'PieceCtrl';
+    return Piece;
     
-    Piece.templateUrl = 'directives/diPiece/diPiece.tpl.html';
-
-    Piece.restrict = 'A';
-
-    Piece.replace = true;
-
-    Piece.scope = true;
-
-    Piece.link = function link(scope, element, attrs, controller) {
+    function link(scope, element, attrs, controller) {
         scope.$on('home.GameOn', function () {
             var top = controller.getTop(),
                 left = controller.getLeft(),
@@ -155,7 +166,5 @@ function(
             }
             return isReady;
         };
-    };
-
-    return Piece;
+    }
 }]);

@@ -1,9 +1,9 @@
 <div class="dy-piece"
     data-ng-class="{'dy-piece-ready': isPieceReady()}">
     <ul class="dy-piece-ul"
-        data-ng-class="getClassForShape()">
-        <li data-ng-repeat="i in pieces"
+        data-ng-class="vm.getClassForShape()">
+        <li data-ng-repeat="i in vm.pieces"
             class="dy-piece-li"
-            data-ng-class="{'dy-pattern': checkPattern(i)}"
+            data-ng-class="{'dy-pattern': vm.checkPattern(i)}"
             data-ng-style="getColor()"></li></ul>
 </div>
