@@ -11,33 +11,59 @@ angular.module('service.GridService', [
 function (
     GameData
 ){
-    var GridService = {},
-        coordToPosMem = _.memoize(function (pos) {
-            return (pos.y * getBoardWidth()) + pos.x;
-        }, function (pos) {
-            return '' + pos.x + pos.y;
-        }),
-        posToCoord = _.memoize(function (i) {
-            var x = i % getBoardWidth(),
-                y = (i - x) / getBoardWidth();
+    var GridService = {
+        // Grid Variables
+        grid: [],
 
-            return {
-                x: x,
-                y: y
-            };
-        });
+        buildEmptyGameBoard: buildEmptyGameBoard,
+        getGridService: getGridService,
+        setGridService: setGridService,
 
-    GridService.grid = [];
+        // Piece Verify
+        insertPiece: insertPiece,
+        isPieceVerify: isPieceVerify,
 
+        // Row
+        checkAndClearFilledRow: checkAndClearFilledRow,
+        clearNthRow: clearNthRow,
+
+        // Piece Action Function
+        movePieceDownLevel: movePieceDownLevel,
+        _positionToCoordinates: _positionToCoordinates,
+        _coordinatesToPosition: _coordinatesToPosition,
+
+        // Ghost Piece
+        resetGhostPiece: resetGhostPiece,
+        updateGhostPiece: updateGhostPiece
+    },
+    coordToPosMem = _.memoize(function (pos) {
+        return (pos.y * getBoardWidth()) + pos.x;
+    }, function (pos) {
+        return '' + pos.x + pos.y;
+    }),
+    posToCoord = _.memoize(function (i) {
+        var x = i % getBoardWidth(),
+            y = (i - x) / getBoardWidth();
+
+        return {
+            x: x,
+            y: y
+        };
+    });
+
+    return GridService;
+
+    // private method
     function getBoardWidth() {
         return GameData.gameBoard.boardWidth;
     }
 
+    // private method
     function getBoardHeight() {
         return GameData.gameBoard.boardHeight;
     }
 
-    GridService.buildEmptyGameBoard = function buildEmptyGameBoard() {
+    function buildEmptyGameBoard() {
         var sizeOfBoard = getBoardWidth() * getBoardHeight();
         for (var i = 0; i < sizeOfBoard; i++) {
             GridService.grid[i] = {
@@ -46,17 +72,17 @@ function (
                 ghost: false
             };
         }
-    };
+    }
 
-    GridService.getGridService = function getGridService() {
+    function getGridService() {
         return GridService.grid;
-    };
+    }
 
-    GridService.setGridService = function setGridService(grid) {
+    function setGridService(grid) {
         GridService.grid = grid;
-    };
+    }
 
-    GridService.insertPiece = function insertPiece(piece, gameOver) {
+    function insertPiece(piece, gameOver) {
         var coordArray = piece.getPieceCoordArray();
         for (var i = 0; i < coordArray.length; i++) {
             var pos = GridService._coordinatesToPosition(coordArray[i]);
@@ -67,17 +93,17 @@ function (
                 GridService.grid[pos].shape = piece.getShape();
             }
         }
-    };
+    }
 
-    GridService.isPieceVerify = function isPieceVerify(coord) {
+    function isPieceVerify(coord) {
         var pos = GridService._coordinatesToPosition(coord);
         if(GridService.grid[pos].filled) {
             return false;
         }
         return true;
-    };
+    }
 
-    GridService.checkAndClearFilledRow = function checkAndClearFilledRow(cb) {
+    function checkAndClearFilledRow(cb) {
         for(var i = 0; i < getBoardHeight(); i++) {
             var j = 0;
             for(; j < getBoardWidth(); j++) {
@@ -94,18 +120,18 @@ function (
                 cb();
             }
         }
-    };
+    }
 
-    GridService.clearNthRow = function clearNthRow(row) {
+    function clearNthRow(row) {
         for(var z = 0; z < getBoardWidth(); z++) {
             var pos = GridService._coordinatesToPosition({x: z, y: row});
             GridService.grid[pos].filled = false;
             GridService.grid[pos].shape = null;
         }
         return GridService;
-    };
+    }
 
-    GridService.movePieceDownLevel = function movePieceDownLevel(row) {
+    function movePieceDownLevel(row) {
         for(var i = row - 1; i >= 0; i--) {
             for(var j = 0; j < getBoardWidth(); j++) {
                 var curPos = GridService._coordinatesToPosition({x: j, y: i}),
@@ -116,28 +142,26 @@ function (
             }
         }
         return GridService;
-    };
+    }
 
-    GridService._positionToCoordinates = function _positionToCoordinates(i) {
+    function _positionToCoordinates(i) {
         return posToCoord(i);  
-    };
+    }
 
-    GridService._coordinatesToPosition = function _coordinatesToPosition(pos) {
+    function _coordinatesToPosition(pos) {
         return coordToPosMem(pos);
-    };
+    }
 
-    GridService.resetGhostPiece = function resetGhostPiece() {
+    function resetGhostPiece() {
         for(var i = 0, len = GridService.grid.length; i < len; i++) {
             GridService.grid[i].ghost = false;
         }
-    };
+    }
 
-    GridService.updateGhostPiece = function updateGhostPiece(cell) {
+    function updateGhostPiece(cell) {
         var pos = GridService._coordinatesToPosition(cell);
         if (pos > 0) {
             GridService.grid[pos].ghost = true;
         }
-    };
-
-    return GridService;
+    }
 }]);
