@@ -16,19 +16,83 @@ angular.module('directive.diDesignPiece', [
     GameData,
     ROTATION_MATRIX
 ){
-    var custom = {},
-        posToCoord = _.memoize(function (i) {
-            var x = i % getCustomPieceWidth(),
-                y = (i - x) / getCustomPieceWidth();
+    var custom = {
+        generatePatterns: generatePatterns,
+        generatePatternCoord: generatePatternCoord,
 
-            return {
-                x: x,
-                y: y
-            };
-        }),
-        patternCoord2d = [],
+        getPattern: getPattern,
+        getPatternCoord: getPatternCoord,
+
+        getCustomPiece: getCustomPiece,
+        setCustomPiece: setCustomPiece,
+        hasCustomPiece: hasCustomPiece
+    },
+    posToCoord = _.memoize(function (i) {
+        var x = i % getCustomPieceWidth(),
+            y = (i - x) / getCustomPieceWidth();
+
+        return {
+            x: x,
+            y: y
+        };
+    }),
+    patternCoord2d = [],
+    pattern2d = [];
+
+    return custom;
+
+    function generatePatterns(pieces) {
+        var pattern = [];
         pattern2d = [];
+        patternCoord2d = [];
+        _.each(pieces, function (piece, index) {
+            if (piece.isSelected) {
+                pattern.push(index);
+            }
+        });
+        pattern2d.push(pattern);
+        custom.generatePatternCoord();
+    }
 
+    function generatePatternCoord() {
+        // set up the first patter coord
+        setPatternToCoord(pattern2d[0]);
+
+        for(var deg in [90, 180, 270]) {
+            // deg is index [0, 1, 2]
+            // patternCoor2d has init with orgin coord
+            // so index + 1 to move to next rotation
+            getRotatePattern(patternCoord2d[0], parseInt(deg, 10) + 1);
+        }
+
+        setPatternCoord2d();
+    }
+
+    function getPattern(rotation) {
+        return pattern2d[rotation];
+    }
+
+    function getPatternCoord(rotation) {
+        return patternCoord2d[rotation];
+    }
+
+    function getCustomPiece() {
+        return {
+            pattern2d: pattern2d,
+            patternCoord2d: patternCoord2d
+        };
+    }
+
+    function setCustomPiece(customPiece) {
+        pattern2d = customPiece.pattern2d;
+        patternCoord2d = customPiece.patternCoord2d;
+    }
+
+    function hasCustomPiece() {
+        return pattern2d.length > 0;
+    }
+
+    // private methods
     function getCustomPieceWidth() {
         return GameData.customPieceWidth;
     }
@@ -52,6 +116,7 @@ angular.module('directive.diDesignPiece', [
         pattern2d.push(pattern);
     }
 
+    // private methods
     function setPatternCoord2d() {
         patternCoord2d = [];
         _.each(pattern2d, function (pattern) {
@@ -59,6 +124,7 @@ angular.module('directive.diDesignPiece', [
         });
     }
 
+    // private methods
     function setPatternToCoord(pattern) {
         var patternCoord = [];
         _.each(pattern, function (i) {
@@ -66,59 +132,6 @@ angular.module('directive.diDesignPiece', [
         });
         patternCoord2d.push(patternCoord);
     }
-
-    custom.generatePatterns = function generatePatterns(pieces) {
-        var pattern = [];
-        pattern2d = [];
-        patternCoord2d = [];
-        _.each(pieces, function (piece, index) {
-            if (piece.isSelected) {
-                pattern.push(index);
-            }
-        });
-        pattern2d.push(pattern);
-        custom.generatePatternCoord();
-    };
-
-    custom.generatePatternCoord = function generatePatternCoord() {
-        // set up the first patter coord
-        setPatternToCoord(pattern2d[0]);
-
-        for(var deg in [90, 180, 270]) {
-            // deg is index [0, 1, 2]
-            // patternCoor2d has init with orgin coord
-            // so index + 1 to move to next rotation
-            getRotatePattern(patternCoord2d[0], parseInt(deg, 10) + 1);
-        }
-
-        setPatternCoord2d();
-    };
-
-    custom.getPattern = function getPattern(rotation) {
-        return pattern2d[rotation];
-    };
-
-    custom.getPatternCoord = function getPatternCoord(rotation) {
-        return patternCoord2d[rotation];
-    };
-
-    custom.getCustomPiece = function getCustomPiece() {
-        return {
-            pattern2d: pattern2d,
-            patternCoord2d: patternCoord2d
-        };
-    };
-
-    custom.setCustomPiece = function setCustomPiece(customPiece) {
-        pattern2d = customPiece.pattern2d;
-        patternCoord2d = customPiece.patternCoord2d;
-    };
-
-    custom.hasCustomPiece = function hasCustomPiece() {
-        return pattern2d.length > 0;
-    };
-
-    return custom;
 }])
 .controller('DesignPieceCtrl', [
     '$scope',
