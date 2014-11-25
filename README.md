@@ -16,6 +16,8 @@ Feature
 7. Able to restore your previous saved record
 8. Mobile friendly UI 
 9. Able to play in your mobile device.
+10. Build from the one of best AngularJS practices, thanks for [johnpapa](https://github.com/johnpapa/angularjs-styleguide)
+11. Use one of most comperhance AngularJS boilerplates, really need to thank: [ngbp](https://github.com/ngbp/ngbp)
 
 Quick Start
 ===========
