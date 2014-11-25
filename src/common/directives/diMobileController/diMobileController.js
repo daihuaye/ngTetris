@@ -14,11 +14,17 @@ function (
     $scope,
     GameManager
 ){
-    $scope.move = function move(direction) {
-        GameManager.move(direction);
-    };
+    var vm = this;
+    vm.move = move;
+    vm.pause = pause;
 
-    $scope.pause = function pause() {
+    ///////////////////
+
+    function move(direction) {
+        GameManager.move(direction);
+    }
+
+    function pause() {
         if (GameManager.isGameStart()) {
             $scope.$emit('mobile.pause');
             GameManager.setPause();
@@ -26,22 +32,18 @@ function (
             GameManager.setOpenDesignBeforeStart(true);
             $scope.$emit('mobile.pause');
         }
-    };
+    }
 }])
 .directive('diMobileController', [
 function(
 ){
-    var MobileController = {};
-
-    MobileController.controller = 'MobileControllerCtrl';
+    var MobileController = {
+        controller: 'MobileControllerCtrl',
+        controllerAs: 'vm',
+        templateUrl: 'directives/diMobileController/diMobileController.tpl.html',
+        restrict: 'A',
+        scope: true
+    };
     
-    MobileController.templateUrl = 'directives/diMobileController/diMobileController.tpl.html';
-
-    MobileController.restrict = 'A';
-
-    MobileController.scope = true;
-
-    MobileController.link = function link(scope, element, attrs) {};
-
     return MobileController;
 }]);
