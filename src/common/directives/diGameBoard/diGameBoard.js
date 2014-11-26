@@ -18,11 +18,18 @@ function (
     GridService,
     GameData
 ){
-    $scope.getGridService = function getGridService() {
-        return GridService.getGridService();
-    };
+    var vm = this;
+    vm.getGridService = getGridService;
+    vm.getFilledClass = getFilledClass;
+    vm.getFilledCustomColor = getFilledCustomColor;
 
-    $scope.getFilledClass = function getFilledClass(cell) {
+    ////////////////
+
+    function getGridService() {
+        return GridService.getGridService();
+    }
+
+    function getFilledClass(cell) {
         var pieceClass = '';
         if (cell.filled) {
             switch(cell.shape) {
@@ -48,32 +55,27 @@ function (
             pieceClass += (pieceClass.length > 0) ? ' dy-ghost-piece' : 'dy-ghost-piece';
         }
         return pieceClass;
-    };
+    }
 
-    $scope.getFilledCustomColor = function getFilledCustomColor(cell) {
+    function getFilledCustomColor(cell) {
         if (cell.filled && cell.shape === 7) {
             return {
                 'background-color': GameData.getColor()
             };
         }
-    };
+    }
 }])
 .directive('diGameBoard', [
 function(
 ){
-    var GameBoard = {};
-
-    GameBoard.controller = 'GameBoardCtrl';
-    
-    GameBoard.templateUrl = 'directives/diGameBoard/diGameBoard.tpl.html';
-
-    GameBoard.restrict = 'A';
-
-    GameBoard.scope = true;
-
-    GameBoard.replace = true;
-
-    GameBoard.link = function link(scope, element, attrs) {};
+    var GameBoard = {
+        controller: 'GameBoardCtrl',
+        controllerAs: 'vm',
+        templateUrl: 'directives/diGameBoard/diGameBoard.tpl.html',
+        restrict: 'AE',
+        scope: true,
+        replace: true
+    };
 
     return GameBoard;
 }]);
