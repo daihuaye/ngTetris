@@ -41,6 +41,8 @@ angular.module('directive.diDesignPiece', [
 
     return custom;
 
+    /////////////////////
+    
     function generatePatterns(pieces) {
         var pattern = [];
         pattern2d = [];
