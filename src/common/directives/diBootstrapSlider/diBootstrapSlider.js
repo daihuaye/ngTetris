@@ -16,38 +16,42 @@ function (
     GameManager,
     GAMESPEED
 ){
-    $scope.whichRole = function whichRole(role) {
+    var vm = this;
+    vm.whichRole = whichRole;
+    vm.updateGameSpeed = updateGameSpeed;
+
+    function whichRole(role) {
         var speed = GameManager.getGameSpeed();
         return GAMESPEED[role] === speed;
-    };
+    }
 
-    this.updateGameSpeed = function updateGameSpeed(option) {
+    function updateGameSpeed(option) {
         var speed = GAMESPEED[option];
         GameManager.updateGameSpeed(speed);
-    };
+    }
 }])
 .directive('diBootstrapSlider', [
 function(
 ){
-    var BootstrapSlider = {};
+    var BootstrapSlider = {
+        controller: 'BootstrapSliderCtrl',
+        controllerAs: 'vm',
+        templateUrl: 'directives/diBootstrapSlider/diBootstrapSlider.tpl.html',
+        restrict: 'A',
+        scope: true,
+        replace: true,
+        link: link
+    };
 
-    BootstrapSlider.controller = 'BootstrapSliderCtrl';
-    
-    BootstrapSlider.templateUrl = 'directives/diBootstrapSlider/diBootstrapSlider.tpl.html';
+    return BootstrapSlider;
 
-    BootstrapSlider.restrict = 'A';
+    //////////////////
 
-    BootstrapSlider.scope = true;
-
-    BootstrapSlider.replace = true;
-
-    BootstrapSlider.link = function link(scope, element, attrs, controller) {
+    function link(scope, element, attrs, controller) {
         element.on('click', function (event) {
             var option = $(event.target).find('input').data('role');
             controller.updateGameSpeed(option);
             scope.$emit('BootstrapSlider.Speed');
         });
-    };
-
-    return BootstrapSlider;
+    }
 }]);
