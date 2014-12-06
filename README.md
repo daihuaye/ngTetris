@@ -21,7 +21,7 @@ Feature
 
 Quick Start
 ===========
-Install Node.js and then:
+Install [Node.js](http://nodejs.org) and then:
 
 ```sh
 $ git clone https://github.com/davishacker/ngTetris.git
