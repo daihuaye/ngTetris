@@ -21,7 +21,7 @@ Feature
 
 Quick Start
 ===========
-Install Node.js and then:
+Install [Node.js](http://nodejs.org) and then:
 
 ```sh
 $ git clone https://github.com/davishacker/ngTetris.git
@@ -32,4 +32,4 @@ $ bower install
 $ grunt watch
 ```
 
-Finally, open the app with the url: `http://localhost:9000` in your browser
+Finally, open the app with the url: [http://localhost:9000](http://localhost:9000) in your browser
