@@ -72,7 +72,8 @@ module.exports = {
         'vendor/angular-messages/angular-messages.min.js',
         'vendor/randomColor/randomColor.js',
         'vendor/basil.js/build/basil.min.js',
-        'vendor/angular-touch/angular-touch.min.js'
+        'vendor/angular-touch/angular-touch.min.js',
+        'vendor/angular-translate/angular-translate.min.js'
     ],
     css: [
     ],
