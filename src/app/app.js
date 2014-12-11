@@ -4,21 +4,29 @@ angular.module( 'ngTetris', [
   'ngTetris.home',
   'service.GameManager',
   'service.Keyboard',
-  'ui.router'
+  'ui.router',
+  'pascalprecht.translate'
 ])
+.config(myAppConfig)
+.run( function run () {})
+.controller('AppCtrl', AppCtrl);
 
-.config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
+AppCtrl.$inject = ['$scope', 'GameManager', 'KeyboardService'];
+myAppConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$translateProvider', 'en'];
+
+
+function myAppConfig ( 
+    $stateProvider, 
+    $urlRouterProvider,
+    $translateProvider,
+    en
+){
   $urlRouterProvider.otherwise( '/home' );
-})
+  $translateProvider.translations('en', en);
+  $translateProvider.preferredLanguage('en');
+}
 
-.run( function run () {
-})
-
-.controller( 'AppCtrl', [
-    '$scope', 
-    'GameManager',
-    'KeyboardService',
-function(
+function AppCtrl(
     $scope,
     GameManager,
     KeyboardService
@@ -49,4 +57,4 @@ function(
             return true;
         }
     };
-}]);
+}
