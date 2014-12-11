@@ -7,15 +7,15 @@ Use AngularJS to build a simple Tetris game . [Demo link](http://ngtetris.com)
 
 Feature
 ===========
-1. Colorful and beatiful UI design
-2. Ghost Piece available
-3. Able to hard drop and soft drop
-4. Five different level of custom speed control
-5. Let you design your own custom piece
-6. Able to save your game anytime
+1. Colorful and beatiful UI
+2. Ghost piece support
+3. Able to do hard drop and soft drop
+4. Five different levels of customable speed control
+5. Let you design your own custom piece and use it in the game
+6. Able to save your game in anytime
 7. Able to restore your previous saved record
-8. Mobile friendly UI 
-9. Able to play in your mobile device.
+8. Responsive UI design for Desktop and mobile
+9. Able to play in your mobile device. ~Wow~
 10. Build from the one of best AngularJS practices, thanks for [johnpapa](https://github.com/johnpapa/angularjs-styleguide)
 11. Use one of most comperhance AngularJS boilerplates, really need to thank: [ngbp](https://github.com/ngbp/ngbp)
 
