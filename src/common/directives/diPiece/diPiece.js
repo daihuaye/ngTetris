@@ -139,7 +139,7 @@ function(
             var ul = element.children(),
                 li = ul ? ul.children() : undefined;
             if (ul.hasClass('dy-X')) {
-                if (this.checkPattern(this.i)) {
+                if (controller.checkPattern(this.i)) {
                     return {
                         'background-color': GameData.getColor()
                     };
