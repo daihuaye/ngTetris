@@ -9,25 +9,28 @@ angular.module( 'ngTetris.home', [
   'service.Keyboard',
   'service.GAMESPEED'
 ])
-.config(function config( $stateProvider ) {
-  $stateProvider.state( 'home', {
-    url: '/home',
-    views: {
-      "main": {
-        controller: 'HomeCtrl',
-        templateUrl: 'home/home.tpl.html'
-      }
-    },
-    data:{ pageTitle: 'Home' }
-  });
-})
-.controller('HomeCtrl', [
-    '$scope',
-    'GameManager',
-    'animframePolyFill',
-    'KeyboardService',
-    'GAMESPEED',
-    'Device',
+.config(config)
+.controller('HomeCtrl', HomeController);
+
+config.$inject = ['$stateProvider'];
+HomeController.$inject = ['$scope', 'GameManager', 'animframePolyFill', 'KeyboardService', 'GAMESPEED', 'Device'];
+
+function config( 
+    $stateProvider, 
+    $translateProvider
+){
+    $stateProvider.state( 'home', {
+        url: '/home',
+        views: {
+        "main": {
+            controller: 'HomeCtrl',
+            templateUrl: 'home/home.tpl.html'
+        }
+        },
+        data:{ pageTitle: 'Home' }
+    });
+}
+
 function HomeController(
     $scope,
     GameManager,
@@ -162,4 +165,4 @@ function HomeController(
 
     KeyboardService.init();
     newGame();
-}]);
+}
