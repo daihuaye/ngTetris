@@ -5,7 +5,8 @@ angular.module( 'ngTetris', [
   'service.GameManager',
   'service.Keyboard',
   'ui.router',
-  'pascalprecht.translate'
+  'pascalprecht.translate',
+  'service.language'
 ])
 .config(myAppConfig)
 .run( function run () {})
