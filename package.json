@@ -2,14 +2,14 @@
   "author": "Daihua Ye",
   "name": "ngTetris",
   "version": "2.1.0",
-  "homepage": "https://github.com/davishacker/ngtetris",
+  "homepage": "https://github.com/daihuaye/ngtetris",
   "licenses": {
     "type": "MIT",
-    "url": "https://raw.github.com/ngbp/ngbp/master/LICENSE"
+    "url": "https://github.com/daihuaye/ngtetris/LICENSE"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:davishacker/ngTetris.git"
+    "url": "git@github.com:daihuaye/ngTetris.git"
   },
   "dependencies": {},
   "devDependencies": {
