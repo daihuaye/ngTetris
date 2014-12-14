@@ -4,7 +4,7 @@
     <div class="row" data-ng-hide="isMobilePlay()">
         <div class="dy-game-title col-sm-7 col-xs-6">NgTetris</div>
         <div class="dy-instructions col-sm-5 col-xs-6">
-            Let's play tetris.
+            {{ 'sub_title' | translate }}
         </div>
     </div>
     <div class="dy-game-container row"
@@ -47,26 +47,26 @@
                         data-ng-show="!isGameStart() && !isGameEnd()">
                         <button class="dy-new-game-btn hollow dy-button" 
                             data-ng-click="startNewGame()">
-                            New Game
+                            {{ 'new_game' | translate }}
                         </button>
                     </div>
                     <div class="dy-game-over"
                         data-ng-show="!isGameStart() && isGameEnd()">
                         <div data-ng-show="isNewRecord()"
                             class="dy-new-record pulse">
-                            New Record:<br>
+                            {{ 'new_record' | translate }}<br>
                             <span data-ng-bind="getBestScore()"></span>
                         </div>
                         <div data-ng-show="!isNewRecord()"
                             class="dy-your-score">
-                            Your Score:<br>
+                            {{ 'your_score' | translate }}<br>
                             <span data-ng-bind="getScore()"></span>
                         </div>
-                        <p>Game Over</p>
+                        <p>{{ 'game_over' | translate }}</p>
                         <div class="dy-game-restart">
                             <button class="dy-new-game-btn hollow dy-button"
                                 data-ng-click="restartNewGame()">
-                                Try again
+                                {{ 'try_again' | translate }}
                             </button>
                         </div>
                     </div>
@@ -80,10 +80,10 @@
     </div>
     <div class="dy-how-to-pause row"
         data-ng-hide="shouldShowMobileControll()">
-        PRESS <span class="key light">ESC</span> OR <span class="key light">P</span> TO PAUSE AND VIEW/EDIT CONTROLS
+        {{ 'press' | translate }} <span class="key light">ESC</span> {{ 'or' | translate }} <span class="key light">P</span> {{ 'pause_keys' | translate }}
     </div>
     <hr>
     <p data-ng-hide="isMobilePlay()">
-        Created by <a href="https://github.com/daihuaye" target="_blank">Daihua Ye</a>. This is the completed redesign version of my previous <a href="http://tetrisgame.heroku.com/" target="_blank">Tetris game</a>. This version is built on top of <a href="https://angularjs.org/" target="_blank">AngularJS</a>. And the idea for ngTetris is inspired by <a href="http://ng2048.github.io/" target="_blank">ng-2048</a>.
+        {{ 'created_by' | translate }} <a href="https://github.com/daihuaye" target="_blank">{{ 'author' | translate }}</a>. {{ 'game_description' | translate }} <a href="http://tetrisgame.heroku.com/" target="_blank">Tetris game</a>. {{ 'on_top_of' | translate }} <a href="https://angularjs.org/" target="_blank">{{'AngularJS' | translate}}</a>. {{ 'inspired_by' | translate }} <a href="http://ng2048.github.io/" target="_blank">ng-2048</a>.
     </p>
 </div>
