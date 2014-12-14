@@ -1,5 +1,5 @@
 {
-  "name": "ng-boilerplate",
+  "name": "ngTetris",
   "version": "0.1.0",
   "devDependencies": {
     "angular": "1.3",
