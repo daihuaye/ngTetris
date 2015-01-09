@@ -235,8 +235,8 @@ function (
         return game.currentPiece.getShape();
     }
 
-    function rotatePiece() {
-        rotatePieceCheck();
+    function rotatePiece(direction) {
+        rotatePieceCheck(direction);
     }
 
     function getPositionX() {
@@ -291,9 +291,11 @@ function (
     }
 
     function move(key) {
+        var rotateRight = 1,
+            rotateLeft = -1;
         switch (key) {
             case 'up':
-                game.rotatePiece();
+                game.rotatePiece(rotateRight);
                 break;
             case 'left':
                 game.movePieceInLevel('left');
@@ -302,7 +304,7 @@ function (
                 game.movePieceInLevel('right');
                 break;
             case 'down':
-                game.moveCurrentPiece();
+                game.rotatePiece(rotateLeft);
                 break;
             case 'space':
                 game.hardDrop();
@@ -343,9 +345,10 @@ function (
     }
 
     // private method
-    function rotatePieceCheck() {
-        var oldRotation = game.currentPiece.getRotation();
-        game.currentPiece.setRotation((oldRotation + 1) % GameData.rotationLimit);
+    function rotatePieceCheck(direction) {
+        var oldRotation = game.currentPiece.getRotation(),
+            newRotation = oldRotation + direction;
+        game.currentPiece.setRotation(newRotation < 0 ? newRotation + GameData.rotationLimit : newRotation % GameData.rotationLimit);
 
         var coord = game.currentPiece.convertPatternToCoordinates();
         for(var i = 0, len = coord.length; i < len; i++) {
