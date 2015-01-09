@@ -9,7 +9,7 @@ Feature
 ===========
 1. Colorful and beatiful UI
 2. Ghost piece support
-3. Able to do hard drop and soft drop
+3. Able to do hard drop and either rotation direction
 4. Five different levels of customable speed control
 5. Let you design your own custom piece and use it in the game
 6. Able to save your game in anytime
