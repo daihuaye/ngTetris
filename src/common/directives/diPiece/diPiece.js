@@ -125,13 +125,15 @@ function(
     function link(scope, element, attrs, controller) {
         scope.$on('home.GameOn', function () {
             var top = controller.getTop(),
-                left = controller.getLeft(),
-                translatePos = 'translate(' + left + 'px,' + Math.round(top) + 'px)';
+                left = controller.getLeft();
+                // translatePos = 'translate(' + left + 'px,' + Math.round(top) + 'px)';
             element.css({
-                'transform': translatePos,
-                '-webkit-transform': translatePos,
-                '-ms-transform': translatePos,
-                '-moz-transform': translatePos
+                // 'transform': translatePos,
+                // '-webkit-transform': translatePos,
+                // '-ms-transform': translatePos,
+                // '-moz-transform': translatePos
+                top: top + 'px',
+                left: left + 'px'
             });
         });
 
