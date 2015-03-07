@@ -32,3 +32,6 @@ $ grunt watch
 ```
 
 Finally, open the app with the url: [http://localhost:9000](http://localhost:9000) in your browser
+
+## License
+MIT
