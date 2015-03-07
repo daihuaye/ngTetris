@@ -1,8 +1,10 @@
 # NgTetris
-
-Use AngularJS to build a simple Tetris game . [Demo link](http://ngtetris.com)
+This is the completed redesign version of my previous Tetris game. This version is built on top of [AngularJS](https://angularjs.org/). And the idea for ngTetris is inspired by [ng-2048](http://ng2048.github.io/).
 
 ![alt text](https://s3.amazonaws.com/ngtetrisresource/ngtetris.png "Game Play")
+
+## Demo
+Use AngularJS to build a simple Tetris game . [Demo link](http://ngtetris.com)
 
 ## Feature
 1. Colorful and beatiful UI
