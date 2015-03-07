@@ -1,12 +1,10 @@
-ngTetris
-========
+# NgTetris
 
 Use AngularJS to build a simple Tetris game . [Demo link](http://ngtetris.com)
 
 ![alt text](https://s3.amazonaws.com/ngtetrisresource/ngtetris.png "Game Play")
 
-Feature
-===========
+## Feature
 1. Colorful and beatiful UI
 2. Ghost piece support
 3. Able to do hard drop and either rotation direction
@@ -19,8 +17,7 @@ Feature
 10. Build from the one of best AngularJS practices, thanks for [johnpapa](https://github.com/johnpapa/angularjs-styleguide)
 11. Use one of most comperhance AngularJS boilerplates, really need to thank: [ngbp](https://github.com/ngbp/ngbp)
 
-Quick Start
-===========
+## Quick Start
 Install [Node.js](http://nodejs.org) and then:
 
 ```sh
