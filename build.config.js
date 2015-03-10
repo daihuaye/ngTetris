@@ -73,10 +73,8 @@ module.exports = {
         'vendor/randomColor/randomColor.js',
         'vendor/basil.js/build/basil.min.js',
         'vendor/angular-touch/angular-touch.min.js',
-        'vendor/angular-translate/angular-translate.min.js',
-        'vendor/bootstrap-modal/js/bootstrap-modal.js',
-        'vendor/bootstrap-modal/js/bootstrap-modalmanager.js'
-    ], 
+        'vendor/angular-translate/angular-translate.min.js'
+    ],
     css: [
     ],
     assets: [
