@@ -133,7 +133,6 @@ function(
         controllerAs: 'vm',
         templateUrl: 'directives/diGameMenu/diGameMenu.tpl.html',
         restrict: 'A',
-        replace: true,
         scope: true,
         link: link
     };
@@ -144,16 +143,18 @@ function(
         scope.$on('app.pause', function() {
             if ((!controller.isPause() && controller.isGameStart()) ||
                 GameManager.getOpenDesignBeforeStart()) {
-                $(element).modal({
+                $(element).children('.dy-game-menu').modal({
                     backdrop: 'static'
                 });
+                $(element).addClass('dy-game-menu-modal');
             } else {
-                scope.closeModal();                
+                scope.closeModal();
             }
         });
 
         scope.closeModal = function closeModal() {
-            $(element).modal('hide');
+            $(element).children('.dy-game-menu').modal('hide');
+            $(element).removeClass('dy-game-menu-modal');
         };
 
     }
