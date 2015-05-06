@@ -4,7 +4,7 @@ This is the completed redesign version of my previous Tetris game. This version 
 ![alt text](https://s3.amazonaws.com/ngtetrisresource/ngtetris.png "Game Play")
 
 ## Demo
-Use AngularJS to build a simple Tetris game . [Demo link](http://ngtetris.com)
+Use AngularJS to build a simple Tetris game. [Demo link](http://ngtetris.com)
 
 ## Feature
 1. Colorful and beatiful UI
