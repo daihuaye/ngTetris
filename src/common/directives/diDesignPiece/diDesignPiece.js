@@ -25,7 +25,8 @@ angular.module('directive.diDesignPiece', [
 
         getCustomPiece: getCustomPiece,
         setCustomPiece: setCustomPiece,
-        hasCustomPiece: hasCustomPiece
+        hasCustomPiece: hasCustomPiece,
+        destroyCustomPiece: destroyCustomPiece
     },
     posToCoord = _.memoize(function (i) {
         var x = i % getCustomPieceWidth(),
@@ -42,7 +43,7 @@ angular.module('directive.diDesignPiece', [
     return custom;
 
     /////////////////////
-    
+
     function generatePatterns(pieces) {
         var pattern = [];
         pattern2d = [];
@@ -54,6 +55,11 @@ angular.module('directive.diDesignPiece', [
         });
         pattern2d.push(pattern);
         custom.generatePatternCoord();
+    }
+
+    function destroyCustomPiece () {
+        pattern2d = [];
+        patternCoord2d = [];
     }
 
     function generatePatternCoord() {
@@ -197,24 +203,24 @@ function (
                 .value();
     }
 
+    function savePiece() {
+        isSumbit = true;
+        if (isOk()) {
+            $scope.errorCode.saved = true;
+            CustomPiece.generatePatterns($scope.pieces);
+        }
+    }
+
     $scope.onClick = function onClick(index) {
         var isChecked = $scope.pieces[index].isSelected;
         $scope.pieces[index].isSelected = !isChecked;
         checkSelectedField();
         isSumbit = true;
+        savePiece();
     };
 
     $scope.isSelected = function isSelected(index) {
         return $scope.pieces[index].isSelected;
-    };
-
-    $scope.savePiece = function savePiece() {
-        isSumbit = true;
-        if (isOk()) {
-            $scope.errorCode.saved = true;
-            CustomPiece.generatePatterns($scope.pieces);
-            GameData.setColor(currentColor);
-        }
     };
 
     $scope.isSaved = function isSaved() {
@@ -235,6 +241,7 @@ function (
             isSumbit = true;
         }
         currentColor = color;
+        GameData.setColor(currentColor);
     };
 
     $scope.getColor = function getColor() {

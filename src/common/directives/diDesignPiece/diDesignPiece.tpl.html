@@ -15,11 +15,6 @@
                     role="alert">
                     You selected over {{::getMaxPiece()}} cells.
                 </div>
-                <div data-ng-message="minlength"
-                    class="alert alert-danger"
-                    role="alert">
-                    Please select at least one cell.
-                </div>
                 <div data-ng-message="saved"
                     class="alert alert-success"
                     role="alert">
@@ -61,14 +56,6 @@
                     data-ng-click="pickColor(color)"
                     class="dy-color"></li>
             </ul>
-        </div>
-    </div>
-    <div class="row dy-save-btn">
-        <div class="col-sm-12">
-            <button class="btn btn-primary"
-                data-ng-click="savePiece()">Save your tetris</button> 
-            <span class="alert alert-warning"
-                data-ng-show="isSaved()">No saved yet!</span>
         </div>
     </div>
 </div>
