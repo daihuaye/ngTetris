@@ -152,50 +152,63 @@ function (
     CustomPiece,
     GameManager
 ){
-    var isSumbit = false,
+    var vm = this,
+        isSumbit = false,
         currentColor = '';
-    
-    $scope.pieces = [];
-    $scope.colors = randomColor({count: GameData.availableColors});
+
+    vm.pieces = [];
+    vm.colors = randomColor({count: GameData.availableColors});
     if (GameData.getColor() === '') {
         GameData.setColor(randomColor());
     }
     currentColor = GameData.getColor();
 
     _.each(_.range(16), function (value) {
-        $scope.pieces[value] = {
+        vm.pieces[value] = {
             isSelected: false
         };
     });
     _.each(CustomPiece.getPattern(0), function (index) {
-        $scope.pieces[index].isSelected = true;
+        vm.pieces[index].isSelected = true;
     });
-    $scope.errorCode = {
+    vm.errorCode = {
         maxlength: false,
-        minlength: ($scope.pieces.length === 0),
+        minlength: (vm.pieces.length === 0),
         saved: false
     };
 
+    vm.onClick = onClick;
+    vm.isSelected = isSelected;
+    vm.isSaved = isSaved;
+    vm.getMaxPiece = getMaxPiece;
+    vm.interacted = interacted;
+    vm.pickColor = pickColor;
+    vm.getColor = getColor;
+    vm.getColorByIndex = getColorByIndex;
+    vm.getTop = getTop;
+
+    /////////////
+
     function checkSelectedField() {
-        var res = _.countBy($scope.pieces, function (piece) {
+        var res = _.countBy(vm.pieces, function (piece) {
             return piece.isSelected ? 'selected' : 'unselected';
         });
         if (res.selected > GameData.maxCustomPiece) {
-            $scope.errorCode.maxlength = true;
+            vm.errorCode.maxlength = true;
         } else {
-            $scope.errorCode.maxlength = false;
+            vm.errorCode.maxlength = false;
         }
         if (res.selected > 0) {
-            $scope.errorCode.minlength = false;
+            vm.errorCode.minlength = false;
         } else if (_.isUndefined(res.selected)) {
-            $scope.errorCode.minlength = true;
+            vm.errorCode.minlength = true;
         }
-        $scope.errorCode.saved = false;
+        vm.errorCode.saved = false;
     }
 
     function isOk() {
         // check any fields except saved field 
-        return _.chain($scope.errorCode)
+        return _.chain(vm.errorCode)
                 .find(function (value, key) {
                     return key === 'saved' ? false : value;
                 })
@@ -206,59 +219,59 @@ function (
     function savePiece() {
         isSumbit = true;
         if (isOk()) {
-            $scope.errorCode.saved = true;
-            CustomPiece.generatePatterns($scope.pieces);
+            vm.errorCode.saved = true;
+            CustomPiece.generatePatterns(vm.pieces);
         }
     }
 
-    $scope.onClick = function onClick(index) {
-        var isChecked = $scope.pieces[index].isSelected;
-        $scope.pieces[index].isSelected = !isChecked;
+    function onClick(index) {
+        var isChecked = vm.pieces[index].isSelected;
+        vm.pieces[index].isSelected = !isChecked;
         checkSelectedField();
         isSumbit = true;
         savePiece();
-    };
+    }
 
-    $scope.isSelected = function isSelected(index) {
-        return $scope.pieces[index].isSelected;
-    };
+    function isSelected(index) {
+        return vm.pieces[index].isSelected;
+    }
 
-    $scope.isSaved = function isSaved() {
-        return isSumbit && !$scope.errorCode.saved;
-    };
+    function isSaved() {
+        return isSumbit && !vm.errorCode.saved;
+    }
 
-    $scope.getMaxPiece = function getMaxPiece() {
+    function getMaxPiece() {
         return GameData.maxCustomPiece;
-    };
+    }
 
-    $scope.interacted = function interacted() {
+    function interacted() {
         return isSumbit;
-    };
+    }
 
-    $scope.pickColor = function pickColor(color) {
-        $scope.errorCode.saved = false;
-        if ($scope.pieces.length > 0) {
+    function pickColor(color) {
+        vm.errorCode.saved = false;
+        if (vm.pieces.length > 0) {
             isSumbit = true;
         }
         currentColor = color;
         GameData.setColor(currentColor);
-    };
+    }
 
-    $scope.getColor = function getColor() {
+    function getColor() {
         return { background: currentColor };
-    };
+    }
 
-    $scope.getColorByIndex = function getColorByIndex(index) {
-        if ($scope.pieces[index].isSelected) {
+    function getColorByIndex(index) {
+        if (vm.pieces[index].isSelected) {
             return currentColor;
         }
         return;
-    };
+    }
 
-    $scope.getTop = function() {
+    function getTop() {
         var customTop = GameManager.getOpenDesignBeforeStart() ? { top: '-76px' } : {};
         return customTop;
-    };
+    }
 
 }])
 .directive('diDesignPiece', [
@@ -267,7 +280,9 @@ function(
     var DesignPiece = {};
 
     DesignPiece.controller = 'DesignPieceCtrl';
-    
+
+    DesignPiece.controllerAs = 'dp';
+
     DesignPiece.templateUrl = 'directives/diDesignPiece/diDesignPiece.tpl.html';
 
     DesignPiece.restrict = 'A';

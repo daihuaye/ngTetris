@@ -6,14 +6,14 @@
                 <li>1. Click on 4 by 4 sqare grid (green border one)</li> 
                 <li>2. Click save button.</li>
             </ul>
-            <div data-ng-messages="errorCode"
+            <div data-ng-messages="dp.errorCode"
                 class="dy-alert"
-                data-ng-style="getTop()"
-                data-ng-if="interacted()">
+                data-ng-style="dp.getTop()"
+                data-ng-if="dp.interacted()">
                 <div data-ng-message="maxlength"
                     class="alert alert-danger"
                     role="alert">
-                    You selected over {{::getMaxPiece()}} cells.
+                    You selected over {{::dp.getMaxPiece()}} cells.
                 </div>
                 <div data-ng-message="saved"
                     class="alert alert-success"
@@ -29,11 +29,11 @@
                 data-ng-repeat="i in [0, 90 , 180, 270]"
                 data-ng-class="'dy-' + i">
                 <ul class="dy-piece-ul">
-                   <li data-ng-repeat="i in pieces track by $index"
+                   <li data-ng-repeat="i in dp.pieces track by $index"
                         class="dy-piece-li"
-                        data-ng-class="{'dy-checked': isSelected($index)}"
-                        data-ng-style="{'background-color': getColorByIndex($index)}"
-                        data-ng-click="onClick($index)"></li> 
+                        data-ng-class="{'dy-checked': dp.isSelected($index)}"
+                        data-ng-style="{'background-color': dp.getColorByIndex($index)}"
+                        data-ng-click="dp.onClick($index)"></li> 
                 </ul>
                 <div data-ng-class="'dy-preview-' + i"
                     data-ng-if="i !== 0">Preview <i class="fa fa-repeat"></i> {{i}}&#176;</div>
@@ -45,15 +45,15 @@
             <span>Your color:</span>
             <ul>
                 <li class="dy-color dy-your-color"
-                    data-ng-style="getColor()"></li>
+                    data-ng-style="dp.getColor()"></li>
             </ul>
         </div> 
         <div class="col-sm-9">
             <span>Pick a color:</span>
             <ul>
-                <li data-ng-repeat="color in colors"
+                <li data-ng-repeat="color in dp.colors"
                     data-ng-style="{background: color}"
-                    data-ng-click="pickColor(color)"
+                    data-ng-click="dp.pickColor(color)"
                     class="dy-color"></li>
             </ul>
         </div>
